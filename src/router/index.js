@@ -1,29 +1,39 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import { handleScroll } from './../utils/index'
+import layoutHome from '../layout/home/index'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    redirect: '/home',
+    component: layoutHome,
+    children: [{
+      path: '/home',
+      name: 'Home',
+      component: () => import('@/views/home/Home')
+    }]
   }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      handleScroll(document.documentElement.scrollTop, savedPosition.y)
+      return {
+        x: 0,
+        y: document.documentElement.scrollTop
+      }
+    } else {
+      handleScroll(document.documentElement.scrollTop, 0)
+      return {}
+    }
+  }
 })
 
 export default router

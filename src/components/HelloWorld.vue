@@ -36,7 +36,10 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
-  }
+  },
+  // mounted() {
+  //   console.log(document.documentElement.scrollHeight)
+  // },
 }
 </script>
 

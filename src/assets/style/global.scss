@@ -1,0 +1,9 @@
+@import './reset.scss';
+@import './transition.scss';
+
+html {
+  font-family: 'Helvetica', "Microsoft YaHei", sans-serif;
+}
+.uppercase {
+  text-transform: uppercase;
+}
