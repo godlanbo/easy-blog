@@ -1,20 +1,26 @@
 <template>
-  <header class="header-wrapper">
+  <header class="header-wrapper" :class="{'active-color-switch' : isSwtichHeaderBg}">
     <div class="logo-wrapper">
+      <span class="icon-logo"></span>
       <span class="logo-text">GodLanBo</span>
     </div>
-    <nav class="nav-wrapper">
-      <div class="nav-item">
+    <input type="checkbox" id="check" v-model="menuVisible" />
+    <label class="menu" for="check">
+      <span class="icon-menu"></span>
+    </label>
+    <div class="menu-bg" @touchmove.prevent @click="hideMenu"></div>
+    <nav class="nav-wrapper" :class="{'active-color-switch' : isSwtichHeaderBg}">
+      <div class="nav-item" :class="{'active' : activeRoute === '/home'}">
         <router-link to="/home">
           <span class="nav-item-text uppercase">home</span>
         </router-link>
       </div>
-      <div class="nav-item">
+      <div class="nav-item" :class="{'active' : activeRoute === '/blogs'}">
         <router-link to="/blogs">
           <span class="nav-item-text uppercase">blogs</span>
         </router-link>
       </div>
-      <div class="nav-item">
+      <div class="nav-item" :class="{'active' : activeRoute === '/timeline'}">
         <router-link to="/timeline">
           <span class="nav-item-text uppercase">timeline</span>
         </router-link>
@@ -29,46 +35,134 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      menuVisible: false,
+      scrollTop: 0,
+    }
+  },
+  computed: {
+    activeRoute() {
+      return this.$route.path
+    },
+    isSwtichHeaderBg() {
+      let switchLimit = document.documentElement.clientHeight + 50
+      this.scrollTop = document.documentElement.scrollTop
+      return this.scrollTop >= switchLimit || this.activeRoute !== '/home'
+    },
+  },
+  watch: {
+    $route() {
+      this.getScrollTop()
+    }
+  },
+  methods: {
+    hideMenu() {
+      this.menuVisible = false
+    },
+    getScrollTop() {
+      this.scrollTop = document.documentElement.scrollTop
+    },
+  },
+  mounted() {
+    window.addEventListener('scroll', this.getScrollTop)
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.getScrollTop)
+  },
+}
 </script>
 <style lang="scss" scoped>
 @import '@/assets/style/globalScript';
 .header-wrapper {
   width: 100%;
-  padding: 0 10%;
+  position: relative;
   position: fixed;
   top: 0;
   left: 0;
+  backdrop-filter: saturate(180%) blur(20px);
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  height: 50px;
+  height: 60px;
   z-index: 999;
-  background: rgba(0, 0, 0, .3);
+  transition: color $animationTime $animationType,
+    background-color $animationTime $animationType;
+  &.active-color-switch {
+    background-color: rgba(240, 243, 246, .7);
+    color: transparent;
+    .nav-item-text {
+      @include colorText($line-color);
+    }
+    .logo-wrapper {
+      @include colorText($line-color);
+    }
+  }
   .logo-wrapper {
     flex: 0 0 20%;
     height: 100%;
-    @include center;
-    font-size: 32px;
     font-weight: bold;
-    color: $text-color2;
+    color: inherit;
+    @include center;
+    .icon-logo {
+      margin-bottom: 5px;
+    }
+  }
+  #check {
+    display: none;
+  }
+  .menu {
+    color: inherit;
+    font-size: 28px;
+    position: absolute;
+    top: 0;
+    user-select: none;
+    bottom: 0;
+    right: 20px;
+    @include center;
+    cursor: pointer;
+  }
+  .menu-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+    width: 100vw;
+    height: 100vh;
+    z-index: 4;
+    display: none;
   }
   .nav-wrapper {
     flex: 1;
     height: 100%;
     display: flex;
     justify-content: flex-end;
+    &.active-color-switch {
+      .nav-item.active a::before {
+        background-image: $line-color;
+      }
+      .nav-item a:hover::before {
+        background-image: $line-color;
+      }
+    }
     .nav-item {
       @include center;
       height: 100%;
       margin: 0 20px;
+      &.active a::before {
+        transform: scaleX(1);
+      }
       a {
         width: 100%;
         text-decoration: none;
         position: relative;
+        color: inherit;
         .nav-item-text {
           width: 100%;
-          color: $text-color2;
+          color: inherit;
           font-size: 18px;
           font-weight: bold;
         }
@@ -79,15 +173,78 @@ export default {}
           left: 0;
           right: 0;
           width: 100%;
-          bottom: -4px;
+          bottom: -5px;
           height: 4px;
           transform: scaleX(0);
           background-color: #fff;
-          transition: transform .3s ease;
+          transition: transform $animationTime $animationType,
+            background-image $animationTime $animationType;
         }
         &:hover::before {
           transform: scaleX(1);
         }
+      }
+    }
+  }
+}
+@media (min-width: 690px) {
+  .header-wrapper {
+    .logo-wrapper {
+      margin-left: 50px;
+      font-size: 32px;
+    }
+    .menu {
+      display: none;
+    }
+    .menu-bg {
+      display: none;
+    }
+  }
+}
+@media (max-width: 790px) {
+  .nav-wrapper {
+    margin-right: 20px;
+  }
+}
+@media (min-width: 790px) {
+  .nav-wrapper {
+    margin-right: 50px;
+  }
+}
+@media (max-width: 690px) {
+  .header-wrapper {
+    .logo-wrapper {
+      margin-left: 20px;
+      font-size: 28px;
+    }
+    .menu {
+      display: flex;
+    }
+    #check:checked ~ .nav-wrapper {
+      left: 0;
+      opacity: 1;
+    }
+    #check:checked ~ .menu-bg {
+      display: block;
+    }
+    .nav-wrapper {
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      box-sizing: border-box;
+      padding-left: 100px;
+      height: 100vh;
+      background: #082634;
+      text-align: center;
+      transform: translateX(-100px);
+      opacity: 0;
+      transition: all $animationTime $animationType;
+      top: 0;
+      left: -100%;
+      z-index: 5;
+      .nav-item {
+        border-bottom: 1px solid #30849a;
       }
     }
   }

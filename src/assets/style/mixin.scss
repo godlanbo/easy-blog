@@ -10,6 +10,19 @@
   overflow: hidden;
 }
 
+@mixin colorText($color) {
+  background-image: $color;
+  background-clip: text;
+  color: transparent;
+}
+
+@mixin columnCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 @mixin overflowText($line) {
   @if $line == 1 {
     @include ellipsis;

@@ -5,14 +5,13 @@
         <img src="/image/avatar.jpeg" />
       </a>
       <div class="avatar-detail-text">
-        <div class="title">Andrew Neil</div>
-        <div class="place">Surlhet, Nepal</div>
+        <div class="title">{{title}}</div>
+        <div class="place">{{place}}</div>
       </div>
     </div>
     <div class="avatar-detail-content">
       <p>
-        User Interface Designer and
-        <br />fromt-and developer
+        {{content}}
       </p>
     </div>
     <div class="avatar-icons">
@@ -30,7 +29,13 @@
   </div>
 </template>
 <script>
-export default {}
+export default {
+  props: {
+    title: String,
+    place: String,
+    content: String
+  }
+}
 </script>
 <style lang="scss" scoped>
 @import '@/assets/style/globalScript';
@@ -42,15 +47,15 @@ export default {}
   margin: 0 auto;
   border-radius: 50%;
   transition: all 0.3s ease-in-out;
-  background: linear-gradient(to right, #30849a, #031013);
+  background: $line-color;
   box-sizing: border-box;
   &:hover {
-    height: 470px;
+    height: 370px;
     width: 350px;
-    border-radius: 5px;
+    border-radius: 10px;
     .avatar-icons li {
       opacity: 1;
-      margin-left: 0px;
+      margin-left: 10px;
     }
   }
   .avatar-detail-wrapper {
@@ -60,8 +65,8 @@ export default {}
         z-index: 20;
         border-radius: 50%;
         display: block;
-        height: 200px;
-        width: 200px;
+        height: 210px;
+        width: 210px;
         margin: 20px auto;
         border: 5px solid #fff;
         object-fit: cover;
@@ -70,20 +75,20 @@ export default {}
     .avatar-detail-text {
       color: #fff;
       .title {
-        font-size: 30px;
+        font-size: 34px;
         font-weight: 500;
         padding: 10px;
         line-height: 25px;
       }
       .place {
-        font-size: 17px;
+        font-size: 18px;
         margin: 10px 0;
       }
     }
   }
   .avatar-detail-content {
     color: #fff;
-    font-size: 17px;
+    font-size: 24px;
     margin-top: 10px;
     padding: 1px 20px 10px 20px;
   }

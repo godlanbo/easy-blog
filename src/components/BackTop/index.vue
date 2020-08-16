@@ -59,7 +59,7 @@ export default {
   position: fixed;
   background-color: #fff;
   font-weight: bold;
-  bottom: 100px;
+  bottom: 40px;
   right: 40px;
   z-index: 20;
   width: 50px;
