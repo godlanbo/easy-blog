@@ -128,7 +128,6 @@ export default {
     .title-section-desc {
       font-weight: bold;
       padding: 10px 25px;
-      box-sizing: border-box;
       margin-top: 20px;
       margin-bottom: 100px;
       color: #fff;
@@ -141,13 +140,11 @@ export default {
   .home-blogs-section {
     .home-blogs-section-list {
       width: 100%;
-      box-sizing: border-box;
       display: flex;
       flex-flow: row wrap;
       .home-blogs-section-list-item {
         margin-bottom: 20px;
         padding: 0 10px;
-        box-sizing: border-box;
       }
     }
   }
@@ -156,7 +153,6 @@ export default {
     margin-bottom: 70px;
     .home-life-section-list {
       width: 100%;
-      box-sizing: border-box;
       padding: 20px 0px;
       display: flex;
       flex-flow: row wrap;
@@ -173,7 +169,6 @@ export default {
         width: 100%;
         margin-bottom: 20px;
         padding: 0 20px;
-        box-sizing: border-box;
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -208,7 +203,7 @@ export default {
     font-size: 20px;
   }
 }
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .home {
     .home-blogs-section-list {
       padding: 20px 20px;
@@ -224,7 +219,7 @@ export default {
     }
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1280px) {
   .home {
     .home-blogs-section {
       width: 80%;

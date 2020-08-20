@@ -17,7 +17,7 @@ export default {
       handler() {
         setTimeout(() => {
           this.initProgress()
-        }, 100)
+        }, 600)
       },
     },
   },
@@ -26,8 +26,7 @@ export default {
       this.pageHeight = document.documentElement.scrollHeight
       this.windowHeight = document.documentElement.clientHeight
       this.scrollAvail = this.pageHeight - this.windowHeight
-      this.progress = document.querySelector('.progress')
-      window.addEventListener('scroll', this.onScroll)
+      // console.log('route change', document.documentElement.scrollHeight)
     },
     onScroll() {
       let scrollTop = document.documentElement.scrollTop
@@ -47,7 +46,9 @@ export default {
     window.removeEventListener('resize', this.onResize)
   },
   mounted() {
+    this.progress = document.querySelector('.progress')
     window.addEventListener('resize', this.onResize)
+    window.addEventListener('scroll', this.onScroll)
   },
 }
 </script>
@@ -57,7 +58,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 10000;
   background: transparent;
   height: 4px;
   .progress {

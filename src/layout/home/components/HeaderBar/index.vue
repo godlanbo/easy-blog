@@ -20,9 +20,14 @@
           <span class="nav-item-text uppercase">blogs</span>
         </router-link>
       </div>
-      <div class="nav-item" :class="{'active' : activeRoute === '/timeline'}">
+      <div class="nav-item" :class="{'active' : activeRoute === '/archive'}">
         <router-link to="/timeline">
-          <span class="nav-item-text uppercase">timeline</span>
+          <span class="nav-item-text uppercase">archive</span>
+        </router-link>
+      </div>
+      <div class="nav-item" :class="{'active' : activeRoute === '/life'}">
+        <router-link to="/timeline">
+          <span class="nav-item-text uppercase">life</span>
         </router-link>
       </div>
       <div class="nav-item">
@@ -88,7 +93,7 @@ export default {
   display: flex;
   align-items: center;
   height: 60px;
-  z-index: 999;
+  z-index: 9999;
   transition: color $animationTime $animationType,
     background-color $animationTime $animationType;
   &.active-color-switch {
@@ -141,6 +146,9 @@ export default {
     display: flex;
     justify-content: flex-end;
     &.active-color-switch {
+      .nav-item a::before {
+        background-image: $line-color;
+      }
       .nav-item.active a::before {
         background-image: $line-color;
       }
@@ -177,8 +185,7 @@ export default {
           height: 4px;
           transform: scaleX(0);
           background-color: #fff;
-          transition: transform $animationTime $animationType,
-            background-image $animationTime $animationType;
+          transition: all $animationTime $animationType;
         }
         &:hover::before {
           transform: scaleX(1);

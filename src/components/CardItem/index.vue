@@ -98,7 +98,7 @@ export default {
             padding-right: 10px;
             color: #ccc;
             &:hover {
-              color: #1965fe;
+              color: $color-blue;
             }
             .tags-item-text {
               font-size: 16px;

@@ -34,7 +34,7 @@ request.interceptors.response.use(
     // } else {
     //   return response
     // }
-    return response
+    return response.data
   },
   error => {
     // const { response } = error

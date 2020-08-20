@@ -1,7 +1,11 @@
 <template>
   <div class="container">
     <header-bar></header-bar>
-    <router-view />
+    <transition name="slide-up" mode="out-in">
+      <keep-alive exclude="BlogsDetail">
+        <router-view />
+      </keep-alive>
+    </transition>
     <footer-bar></footer-bar>
   </div>
 </template>
@@ -12,8 +16,8 @@ import FooterBar from './components/FooterBar/index'
 export default {
   components: {
     HeaderBar,
-    FooterBar
-  }
+    FooterBar,
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -23,5 +27,6 @@ export default {
   width: 100%;
   box-sizing: border-box;
   background-color: $bg-color;
+  min-height: calc(100vh + 100px)
 }
 </style>

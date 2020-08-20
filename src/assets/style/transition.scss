@@ -1,2 +1,16 @@
 $animationTime: .3s;
 $animationType: ease;
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all $animationTime $animationType;
+}
+
+.slide-up-enter, .slide-up-leave-to {
+  transform: translateY(-40px);
+  opacity: 0;
+}
+.slide-up-enter-to, .slide-up-leave {
+  transform: translateY(0);
+  opacity: 1;
+}
