@@ -9,6 +9,9 @@ export default {
   data() {
     return {
       timer: null,
+      pageHeight: 0,
+      windowHeight: 0,
+      scrollAvail: 0
     }
   },
   watch: {

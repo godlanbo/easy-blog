@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 const cubic = value => Math.pow(value, 3)
 const easeInOutCubic = value => value < 0.5
   ? cubic(value * 2) / 2
@@ -33,4 +34,12 @@ export function handleScroll(start, end) {
   //   rAF(frameFunc)
   // }, 500)
   rAF(frameFunc)
+}
+
+export function isSameYear(date1, date2) {
+  return dayjs(date1).isSame(date2, 'year')
+}
+
+export function getYear(date) {
+  return dayjs(date).get('year')
 }

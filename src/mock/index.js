@@ -1,5 +1,5 @@
 import Mock from 'mockjs'
-import { blogsList } from './../utils/mock';
+import { blogsList, lifeList } from './../utils/mock';
 
 Mock.mock(/\/blogs\/\d+$/, 'get', {
   'status': 200,
@@ -101,21 +101,73 @@ Mock.mock(/\/blogs\/\d+$/, 'get', {
     http://www.ruanyifeng.com/blog/2014/10/event-loop.html`
   }
 })
-Mock.mock(/\/blogs\/categoryList/, 'get', {
-  status: 200,
-  data: {
-    // 'categoryList|5-8': [2013,2014,2015,2016,2017,2018,2019,2020],
-    'categoryList|1-8': [
-      {
-        "name|+1": ["Vue", "node", "axios", "javascript", "css", "mysql", "scss", "vuepress"],
-        "num|+1": [32, 21, 12, 11, 10, 5]
-      }
-    ]
+// Mock.mock(/\/blogs\/categoryList/, 'get', {
+//   status: 200,
+//   data: {
+//     // 'categoryList|5-8': [2013,2014,2015,2016,2017,2018,2019,2020],
+//     'categoryList|1-8': [
+//       {
+//         "name|+1": ["Vue", "node", "axios", "javascript", "css", "mysql", "scss", "vuepress"],
+//         "num|+1": [32, 21, 12, 11, 10, 5]
+//       }
+//     ]
+//   }
+// })
+Mock.mock(/\/blogs\/categoryList/, 'get', (options) => {
+  let url = options.url
+  let type = url.split('?')[1].split('=')[1]
+  let data = {}
+  if (type === 'time') {
+    data.categoryList = [{
+      name: 2020,
+      num: 32
+    }, {
+      name: 2019,
+      num: 30
+    }, {
+      name: 2018,
+      num: 31
+    }, {
+      name: 2017,
+      num: 16
+    }, {
+      name: 2016,
+      num: 3
+    }]
+  } else {
+    data.categoryList = [{
+      name: 'Vue',
+      num: 32
+    }, {
+      name: 'node',
+      num: 21
+    }, {
+      name: 'axios',
+      num: 31
+    }, {
+      name: 'javascript',
+      num: 16
+    }, {
+      name: 'mysql',
+      num: 3
+    }]
+  }
+  return {
+    status: 200,
+    data
   }
 })
 Mock.mock(/\/blogs$/, 'get', {
   status: 200,
   data: {
     blogsList
+  }
+})
+Mock.mock(/\/life$/, 'get', (options) => {
+  return {
+    status: 200,
+    data: {
+      lifeList: lifeList
+    }
   }
 })

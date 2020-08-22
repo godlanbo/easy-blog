@@ -20,7 +20,7 @@
           <div
             class="blogs-category-list-item"
             v-for="(item, index) in categoryList"
-            :class="{'isSelected':item.name === title}"
+            :class="{'isSelected':item.name == title}"
             :key="index"
             @click="switchQuery(item.name)"
           >
@@ -36,6 +36,7 @@
 <script>
 import CategoryItem from '../CategoryItem/index'
 import { homeMixin } from '../../../../utils/mixin'
+import { isSameYear } from '../../../../utils/index'
 export default {
   mixins: [homeMixin],
   components: {
@@ -52,19 +53,27 @@ export default {
   },
   computed: {
     categoryContentList() {
-      return this.blogsList.filter((blog) => {
-        return blog.tags.indexOf(this.title) !== -1
-      })
+      if (this.type === 'tag') {
+        return this.blogsList.filter((blog) => {
+          return blog.tags.indexOf(this.title) !== -1
+        })
+      } else {
+        return this.blogsList.filter((blog) => {
+          return isSameYear(blog.releaseTime, this.title)
+        })
+      }
     },
     totalNum() {
       let totalNum = 0
       this.categoryList.forEach((item) => {
-        if (item.name === this.title) {
+        if (item.name == this.title && this.type === 'tag') {
+          totalNum = item.num
+        } else if (item.name == this.title && this.type === 'time') {
           totalNum = item.num
         }
       })
       return totalNum
-    }
+    },
   },
   watch: {
     $route(value) {
@@ -76,21 +85,30 @@ export default {
       if (queryString === this.title) {
         return
       }
-      this.$router.replace({
-        path: '/blogs/tags',
-        query: {
-          tag: queryString,
-        },
-      })
+      if (this.type === 'tag') {
+        this.$router.replace({
+          path: '/blogs/tags',
+          query: {
+            tag: queryString,
+          },
+        })
+      } else {
+        this.$router.replace({
+          path: '/archive',
+          query: {
+            time: queryString,
+          },
+        })
+      }
     },
     initHeader() {
       this.title = this.$route.query[this.type]
     },
     linkToBlogsDetail(id) {
       this.$router.push({
-        path: `/blogs/${id}`
+        path: `/blogs/${id}`,
       })
-    }
+    },
   },
   mounted() {
     this.initHeader()
@@ -144,7 +162,8 @@ export default {
           padding: 15px 20px;
           border-radius: 6px;
           background: #f0f3f6;
-          box-shadow: 5px 5px 10px #cccfd1, -5px -5px 10px #ffffff;
+          // box-shadow: 5px 5px 10px #cccfd1, -5px -5px 10px #ffffff;
+          box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
           color: $text-color;
           display: flex;
           justify-content: space-between;

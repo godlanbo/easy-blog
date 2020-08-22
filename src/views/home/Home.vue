@@ -12,19 +12,6 @@
         class="title-section-desc"
       >I use this website to witness my journey in Front-end Development.</span>
     </section>
-    <!-- <section class="home-blogs-section">
-      <div class="home-blogs-section-header">
-        <span class="title">New Blogs</span>
-        <div class="more-link-btn" @click="linkTo('blogs')">
-          <span>More Blogs</span>
-        </div>
-      </div>
-      <div class="home-blogs-section-list">
-        <div class="home-blogs-section-list-item" v-for="item in blogsList" :key="item.id">
-          <card-item :data="item"></card-item>
-        </div>
-      </div>
-    </section>-->
     <section-item
       title="New Blogs"
       btnText="More Blogs"
@@ -32,7 +19,7 @@
       class="home-blogs-section"
     >
       <div class="home-blogs-section-list">
-        <div class="home-blogs-section-list-item" v-for="item in blogsList" :key="item.id">
+        <div class="home-blogs-section-list-item" v-for="item in blogsItemList" :key="item.id">
           <card-item :data="item"></card-item>
         </div>
       </div>
@@ -46,12 +33,15 @@
       <div class="home-life-section-list">
         <div
           class="home-life-section-list-item"
-          v-for="item in lifeList"
+          v-for="item in lifeItemList"
           :key="item.id"
-          :style="{'background-image': `url(${item.cover})`}"
+          :style="{'background-image': lifeItemImg(item)}"
+          @click="linkToLife(item.id)"
         >
-          <span class="title">{{item.title}}</span>
-          <span class="time">{{item.time | dateformat}}</span>
+          <div class="content">
+            <div class="title">「{{item.title}}」</div>
+            <div class="time">{{item.time | dateformat('YYYY年MM月DD日')}}</div>
+          </div>
         </div>
       </div>
     </section-item>
@@ -60,40 +50,59 @@
 
 <script>
 import AvatarDetail from './components/Avatar/index'
-import CardItem from '@/components/CardItem/index'
+import CardItem from './components/CardItem/index'
 import SectionItem from './components/SectionItem/index'
-import { blogsList, lifeList } from '../../utils/mock'
 import VanillaTilt from 'vanilla-tilt'
+import { homeMixin } from '../../utils/mixin'
 export default {
   components: {
     AvatarDetail,
     CardItem,
     SectionItem,
   },
-  data() {
-    return {
-      blogsList: blogsList,
-      lifeList: lifeList,
-    }
-  },
+  mixins: [homeMixin],
   methods: {
-    linkTo(type) {
-      if (type === 'blogs') {
-        this.$router.push('/blogs')
+    linkToLife(id) {
+      this.$router.push({
+        path: '/life',
+        query: {
+          id
+        }
+      })
+    },
+    lifeItemImg(item) {
+      if (item.imgUrl) {
+        return `url(${item.imgUrl})`
+      } else {
+        return `linear-gradient(to right, #30849a, #031013)`
       }
     },
   },
-  mounted() {
-    VanillaTilt.init(
-      document.querySelectorAll('.home-life-section-list-item'),
-      {
-        glare: true,
-        reverse: true,
-        scale: 1.1,
-        max: 10,
-        'max-glare': 0.7,
+  computed: {
+    blogsItemList() {
+      return this.blogsList.slice(0, 6)
+    },
+    lifeItemList() {
+      return this.lifeList.slice(0, 4)
+    },
+  },
+  watch: {
+    lifeList(val) {
+      if (val.length) {
+        this.$nextTick(() => {
+          VanillaTilt.init(
+            document.querySelectorAll('.home-life-section-list-item'),
+            {
+              glare: true,
+              reverse: true,
+              scale: 1.1,
+              max: 10,
+              'max-glare': 0.5,
+            }
+          )
+        })
       }
-    )
+    },
   },
 }
 </script>
@@ -150,7 +159,7 @@ export default {
   }
   .home-life-section {
     margin-top: 15px !important;
-    margin-bottom: 70px;
+    margin-bottom: 100px;
     .home-life-section-list {
       width: 100%;
       padding: 20px 0px;
@@ -160,9 +169,7 @@ export default {
       .home-life-section-list-item {
         transform-style: preserve-3d;
         transform: perspective(1000px);
-        // box-shadow: 0 4px 8px 0 rgba(28, 31, 33, 0.1);
-        box-shadow: 26px 26px 52px #bbbec0, -26px -26px 52px #ffffff;
-        overflow: hidden;
+        box-shadow: 6px 6px 12px #cccfd1, -6px -6px 12px #ffffff;
         border-radius: 7px;
         position: relative;
         height: 240px;
@@ -173,21 +180,22 @@ export default {
         background-repeat: no-repeat;
         background-size: cover;
         color: #fff;
-        .title {
+        .content {
           position: absolute;
-          right: 25px;
-          bottom: 65px;
+          left: 50%;
+          top: 50%;
+          transform: translate3d(-50%, -50%, 80px);
           font-size: 22px;
           font-weight: 600;
-          transform: translateZ(40px);
-        }
-        .time {
-          position: absolute;
-          right: 25px;
-          bottom: 25px;
-          font-size: 22px;
-          font-weight: 600;
-          transform: translateZ(40px);
+          text-align: center;
+          .title {
+            margin-bottom: 15px;
+            white-space: nowrap;
+          }
+          .time {
+            font-size: 16px;
+            white-space: nowrap;
+          }
         }
       }
     }

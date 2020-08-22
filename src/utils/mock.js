@@ -84,22 +84,32 @@ export const blogsList = [{
 
 export const lifeList = [{
   id: 1,
-  cover: '/image/demo3.png',
+  imgUrl: '/image/demo3.png',
   title: '泰拉瑞亚全图鉴全成就达成',
-  time: 1597407302225
+  content: '泰拉瑞亚大师中世界全图鉴全成就达成，时间也来到500小时，我就是泰拉master了',
+  time: 1597407301225
 }, {
   id: 2,
-  cover: '/image/demo2.jpg',
+  imgUrl: '/image/demo2.jpg',
   title: '泰拉瑞亚全图鉴全成就达成',
-  time: 1597407302225
+  content: '泰拉瑞亚大师中世界全图鉴全成就达成，时间也来到500小时，我就是泰拉master了',
+  time: 1597407302125
 }, {
   id: 3,
-  cover: '/image/demo3.png',
+  imgUrl: '/image/demo3.png',
   title: '泰拉瑞亚全图鉴全成就达成',
-  time: 1597407302225
+  content: '泰拉瑞亚大师中世界全图鉴全成就达成，时间也来到500小时，我就是泰拉master了',
+  time: 1597407102225
 }, {
   id: 4,
-  cover: '/image/demo3.png',
+  imgUrl: '',
   title: '泰拉瑞亚全图鉴全成就达成',
-  time: 1597407302225
+  content: '泰拉瑞亚大师中世界全图鉴全成就达成，时间也来到500小时，我就是泰拉master了',
+  time: 1420070400000
+}, {
+  id: 5,
+  imgUrl: '/image/demo3.png',
+  title: '泰拉瑞亚全图鉴全成就达成',
+  content: '泰拉瑞亚大师中世界全图鉴全成就达成，时间也来到500小时，我就是泰拉master了',
+  time: 1420079900000
 }]

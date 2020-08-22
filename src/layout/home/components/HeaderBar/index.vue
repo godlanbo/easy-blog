@@ -21,12 +21,12 @@
         </router-link>
       </div>
       <div class="nav-item" :class="{'active' : activeRoute === '/archive'}">
-        <router-link to="/timeline">
+        <router-link to="/archive?time=2020">
           <span class="nav-item-text uppercase">archive</span>
         </router-link>
       </div>
       <div class="nav-item" :class="{'active' : activeRoute === '/life'}">
-        <router-link to="/timeline">
+        <router-link to="/life">
           <span class="nav-item-text uppercase">life</span>
         </router-link>
       </div>

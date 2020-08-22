@@ -30,11 +30,13 @@ const routes = [
       path: 'archive',
       name: 'Archive',
       component: () => import('@/views/home/Archive')
+    }, {
+      path: 'life',
+      name: 'Life',
+      component: () => import('@/views/home/Life')
     }]
   }
 ]
-
-// let scrollTop = 0
 
 const router = new VueRouter({
   mode: 'history',
@@ -50,10 +52,5 @@ const router = new VueRouter({
     }
   }
 })
-
-// router.beforeEach((to, from, next) => {
-//   scrollTop = document.documentElement.scrollTop
-//   next()
-// })
 
 export default router

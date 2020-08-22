@@ -18,3 +18,9 @@ export function getBlogsList() {
     url: '/blogs'
   })
 }
+
+export function getLifeList() {
+  return request({
+    url: '/life'
+  })
+}

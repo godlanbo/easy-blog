@@ -13,17 +13,13 @@
   </div>
 </template>
 <script>
-import CardItem from '@/components/CardItem/index'
-import { blogsList } from '../../utils/mock'
+import CardItem from './components/CardItem/index'
+import { homeMixin } from '../../utils/mixin'
 export default {
   components: {
     CardItem,
   },
-  data() {
-    return {
-      blogsList,
-    }
-  },
+  mixins: [homeMixin]
 }
 </script>
 <style lang="scss" scoped>

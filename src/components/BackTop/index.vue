@@ -57,25 +57,32 @@ export default {
   visibility: hidden;
   opacity: 0;
   position: fixed;
-  background-color: #fff;
   font-weight: bold;
-  bottom: 40px;
-  right: 40px;
+  bottom: 60px;
+  right: 30px;
   z-index: 20;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   @include center;
   font-size: 30px;
-  box-shadow: 0 8px 24px 0 rgba(187,191,196,.2);
+  background: #f0f3f6;
+  box-shadow: 6px 6px 12px #cccfd1, -6px -6px 12px #ffffff;
   cursor: pointer;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  transition: all $animationTime $animationType;
   .icon-up {
-    color: transparent;
-    background-image: linear-gradient(to left, #c33764, #1d2671);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    @include center;
+    color: #aaa;
     font-weight: bold;
+  }
+  &:hover {
+    transform: scale(1.08);
+    box-shadow: 10px 10px 20px #cccfd1, -10px -10px 20px #ffffff;
+  }
+}
+@media (max-width: 640px) {
+  .backTop {
+    right: 10px !important;
   }
 }
 </style>
