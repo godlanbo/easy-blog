@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <read-progress></read-progress>
+    <back-top></back-top>
     <header-bar></header-bar>
     <transition name="slide-up" mode="out-in">
       <keep-alive exclude="BlogsDetail">
@@ -13,11 +15,15 @@
 <script>
 import HeaderBar from './components/HeaderBar/index'
 import FooterBar from './components/FooterBar/index'
+import ReadProgress from '@/components/ReadProgress/index'
+import BackTop from '@/components/BackTop/index'
 export default {
   components: {
     HeaderBar,
     FooterBar,
-  },
+    ReadProgress,
+    BackTop
+  }
 }
 </script>
 <style lang="scss" scoped>

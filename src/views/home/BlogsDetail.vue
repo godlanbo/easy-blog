@@ -6,14 +6,12 @@
         <span class="title">{{blogsDetail.title}}</span>
       </header>
       <section class="tags">
-        <div
-          class="tag-item"
+        <tag-item
           v-for="(item, index) in blogsDetail.tags"
           :key="index"
-          @click.prevent="queryTag(item)"
-        >
-          <span class="tag-item-text uppercase">#{{item}}</span>
-        </div>
+          :tag="item"
+          @select="queryTag"
+        ></tag-item>
       </section>
       <article class="content">
         <mavon-editor
@@ -33,9 +31,13 @@
 </template>
 
 <script>
-import { getBlogsDetail } from '../../api/home'
+import { getBlogsDetail } from '../../api/index'
+import TagItem from '../../components/Tag/index'
 export default {
   name: 'BlogsDetail',
+  components: {
+    TagItem,
+  },
   data() {
     return {
       blogsDetail: {},
@@ -54,10 +56,10 @@ export default {
       this.$router.push({
         path: '/blogs/tags',
         query: {
-          tag
-        }
+          tag,
+        },
       })
-    }
+    },
   },
 }
 </script>
@@ -100,21 +102,6 @@ export default {
       flex-flow: row wrap;
       align-items: center;
       margin-bottom: 5px;
-      .tag-item {
-        font-size: 16px;
-        color: $text-color;
-        font-weight: 600;
-        padding: 8px 13px;
-        border-radius: 55px;
-        margin-right: 15px;
-        background: $bg-color;
-        cursor: pointer;
-        transition: all $animationTime $animationType;
-        &:hover {
-          background: $color-blue;
-          color: #fff;
-        }
-      }
     }
     .content {
       width: 100%;

@@ -1,4 +1,4 @@
-import { getBlogsList, getLifeList } from './../api/home';
+import { getBlogsList, getLifeList } from './../api/index';
 
 export const homeMixin = {
   data() {

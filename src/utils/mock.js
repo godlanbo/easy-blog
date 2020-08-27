@@ -4,7 +4,7 @@ export const blogsList = [{
   title: 'JS事件循环之异步任务',
   tags: ['Vue', 'Sass'],
   author: 'GodLanBo',
-  releaseTime: 1597407302225,
+  releaseTime: 1597507302225,
   content: `JS事件循环之异步任务什么是异步任务
 首先我们知道，js是单线程语言，事件循环是js的事件执行机制。因为js是单线程的所以就导致，如果一个任务执行时间太长，会导致后面的任务无法执行，进而卡住执行栈。所以在js中将任务分为两类：
 
@@ -16,9 +16,9 @@ export const blogsList = [{
   id: 2,
   cover: '/image/demo3.png',
   title: 'JS事件循环之异步任务',
-  tags: ['Vue', 'Sass'],
+  tags: ['Vue', 'Axios'],
   author: 'GodLanBo',
-  releaseTime: 1597407302225,
+  releaseTime: 1597607302225,
   content: `# JS事件循环之异步任务
 
 ### 什么是异步任务
@@ -33,9 +33,9 @@ export const blogsList = [{
   id: 3,
   cover: '/image/avatar.jpeg',
   title: 'JS事件循环之异步任务',
-  tags: ['Vue', 'Sass'],
+  tags: ['Vue', 'Node'],
   author: 'GodLanBo',
-  releaseTime: 1597407302225,
+  releaseTime: 1597707302225,
   content: `# JS事件循环之异步任务
 
 ### 什么是异步任务
@@ -52,7 +52,7 @@ export const blogsList = [{
   title: 'JS事件循环之异步任务',
   tags: ['Vue', 'Sass'],
   author: 'GodLanBo',
-  releaseTime: 1597407302225,
+  releaseTime: 1597807302225,
   content: `# JS事件循环之异步任务
 
 ### 什么是异步任务
@@ -69,7 +69,7 @@ export const blogsList = [{
   title: 'JS事件循环之异步任务',
   tags: ['Vue', 'Sass'],
   author: 'GodLanBo',
-  releaseTime: 1597407302225,
+  releaseTime: 1597907302225,
   content: `# JS事件循环之异步任务
 
 ### 什么是异步任务

@@ -11,7 +11,6 @@
 
 <script>
 import LifeItem from './components/LifeItem/index'
-import { getLifeList } from '../../api/home'
 import { getYear } from '../../utils'
 import { homeMixin } from '../../utils/mixin'
 export default {

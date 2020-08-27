@@ -18,7 +18,6 @@ export default {
   },
   mounted() {
     getBlogsCategoryList('time').then(res => {
-      console.log(res)
       this.categoryList = res.data.categoryList
     })
   },
