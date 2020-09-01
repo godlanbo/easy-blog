@@ -1,16 +1,281 @@
 <template>
-  <div class="blog-edit">
-    edit
+  <div class="blog-edit-container">
+    <div class="blog-content-wrapper">
+      <div class="title-wrapper">
+        <input type="text" class="title-text" v-model="blog.title" placeholder="输入文章标题" />
+      </div>
+      <div class="content-wrapper">
+        <mavon-editor
+          ref="md"
+          class="content-view"
+          v-model="blog.content"
+          :subfield="false"
+          :ishljs="true"
+          :boxShadow="false"
+          @imgAdd="onImgAdd"
+          @imgDel="onImgDel"
+          codeStyle="monokai"
+        />
+      </div>
+    </div>
+    <div class="edit-cover-and-tags-panel">
+      <div class="edit-cover">
+        <div class="img-wrapper" v-if="blog.cover">
+          <img :src="blog.cover" />
+        </div>
+        <div class="no-img" v-else>
+          <span class="no-img-text">暂无封面图片</span>
+        </div>
+        <div class="handle-panel">
+          <el-upload action show-file-list :auto-upload="true" :before-upload="onUploadCover">
+            <el-button size="mini" type="primary">点击上传</el-button>
+          </el-upload>
+          <el-button size="mini" type="primary" @click="getRandomCover">随机获取</el-button>
+        </div>
+      </div>
+      <div class="release-info-wrapper" v-if="mode === 'edit'">
+        <div class="title">
+          <span class="title-text">文章信息</span>
+        </div>
+        <div class="content">
+          <div class="author line">
+            <span class="el-icon-user mark"></span>
+            <span class="text">作者：</span>
+            <span>{{blog.author}}</span>
+          </div>
+          <div class="release-tim line">
+            <span class="el-icon-date mark"></span>
+            <span class="text">发布时间：</span>
+            <span>{{blog.releaseTime | dateformat('YYYY年MM月DD日')}}</span>
+          </div>
+        </div>
+      </div>
+      <tags-panel
+        :tags-item-list="tagCategoryList"
+        :initial-selected="initialSelected"
+        :can-edit="true"
+        @select-change="onSelectTag"
+        @add-tag="onAddTag"
+      ></tags-panel>
+      <el-button
+        class="submit-btn"
+        type="success"
+        @click="onSaveBlogEdit"
+      >{{mode === 'create' ? '发布' : '保存'}}</el-button>
+    </div>
   </div>
 </template>
 
 <script>
-
+import TagsPanel from './components/TagsPanel/index'
+import { getBlogsCategoryList } from '../../api/home'
+import { addTag } from '../../api/admin'
+import { adminMixin } from '../../utils/mixin'
+import { getLocalStorage, removeLocalStorage } from '../../utils/localStorage'
 export default {
-  
+  name: 'blogEdit',
+  mixins: [adminMixin],
+  components: {
+    TagsPanel,
+  },
+  data() {
+    return {
+      tagCategoryList: [],
+      blog: {},
+      mode: 'create',
+      initialSelected: [],
+      coverFile: null,
+    }
+  },
+  methods: {
+    onSelectTag(arr, index) {
+      this.blog.tags.push(this.tagCategoryList[index].name)
+      console.log(1)
+    },
+    onAddTag(value) {
+      addTag(value).then((res) => {
+        this.tagCategoryList = res.data.tagCategoryList
+      })
+    },
+    getRandomCover() {
+      this.blog.cover = `https://picsum.photos/seed/${Date.now()}/1920/1080`
+    },
+    onSaveBlogEdit() {
+      let content = this.blog.content
+      this.blog.content = ''
+      setTimeout(() => {
+        this.blog.content = content
+      }, 1000)
+    },
+    onUploadCover(file) {
+      this.coverFile = file
+      let reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = (e) => {
+        this.blog.cover = e.currentTarget.result
+      }
+      return false
+    },
+    onImgAdd(fileName, file) {
+      console.log(fileName, file)
+      // this.$refs.md.$img2Url(fileName, file.miniurl)
+    },
+    onImgDel(fileName) {
+      console.log(fileName)
+    }
+  },
+  mounted() {
+    getBlogsCategoryList('tag').then((res) => {
+      this.tagCategoryList = res.data.categoryList
+      this.blog = getLocalStorage('blog')
+      if (this.blog) {
+        this.mode = 'edit'
+        let initialSelected = new Array(this.tagCategoryList.length)
+        this.tagCategoryList.forEach((item, index) => {
+          if (this.blog.tags.includes(item.name)) {
+            initialSelected[index] = true
+          } else {
+            initialSelected[index] = false
+          }
+        })
+        this.initialSelected = initialSelected
+      } else {
+        this.blog = {
+          cover: '',
+          title: '',
+          content: '',
+          tags: [],
+        }
+      }
+    })
+  },
+  destroyed() {
+    removeLocalStorage('blog')
+  },
 }
 </script>
 <style lang="scss" scoped>
 @import '@/assets/style/globalScript';
-
+.blog-edit-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .blog-content-wrapper {
+    flex: 0 0 70%;
+    display: flex;
+    margin-right: 10px;
+    flex-direction: column;
+    height: auto;
+    .title-wrapper {
+      flex: 0 0 40px;
+      margin-bottom: 10px;
+      .title-text {
+        width: 100%;
+        height: 100%;
+        border: 1px solid;
+        border-radius: 5px;
+        outline: none;
+        font-size: 25px;
+        font-weight: 600;
+        color: $text-color;
+        padding: 1px 10px;
+        border-color: #ccc;
+        &::placeholder {
+          font-weight: 400;
+          color: #ccc;
+        }
+        &:focus {
+          border-color: $color-blue;
+          box-shadow: 0 0 0 1px $color-blue;
+        }
+      }
+    }
+    .content-wrapper {
+      flex: 1;
+      border-radius: 5px;
+      background: #fff;
+      overflow: hidden;
+      max-width: 892px;
+      .content-view {
+        height: 100%;
+      }
+    }
+  }
+  .edit-cover-and-tags-panel {
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    .edit-cover {
+      background: #fff;
+      margin-bottom: 10px;
+      padding: 15px 10px;
+      border-radius: 5px;
+      .img-wrapper {
+        width: 100%;
+        margin-bottom: 15px;
+        img {
+          height: 220px;
+          object-fit: cover;
+          width: 100%;
+          border-radius: 5px;
+        }
+      }
+      .no-img {
+        width: 100%;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        height: 220px;
+        border: 1px dashed #ccc;
+        color: #ccc;
+        @include center;
+        font-size: 14px;
+      }
+      .handle-panel {
+        display: flex;
+        justify-content: space-around;
+      }
+    }
+    .tags-panel {
+      margin-bottom: 10px;
+    }
+    .submit-btn {
+      width: 100%;
+    }
+    .release-info-wrapper {
+      padding: 10px;
+      border-radius: 5px;
+      background: #fff;
+      margin-bottom: 10px;
+      .title {
+        text-align: center;
+        width: 90%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 600;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 15px;
+        padding: 10px;
+      }
+      .content {
+        width: 90%;
+        margin: 0 auto;
+        .line {
+          margin-bottom: 15px;
+          font-size: 16px;
+          color: $text-color;
+          display: flex;
+          align-items: center;
+          .text {
+            font-weight: 600;
+          }
+          .mark {
+            margin-right: 7px;
+            font-weight: 600;
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}
 </style>

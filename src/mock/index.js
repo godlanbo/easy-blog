@@ -113,44 +113,50 @@ Mock.mock(/\/blogs\/\d+$/, 'get', {
 //     ]
 //   }
 // })
+let timeCategoryList = [{
+  name: 2020,
+  num: 32
+}, {
+  name: 2019,
+  num: 30
+}, {
+  name: 2018,
+  num: 31
+}, {
+  name: 2017,
+  num: 16
+}, {
+  name: 2016,
+  num: 3
+}]
+let tagCategoryList = [{
+  name: 'Vue',
+  num: 32
+}, {
+  name: 'Node',
+  num: 21
+}, {
+  name: 'Axios',
+  num: 31
+}, {
+  name: 'javascript',
+  num: 16
+}, {
+  name: 'mysql',
+  num: 3
+}, {
+  name: 'Sass',
+  num: 2
+}]
+
 Mock.mock(/\/blogs\/categoryList/, 'get', (options) => {
   let url = options.url
   let type = url.split('?')[1].split('=')[1]
   let data = {}
   if (type === 'time') {
-    data.categoryList = [{
-      name: 2020,
-      num: 32
-    }, {
-      name: 2019,
-      num: 30
-    }, {
-      name: 2018,
-      num: 31
-    }, {
-      name: 2017,
-      num: 16
-    }, {
-      name: 2016,
-      num: 3
-    }]
+    data.categoryList = timeCategoryList
   } else {
-    data.categoryList = [{
-      name: 'Vue',
-      num: 32
-    }, {
-      name: 'Node',
-      num: 21
-    }, {
-      name: 'Axios',
-      num: 31
-    }, {
-      name: 'javascript',
-      num: 16
-    }, {
-      name: 'mysql',
-      num: 3
-    }]
+    data.categoryList = tagCategoryList
   }
   return {
     status: 200,
@@ -184,6 +190,28 @@ Mock.mock(/\/life$/, 'get', (options) => {
     status: 200,
     data: {
       lifeList: lifeList
+    }
+  }
+})
+Mock.mock(/\/admin\/tag$/, 'post', (options) => {
+  let data = JSON.parse(options.body)
+  tagCategoryList.push({
+    name: data.tag,
+    num: 0
+  })
+  return {
+    status: 200,
+    data: {
+      tagCategoryList
+    }
+  }
+})
+Mock.mock(/\/admin\/login$/, 'post', (options) => {
+  let { account, password } = JSON.parse(options.body)
+  return {
+    status: 200,
+    data: {
+      token: `token is get${account}`
     }
   }
 })

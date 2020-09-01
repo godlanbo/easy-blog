@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import { encode, decode } from '../../utils/auth'
+import { login } from '../../api/admin'
 export default {
   data() {
     return {
@@ -44,7 +46,9 @@ export default {
     }
   },
   methods: {
-    login() {},
+    login() {
+      login(this.postData)
+    },
   },
 }
 </script>

@@ -5,11 +5,19 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    editBlog: null
   },
   mutations: {
+    SET_EDITBLOG(state, editBlog) {
+      state.editBlog = editBlog
+    }
   },
   actions: {
+    setEditBlog({ commit }, editBlog) {
+      return commit('SET_EDITBLOG', editBlog)
+    }
   },
-  modules: {
+  getters: {
+    editBlog: state => state.editBlog
   }
 })

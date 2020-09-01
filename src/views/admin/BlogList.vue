@@ -33,7 +33,12 @@
         </div>
       </div>
       <div class="blog-list">
-        <div class="blog-list-item" v-for="(item, index) in blogsItemList[currentPage - 1]" :key="item.id">
+        <div
+          class="blog-list-item"
+          v-for="(item, index) in blogsItemList[currentPage - 1]"
+          :key="item.id"
+          @click="onClickBlogItem(item)"
+        >
           <div class="title-wrapper">
             <span class="title-text">{{item.title}}</span>
           </div>
@@ -46,8 +51,8 @@
               <span class="author">作者 {{item.author}}</span>
             </div>
             <div class="handle">
-              <el-button size="mini" @click="editBlog(index)">编辑</el-button>
-              <el-button type="danger" size="mini" @click="deleteBlog(index)">删除</el-button>
+              <el-button size="mini" @click.stop="onEditBlog(index)">编辑</el-button>
+              <el-button type="danger" size="mini" @click="onDeleteBlog(index)">删除</el-button>
             </div>
           </div>
         </div>
@@ -74,34 +79,29 @@
         />
         <el-button class="search-btn" size="small" type="primary" @click="onSearch">搜索</el-button>
       </div>
-      <div class="tags-filter-wrapper">
-        <div class="title-wrapper">
-          <span class="title-text">标签</span>
-        </div>
-        <div class="content">
-          <tag-item
-            class="tag-item"
-            v-for="(item, index) in tagCategoryList"
-            :key="index"
-            :tag="item.name"
-            :class="{'is-selected' : selectedTags[index]}"
-            @select="onSelectTag(index)"
-          ></tag-item>
-        </div>
-      </div>
+      <tags-panel
+        :tags-item-list="tagCategoryList"
+        :sticky-top="82"
+        @select-change="onSelectChange"
+      ></tags-panel>
     </div>
   </div>
 </template>
 
 <script>
 import { getBlogsList } from '../../api'
-import TagItem from '../../components/Tag/index'
+import TagItem from '@/components/Tag/index'
+import TagsPanel from './components/TagsPanel/index'
 import { getBlogsCategoryList } from '../../api/home'
 import { isSameYear, getYear } from '../../utils'
-import { off } from 'process'
+import { setLocalStorage } from '../../utils/localStorage'
+import { adminMixin } from '../../utils/mixin'
 export default {
+  name: 'blogList',
+  mixins: [adminMixin],
   components: {
     TagItem,
+    TagsPanel,
   },
   data() {
     return {
@@ -114,7 +114,7 @@ export default {
       sortType: 'up',
       selectedTags: [],
       pageLength: 7,
-      currentPage: 1
+      currentPage: 1,
     }
   },
   computed: {
@@ -153,12 +153,13 @@ export default {
       }
       list = this.sortBlogsList(list)
       let tempList = []
-      // if (list.length != 0) {
-      //   debugger
-      // }
+
       let offset = 0
-      while(1) {
-        let end = offset + this.pageLength >= list.length ? list.length : offset + this.pageLength
+      while (1) {
+        let end =
+          offset + this.pageLength >= list.length
+            ? list.length
+            : offset + this.pageLength
         tempList.push(list.slice(offset, end))
         offset = end
         if (end >= list.length) break
@@ -167,15 +168,20 @@ export default {
     },
     totalLength() {
       let len = 0
-      this.blogsItemList.forEach(item => {
+      this.blogsItemList.forEach((item) => {
         len += item.length
       })
       return len
-    }
+    },
   },
   methods: {
     onCurrentPageChange(page) {
       this.currentPage = page
+    },
+    onClickBlogItem(item) {
+      this.$router.push({
+        path: `/blogs/${item.id}`,
+      })
     },
     onSearch() {
       this.filterText = this.searchText
@@ -191,10 +197,18 @@ export default {
         })
       }
     },
-    editBlog(index) {},
-    deleteBlog(index) {},
-    onSelectTag(index) {
-      this.selectedTags.splice(index, 1, !this.selectedTags[index])
+    onEditBlog(index) {
+      setLocalStorage('blog', this.blogsItemList[this.currentPage][index])
+      this.$router.push({
+        path: '/blog/list',
+        query: {
+          mode: 'edit',
+        },
+      })
+    },
+    onDeleteBlog(index) {},
+    onSelectChange(arr) {
+      this.selectedTags = arr
     },
     onSelectCommand(filterTime) {
       this.filterTime = filterTime
@@ -205,7 +219,6 @@ export default {
   },
   mounted() {
     getBlogsList().then((res) => {
-      console.log(res)
       this.blogsList = res.data.blogsList
     })
     getBlogsCategoryList('time').then((res) => {
@@ -213,7 +226,6 @@ export default {
     })
     getBlogsCategoryList('tag').then((res) => {
       this.tagCategoryList = res.data.categoryList
-      this.selectedTags = new Array(this.tagCategoryList.length).fill(false)
     })
   },
 }
@@ -223,6 +235,7 @@ export default {
 .blog-list-container {
   width: 100%;
   display: flex;
+  justify-content: center;
   .blog-list-wrapper {
     flex: 0 0 70%;
     display: inline-block;
@@ -267,6 +280,7 @@ export default {
         flex-direction: column;
         padding: 10px 0 20px;
         border-bottom: 3px solid $bg-color;
+        cursor: pointer;
         &:hover {
           &::before {
             background: $color-blue;

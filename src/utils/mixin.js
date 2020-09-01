@@ -1,4 +1,5 @@
 import { getBlogsList, getLifeList } from './../api/index';
+import { mapActions, mapGetters } from 'vuex';
 
 export const homeMixin = {
   data() {
@@ -14,5 +15,18 @@ export const homeMixin = {
     getLifeList().then((res) => {
       this.lifeList = res.data.lifeList
     })
+  },
+}
+
+export const adminMixin = {
+  computed: {
+    ...mapGetters([
+      'editBlog'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'setEditBlog'
+    ])
   },
 }

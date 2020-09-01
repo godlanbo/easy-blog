@@ -62,18 +62,13 @@ const routes = [
     children: [{
       path: 'list',
       name: 'List',
-      component: () => import('@/views/admin/BlogList'),
+      component: () => import('@/views/admin/BlogView'),
       meta: { title: '博客列表' }
     }, {
       path: 'create',
       name: 'Create',
       component: () => import('@/views/admin/BlogEdit'),
       meta: { title: '创建博客' }
-    }, {
-      path: 'list/:mode',
-      name: 'ListEdit',
-      hidden: true,
-      component: () => import('@/views/admin/Dashboard'),
     }]
   },
   {

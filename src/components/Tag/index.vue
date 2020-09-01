@@ -1,6 +1,7 @@
 <template>
   <div class="tag" :class="{ 'showBg' : showBg }" @click.prevent="onSelect(tag)">
-    <span class="tag-text uppercase">#{{tag}}</span>
+    <span class="tag-text uppercase" v-if="tag !== '+'">#{{tag}}</span>
+    <span class="tag-text uppercase" v-else>{{tag}}</span>
   </div>
 </template>
 <script>
