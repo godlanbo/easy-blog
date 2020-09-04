@@ -48,7 +48,7 @@ export default {
     let id = this.$route.params.id
     getBlogsDetail(id).then((res) => {
       this.blogsDetail = res.data
-      this.markDownContent = this.blogsDetail.content.replace(/[ ]{2,}/g, '')
+      this.markDownContent = this.blogsDetail.content
     })
   },
   methods: {

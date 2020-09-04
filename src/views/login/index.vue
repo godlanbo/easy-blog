@@ -9,8 +9,9 @@
           required
           type="text"
           autocomplete="off"
-          v-model="postData.account"
+          v-model="postData.username"
           class="form-input"
+          @keyup.enter="login"
         />
         <div class="underline"></div>
         <label class="input-title">Account</label>
@@ -22,6 +23,7 @@
           autocomplete="off"
           v-model="postData.password"
           class="form-input"
+          @keyup.enter="login"
         />
         <div class="underline"></div>
         <label class="input-title">Password</label>
@@ -40,14 +42,47 @@ export default {
   data() {
     return {
       postData: {
-        account: '',
+        username: '',
         password: '',
       },
+      redirect: '',
     }
   },
+  watch: {
+    $route: {
+      handler: function (route) {
+        this.redirect = route.query && route.query.redirect
+      },
+      immediate: true,
+    },
+  },
   methods: {
+    validateLoginInfo() {
+      if (this.postData.username.length === 0) {
+        this.$message({
+          type: 'warning',
+          message: '账号为必填',
+        })
+        return false
+      }
+      if (this.postData.password.length === 0) {
+        this.$message({
+          type: 'warning',
+          message: '密码不能为空',
+        })
+        return false
+      }
+      return true
+    },
     login() {
-      login(this.postData)
+      if (this.validateLoginInfo()) {
+        this.postData.password = encode(this.postData.password)
+        login(this.postData).then(() => {
+          this.$router.push({
+            path: this.redirect || '/dashboard',
+          })
+        })
+      }
     },
   },
 }
@@ -99,8 +134,12 @@ export default {
         background-color: transparent !important;
         height: 100%;
         font-size: 16px;
-        color: #fff;
+        color: #fff !important;
         outline: none;
+        &:-webkit-autofill {
+          transition: background-color 9999s linear;
+          transition-delay: 9999s;
+        }
         &:focus,
         &:valid {
           & ~ .input-title {

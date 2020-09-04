@@ -73,15 +73,30 @@ const routes = [
   },
   {
     path: '/mylife',
-    redirect: '/mylife/index',
     component: layoutAdmin,
+    meta: { title: '我的生活', icon: 'life' },
     children: [{
-      path: 'index',
-      name: 'MyLife',
-      component: () => import('@/views/admin/Dashboard'),
-      meta: { title: '我的生活', icon: 'life' }
+      path: 'list',
+      name: 'LifeList',
+      component: () => import('@/views/admin/LifeList'),
+      meta: { title: '动态列表' }
+    }, {
+      path: 'create',
+      name: 'LifeCreate',
+      component: () => import('@/views/admin/LifeCreate'),
+      meta: { title: '新的动态' }
     }]
   },
+  {
+    path: '/404',
+    component: () => import('@/views/404/index'),
+    hidden: true
+  },
+  {
+    path: '*',
+    redirect: '/404',
+    hidden: true
+  }
 ]
 
 const router = new VueRouter({

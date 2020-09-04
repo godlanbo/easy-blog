@@ -7,10 +7,12 @@
 </template>
 
 <script>
+import { removeToken } from '../../../../utils/auth'
 export default {
   methods: {
     loginOut() {
-      
+      removeToken()
+      this.$router.push('/login')
     }
   },
 }

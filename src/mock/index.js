@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 import { blogsList, lifeList } from './../utils/mock';
 
-Mock.mock(/\/blogs\/\d+$/, 'get', {
+Mock.mock(/\/blog\/\d+$/, 'get', {
   'status': 200,
   'data': {
     'id|1-20': 20,
@@ -149,7 +149,7 @@ let tagCategoryList = [{
   num: 2
 }]
 
-Mock.mock(/\/blogs\/categoryList/, 'get', (options) => {
+Mock.mock(/\/blog\/categoryList/, 'get', (options) => {
   let url = options.url
   let type = url.split('?')[1].split('=')[1]
   let data = {}
@@ -163,7 +163,7 @@ Mock.mock(/\/blogs\/categoryList/, 'get', (options) => {
     data
   }
 })
-Mock.mock(/\/blogs$/, 'get', {
+Mock.mock(/\/blog$/, 'get', {
   status: 200,
   data: {
     "blogsList|8": [

@@ -18,11 +18,6 @@ export default {
     LifeItem,
   },
   mixins: [homeMixin],
-  data() {
-    return {
-      lifeList: [],
-    }
-  },
   computed: {
     lifeItemList() {
       let lifeList = []

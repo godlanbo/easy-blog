@@ -2,17 +2,17 @@ import request from './../utils/request';
 
 export function getBlogsList() {
   return request({
-    url: '/blogs'
+    url: '/blog/list'
   })
 }
 
 export function getLifeList() {
   return request({
-    url: '/life'
+    url: '/life/list'
   })
 }
 export function getBlogsDetail(id) {
   return request({
-    url: `/blogs/${id}`
+    url: `/blog/${id}`
   })
 }

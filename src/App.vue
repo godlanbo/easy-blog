@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view/>
+    <transition name="slide-up" mode="out-in">
+      <router-view/>
+    </transition>
   </div>
 </template>
 <script>

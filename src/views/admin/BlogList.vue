@@ -52,7 +52,7 @@
             </div>
             <div class="handle">
               <el-button size="mini" @click.stop="onEditBlog(index)">编辑</el-button>
-              <el-button type="danger" size="mini" @click="onDeleteBlog(index)">删除</el-button>
+              <el-button type="danger" size="mini" @click.stop="onDeleteBlog(index)">删除</el-button>
             </div>
           </div>
         </div>
@@ -96,6 +96,7 @@ import { getBlogsCategoryList } from '../../api/home'
 import { isSameYear, getYear } from '../../utils'
 import { setLocalStorage } from '../../utils/localStorage'
 import { adminMixin } from '../../utils/mixin'
+import { deleteBlog } from '../../api/admin'
 export default {
   name: 'blogList',
   mixins: [adminMixin],
@@ -198,7 +199,7 @@ export default {
       }
     },
     onEditBlog(index) {
-      setLocalStorage('blog', this.blogsItemList[this.currentPage][index])
+      setLocalStorage('blog', this.blogsItemList[this.currentPage - 1][index])
       this.$router.push({
         path: '/blog/list',
         query: {
@@ -206,7 +207,33 @@ export default {
         },
       })
     },
-    onDeleteBlog(index) {},
+    onDeleteBlog(index) {
+      this.$alert('确认删除这篇文章？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+        showCancelButton: true,
+      })
+        .then(() => {
+          return deleteBlog(this.blogsItemList[this.currentPage - 1][index].id)
+        })
+        .then((res) => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!',
+          })
+          return getBlogsList()
+        })
+        .then((res) => {
+          this.blogsList = res.data.blogsList
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除',
+          })
+        })
+    },
     onSelectChange(arr) {
       this.selectedTags = arr
     },

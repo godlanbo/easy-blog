@@ -7,13 +7,15 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/style/global.scss'
 import './assets/style/icon.css'
-import './mock/index'
+// import './mock/index'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import './permission'
+
 Vue.prototype.$markDown = mavonEditor.markdownIt
 Vue.use(mavonEditor)
 Vue.use(ElementUI)
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 Vue.filter('dateformat', (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') => {
   return dayjs(dataStr).format(pattern)
 })

@@ -12,15 +12,77 @@ export function addTag(newTag) {
 }
 
 export function login(userData) {
-  let { account, password } = userData
+  let { username, password } = userData
   return request({
     url: `/admin/login`,
     method: 'POST',
     data: {
-      account,
+      username,
       password
     }
   }).then(res => {
     setToken(res.data.token)
+  })
+}
+
+export function newBlog(blog) {
+  return request({
+    url: '/blog',
+    method: 'POST',
+    data: blog
+  })
+}
+
+export function deleteBlog(id) {
+  return request({
+    url: '/blog',
+    method: 'DELETE',
+    data: {
+      id
+    }
+  })
+}
+
+export function updateBlog(blog) {
+  return request({
+    url: '/blog',
+    method: 'PATCH',
+    data: blog
+  })
+}
+
+export function uploadImg(img) {
+  return request({
+    url: '/admin/uploadImg',
+    method: 'POST',
+    data: img
+  })
+}
+
+export function deletImg(fileName) {
+  return request({
+    url: '/admin/deleteImg',
+    method: 'DELETE',
+    data: {
+      fileName
+    }
+  })
+}
+
+export function newLife(lifeItem) {
+  return request({
+    url: '/life',
+    method: 'POST',
+    data: lifeItem
+  })
+}
+
+export function deleteLife(id) {
+  return request({
+    url: '/life',
+    method: 'DELETE',
+    data: {
+      id
+    }
   })
 }

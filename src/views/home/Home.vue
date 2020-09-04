@@ -17,6 +17,7 @@
       btnText="More Blogs"
       linkToAddress="/blogs"
       class="home-blogs-section"
+      v-if="blogsItemList.length"
     >
       <div class="home-blogs-section-list">
         <div class="home-blogs-section-list-item" v-for="item in blogsItemList" :key="item.id">
@@ -29,6 +30,7 @@
       btnText="More Life"
       linkToAddress="/life"
       class="home-life-section"
+      v-if="lifeItemList.length"
     >
       <div class="home-life-section-list">
         <div
