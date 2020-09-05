@@ -27,14 +27,14 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   response => {
     const res = response.data
-    if (res.code !== 0) {
-      Message({
-        message: res.message || '请求失败',
-        type: 'error',
-        duration: 5 * 1000
-      })
-      return Promise.reject(new Error(res.message || 'Has Error'))
-    }
+    // if (res.code !== 0) {
+    //   Message({
+    //     message: res.message || '请求失败',
+    //     type: 'error',
+    //     duration: 5 * 1000
+    //   })
+    //   return Promise.reject(new Error(res.message || 'Has Error'))
+    // }
     return res
   },
   error => {

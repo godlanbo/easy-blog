@@ -4,7 +4,6 @@ import router from './router'
 import store from './store'
 import dayjs from 'dayjs'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css';
 import './assets/style/global.scss'
 import './assets/style/icon.css'
 // import './mock/index'
@@ -15,7 +14,7 @@ import './permission'
 Vue.prototype.$markDown = mavonEditor.markdownIt
 Vue.use(mavonEditor)
 Vue.use(ElementUI)
-Vue.config.productionTip = true
+Vue.config.productionTip = process.env.NODE_ENV === 'development'
 Vue.filter('dateformat', (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') => {
   return dayjs(dataStr).format(pattern)
 })

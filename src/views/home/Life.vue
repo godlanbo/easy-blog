@@ -12,12 +12,12 @@
 <script>
 import LifeItem from './components/LifeItem/index'
 import { getYear } from '../../utils'
-import { homeMixin } from '../../utils/mixin'
+import { homeMixin, lazyImgMixin } from '../../utils/mixin'
 export default {
   components: {
     LifeItem,
   },
-  mixins: [homeMixin],
+  mixins: [homeMixin, lazyImgMixin],
   computed: {
     lifeItemList() {
       let lifeList = []

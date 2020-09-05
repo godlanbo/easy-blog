@@ -37,7 +37,8 @@
           class="home-life-section-list-item"
           v-for="item in lifeItemList"
           :key="item.id"
-          :style="{'background-image': lifeItemImg(item)}"
+          :data-src="lifeItemImg(item)"
+          :style="{'background-image': '/image/default.png'}"
           @click="linkToLife(item.id)"
         >
           <div class="content">
@@ -55,21 +56,21 @@ import AvatarDetail from './components/Avatar/index'
 import CardItem from './components/CardItem/index'
 import SectionItem from './components/SectionItem/index'
 import VanillaTilt from 'vanilla-tilt'
-import { homeMixin } from '../../utils/mixin'
+import { homeMixin, lazyImgMixin } from '../../utils/mixin'
 export default {
   components: {
     AvatarDetail,
     CardItem,
     SectionItem,
   },
-  mixins: [homeMixin],
+  mixins: [homeMixin, lazyImgMixin],
   methods: {
     linkToLife(id) {
       this.$router.push({
         path: '/life',
         query: {
-          id
-        }
+          id,
+        },
       })
     },
     lifeItemImg(item) {

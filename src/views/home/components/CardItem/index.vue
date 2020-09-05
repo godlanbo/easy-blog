@@ -3,7 +3,7 @@
     <div class="card-item-content">
       <a :href="linkAddress">
         <figure v-if="isShowImg">
-          <img :src="data.cover" />
+          <img src="/image/default.png" :data-src="data.cover" />
         </figure>
         <main>
           <div class="tags-wrapper">

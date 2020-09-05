@@ -14,12 +14,12 @@
 </template>
 <script>
 import CardItem from './components/CardItem/index'
-import { homeMixin } from '../../utils/mixin'
+import { homeMixin, lazyImgMixin } from '../../utils/mixin'
 export default {
   components: {
     CardItem,
   },
-  mixins: [homeMixin]
+  mixins: [homeMixin, lazyImgMixin]
 }
 </script>
 <style lang="scss" scoped>

@@ -163,7 +163,7 @@ Mock.mock(/\/blog\/categoryList/, 'get', (options) => {
     data
   }
 })
-Mock.mock(/\/blog$/, 'get', {
+Mock.mock(/\/blog\/list$/, 'get', {
   status: 200,
   data: {
     "blogsList|8": [
@@ -185,7 +185,7 @@ Mock.mock(/\/blog$/, 'get', {
     ]
   }
 })
-Mock.mock(/\/life$/, 'get', (options) => {
+Mock.mock(/\/life\/list$/, 'get', (options) => {
   return {
     status: 200,
     data: {

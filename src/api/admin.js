@@ -1,5 +1,6 @@
 import request from './../utils/request';
 import { setToken } from '@/utils/auth';
+import { compress } from '../utils';
 
 export function addTag(newTag) {
   return request({
@@ -52,10 +53,14 @@ export function updateBlog(blog) {
 }
 
 export function uploadImg(img) {
-  return request({
-    url: '/admin/uploadImg',
-    method: 'POST',
-    data: img
+  compress(img.get('img'), { fieldName: 'img' }).then(res => {
+    return res.formData
+  }).then(fileData => {
+    return request({
+      url: '/admin/uploadImg',
+      method: 'POST',
+      data: fileData
+    })
   })
 }
 

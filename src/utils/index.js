@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import lrz from 'lrz'
 const cubic = value => Math.pow(value, 3)
 const easeInOutCubic = value => value < 0.5
   ? cubic(value * 2) / 2
@@ -42,4 +43,8 @@ export function isSameYear(date1, date2) {
 
 export function getYear(date) {
   return dayjs(date).get('year')
+}
+
+export function compress(img) {
+  return lrz(img)
 }
