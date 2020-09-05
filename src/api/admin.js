@@ -53,7 +53,7 @@ export function updateBlog(blog) {
 }
 
 export function uploadImg(img) {
-  compress(img.get('img'), { fieldName: 'img' }).then(res => {
+  return compress(img.get('img'), { fieldName: 'img' }).then(res => {
     return res.formData
   }).then(fileData => {
     return request({

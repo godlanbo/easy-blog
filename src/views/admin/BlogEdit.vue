@@ -27,7 +27,12 @@
           <span class="no-img-text">暂无封面图片</span>
         </div>
         <div class="handle-panel">
-          <el-upload action :show-file-list="false" :auto-upload="true" :before-upload="onUploadCover">
+          <el-upload
+            action
+            :show-file-list="false"
+            :auto-upload="true"
+            :before-upload="onUploadCover"
+          >
             <el-button size="mini" type="primary">点击上传</el-button>
           </el-upload>
           <el-button size="mini" type="primary" @click="getRandomCover">随机获取</el-button>
@@ -69,7 +74,13 @@
 <script>
 import TagsPanel from './components/TagsPanel/index'
 import { getBlogsCategoryList } from '../../api/home'
-import { addTag, uploadImg, newBlog, updateBlog, deletImg } from '../../api/admin'
+import {
+  addTag,
+  uploadImg,
+  newBlog,
+  updateBlog,
+  deletImg,
+} from '../../api/admin'
 import { adminMixin } from '../../utils/mixin'
 import { getLocalStorage, removeLocalStorage } from '../../utils/localStorage'
 export default {
@@ -114,7 +125,10 @@ export default {
             return updateBlog(this.blog)
           })
           .then((res) => {
-            console.log(res)
+            this.$message({
+              type: 'success',
+              message: '更新博客成功',
+            })
           })
           .catch((err) => {
             console.error(err)
@@ -122,11 +136,22 @@ export default {
       } else {
         updateBlog(this.blog)
           .then((res) => {
-            console.log(res)
+            this.$message({
+              type: 'success',
+              message: '更新博客成功',
+            })
           })
           .catch((err) => {
             console.error(err)
           })
+      }
+    },
+    getEmptyBlog() {
+      return {
+        cover: '',
+        title: '',
+        content: '',
+        tags: [],
       }
     },
     releaseBlog() {
@@ -137,7 +162,10 @@ export default {
             return newBlog(this.blog)
           })
           .then((res) => {
-            console.log(res)
+            this.$message({
+              type: 'success',
+              message: '发布成功',
+            })
           })
           .catch((err) => {
             console.error(err)
@@ -145,7 +173,10 @@ export default {
       } else {
         newBlog(this.blog)
           .then((res) => {
-            console.log(res)
+            this.$message({
+              type: 'success',
+              message: '发布成功',
+            })
           })
           .catch((err) => {
             console.error(err)
@@ -167,20 +198,22 @@ export default {
       return false
     },
     onImgAdd(pos, file) {
-      this.uploadImage(file).then(res => {
+      this.uploadImage(file).then((res) => {
         this.$refs.md.$img2Url(pos, res.data.imgUrl)
       })
     },
     onImgDel(pos) {
-      const fileName = pos[0].split('\/').pop()
-      deletImg(fileName).then(res => {
-        this.$message({
-          type: 'success',
-          message: res.message
+      const fileName = pos[0].split('/').pop()
+      deletImg(fileName)
+        .then((res) => {
+          this.$message({
+            type: 'success',
+            message: res.message,
+          })
         })
-      }).catch(err => {
-        console.error(err)
-      })
+        .catch((err) => {
+          console.error(err)
+        })
     },
   },
   mounted() {
@@ -199,12 +232,7 @@ export default {
         })
         this.initialSelected = initialSelected
       } else {
-        this.blog = {
-          cover: '',
-          title: '',
-          content: '',
-          tags: [],
-        }
+        this.blog = this.getEmptyBlog()
       }
     })
   },
