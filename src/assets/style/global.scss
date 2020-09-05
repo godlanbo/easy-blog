@@ -1,6 +1,20 @@
 @import './reset.scss';
 @import './transition.scss';
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600;800&display=swap');
+@font-face { 
+  font-family: 'Fira Sans'; 
+  src: url('./fonts/FiraSans-ExtraBold.ttf');
+  font-weight: 800;
+}
+@font-face { 
+  font-family: 'Fira Sans'; 
+  src: url('./fonts/FiraSans-SemiBold.ttf');
+  font-weight: 600;
+}
+@font-face { 
+  font-family: 'Fira Sans'; 
+  src: url('./fonts/FiraSans-Regular.ttf');
+  font-weight: 400;
+}
 html {
   font-family: 'Fira Sans', 'Helvetica', "Microsoft YaHei", sans-serif;
 }

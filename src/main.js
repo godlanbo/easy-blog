@@ -14,7 +14,8 @@ import './permission'
 Vue.prototype.$markDown = mavonEditor.markdownIt
 Vue.use(mavonEditor)
 Vue.use(ElementUI)
-Vue.config.productionTip = process.env.NODE_ENV === 'development'
+
+Vue.config.productionTip = (process.env.NODE_ENV !== 'development')
 Vue.filter('dateformat', (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') => {
   return dayjs(dataStr).format(pattern)
 })

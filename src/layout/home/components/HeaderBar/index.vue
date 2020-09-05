@@ -109,7 +109,7 @@ export default {
   .logo-wrapper {
     flex: 0 0 20%;
     height: 100%;
-    font-weight: bold;
+    font-weight: 800;
     color: inherit;
     @include center;
     .icon-logo {
