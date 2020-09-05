@@ -6,6 +6,8 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
+let vueCdn = process.env.NODE_ENV === 'production' ? 'vue.min.js' : 'vue.js'
+
 module.exports = {
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
@@ -27,7 +29,7 @@ module.exports = {
         'https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css'
       ],
       js: [
-        'https://unpkg.com/vue/dist/vue.js',
+        `https://unpkg.com/vue/dist/${vueCdn}`,
         // element-ui js
         'https://unpkg.com/element-ui@2.13.2/lib/index.js'
       ]
