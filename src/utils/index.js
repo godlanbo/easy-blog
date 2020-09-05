@@ -45,6 +45,6 @@ export function getYear(date) {
   return dayjs(date).get('year')
 }
 
-export function compress(img) {
-  return lrz(img)
+export function compress(img, opt) {
+  return lrz(img, opt)
 }

@@ -56,6 +56,7 @@ export function uploadImg(img) {
   return compress(img.get('img'), { fieldName: 'img' }).then(res => {
     return res.formData
   }).then(fileData => {
+    
     return request({
       url: '/admin/uploadImg',
       method: 'POST',
