@@ -1,5 +1,4 @@
 import { getBlogsList, getLifeList } from './../api/index';
-import { mapActions, mapGetters } from 'vuex';
 
 export const homeMixin = {
   data() {
@@ -18,18 +17,6 @@ export const homeMixin = {
   },
 }
 
-export const adminMixin = {
-  computed: {
-    ...mapGetters([
-      'editBlog'
-    ])
-  },
-  methods: {
-    ...mapActions([
-      'setEditBlog'
-    ])
-  },
-}
 
 export const lazyImgMixin = {
   mounted() {

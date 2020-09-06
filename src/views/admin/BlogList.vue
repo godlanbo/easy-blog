@@ -95,11 +95,9 @@ import TagsPanel from './components/TagsPanel/index'
 import { getBlogsCategoryList } from '../../api/home'
 import { isSameYear, getYear } from '../../utils'
 import { setLocalStorage } from '../../utils/localStorage'
-import { adminMixin } from '../../utils/mixin'
 import { deleteBlog } from '../../api/admin'
 export default {
   name: 'blogList',
-  mixins: [adminMixin],
   components: {
     TagItem,
     TagsPanel,

@@ -81,11 +81,9 @@ import {
   updateBlog,
   deletImg,
 } from '../../api/admin'
-import { adminMixin } from '../../utils/mixin'
 import { getLocalStorage, removeLocalStorage } from '../../utils/localStorage'
 export default {
   name: 'blogEdit',
-  mixins: [adminMixin],
   components: {
     TagsPanel,
   },
