@@ -38,8 +38,10 @@
 
 <script>
 import { uploadImg, newLife } from '../../api/admin'
+import { editMixin } from '../../utils/mixin'
 
 export default {
+  mixins: [editMixin],
   data() {
     return {
       lifeItem: this.getEmptyItem(),

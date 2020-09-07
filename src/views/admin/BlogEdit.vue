@@ -82,11 +82,13 @@ import {
   deletImg,
 } from '../../api/admin'
 import { getLocalStorage, removeLocalStorage } from '../../utils/localStorage'
+import { editMixin } from '../../utils/mixin'
 export default {
   name: 'blogEdit',
   components: {
     TagsPanel,
   },
+  mixins: [editMixin],
   data() {
     return {
       tagCategoryList: [],
@@ -236,7 +238,7 @@ export default {
   },
   destroyed() {
     removeLocalStorage('blog')
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>

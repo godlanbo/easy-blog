@@ -25,6 +25,19 @@ export default {
   components: {
     SidebarItem,
   },
+  data() {
+    return {
+      activeMenu: '',
+    }
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(val) {
+        this.activeMenu = val.path
+      },
+    },
+  },
   computed: {
     style() {
       return style
@@ -34,10 +47,6 @@ export default {
         return !route.hidden
       })
     },
-    activeMenu() {
-      let route = this.$route
-      return route.path
-    }
   },
 }
 </script>
@@ -66,7 +75,7 @@ export default {
       }
     }
     .sidebar-item /deep/ {
-       & > .el-menu-item {
+      & > .el-menu-item {
         &:hover {
           background-color: $menuHover !important;
         }

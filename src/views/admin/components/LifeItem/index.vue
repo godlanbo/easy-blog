@@ -69,6 +69,7 @@ export default {
       }
       .title-text {
         color: $text-color;
+        margin-right: 15px;
       }
       .collapse-item-content-wrapper {
         display: flex;
