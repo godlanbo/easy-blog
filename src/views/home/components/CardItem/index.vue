@@ -12,7 +12,7 @@
             </div>
           </div>
           <div class="title">{{data.title}}</div>
-          <p class="content">{{data.content}}</p>
+          <p class="content">{{detail}}</p>
           <div class="release-time">
             <span class="release-time-text">{{data.releaseTime | dateformat}}</span>
           </div>
@@ -39,6 +39,9 @@ export default {
     isShowImg() {
       return this.innerWidth > 640 && !!this.data.cover
     },
+    detail() {
+      return this.$markDown.render(this.data.content.slice(0, 100)).replace(/<.*?>/g, '')
+    }
   },
   methods: {
     init() {
