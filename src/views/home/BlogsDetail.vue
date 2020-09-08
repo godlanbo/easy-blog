@@ -48,6 +48,7 @@ export default {
     let id = this.$route.params.id
     getBlogsDetail(id).then((res) => {
       this.blogsDetail = res.data
+      this.blogsDetail.content = this.blogsDetail.content.replace(/&gt;/g, '>')
       this.markDownContent = this.blogsDetail.content
       document.title = this.blogsDetail.title
     })
@@ -108,7 +109,7 @@ export default {
       .content-view {
         // height: 100vh;
         width: 100%;
-        /deep/ .lang-js {
+        /deep/ code {
           font-size: 16px !important;
         }
       }
