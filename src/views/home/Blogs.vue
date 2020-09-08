@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-import CardItem from './components/CardItem/index'
+import CardItem from './components/CardItem/index.vue'
 import { homeMixin, lazyImgMixin } from '../../utils/mixin'
 export default {
   components: {

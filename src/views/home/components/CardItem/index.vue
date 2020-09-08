@@ -67,7 +67,7 @@ export default {
   width: 100%;
   .card-item-content {
     background: #fff;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 8px 24px 0 rgba(187, 191, 196, 0.2);
     overflow: hidden;
     transition: all $animationTime $animationType;
@@ -85,6 +85,7 @@ export default {
           object-fit: cover;
           width: 100%;
           height: 220px;
+          vertical-align: middle;
         }
       }
       main {

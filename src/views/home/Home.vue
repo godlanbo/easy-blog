@@ -217,7 +217,7 @@ export default {
 @media (min-width: 1280px) {
   .home {
     .home-blogs-section-list {
-      padding: 20px 20px;
+      padding: 20px 0px;
       justify-content: flex-start;
       .home-blogs-section-list-item {
         max-width: 33.33%;
