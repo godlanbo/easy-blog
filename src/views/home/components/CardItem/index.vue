@@ -40,7 +40,7 @@ export default {
       return this.innerWidth > 640 && !!this.data.cover
     },
     detail() {
-      return this.$markDown.render(this.data.content.slice(0, 100)).replace(/<.*?>/g, '')
+      return this.$markDown.render(this.data.content.slice(0, 100).replace(/&gt;/g, '>')).replace(/<.*?>/g, '')
     }
   },
   methods: {
