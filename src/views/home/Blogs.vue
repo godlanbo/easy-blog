@@ -66,7 +66,7 @@ export default {
 @media (min-width: 1280px) {
   .blogs {
     .blogs-list-wrapper {
-      width: 70%;
+      width: 75%;
       .blogs-list-item {
         max-width: 33.33%;
       }

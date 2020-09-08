@@ -74,7 +74,6 @@ export default {
       background: #fff;
       border-radius: 5px;
       width: 100%;
-      // height: 80px;
       display: flex;
       flex-direction: column;
       padding: 25px 30px;
@@ -89,7 +88,6 @@ export default {
         font-size: 40px;
         font-weight: 600;
         color: $text-color;
-        padding-bottom: 20px;
       }
     }
     .tags {
@@ -109,9 +107,8 @@ export default {
       .content-view {
         // height: 100vh;
         width: 100%;
-        /deep/ .hljs {
-          font-size: 20px !important;
-          font-weight: 600;
+        /deep/ .lang-js {
+          font-size: 16px !important;
         }
       }
     }
@@ -130,6 +127,9 @@ export default {
 @media (max-width: 640px) {
   .blogs-detail-content {
     width: 95%;
+    /deep/ pre {
+      padding: 16px 0 !important;
+    }
   }
 }
 </style>
