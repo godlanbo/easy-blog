@@ -58,6 +58,7 @@ const routes = [
   {
     path: '/blog',
     component: layoutAdmin,
+    name: 'BlogEdit',
     meta: { title: '博客', icon: 'edit' },
     children: [{
       path: 'list',
@@ -75,6 +76,7 @@ const routes = [
     path: '/mylife',
     component: layoutAdmin,
     meta: { title: '我的生活', icon: 'life' },
+    name: 'MyLife',
     children: [{
       path: 'list',
       name: 'LifeList',
@@ -89,6 +91,7 @@ const routes = [
   },
   {
     path: '/404',
+    name: '404 Not Found',
     component: () => import('@/views/404/index'),
     hidden: true
   },

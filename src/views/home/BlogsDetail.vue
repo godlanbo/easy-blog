@@ -49,6 +49,7 @@ export default {
     getBlogsDetail(id).then((res) => {
       this.blogsDetail = res.data
       this.markDownContent = this.blogsDetail.content
+      document.title = this.blogsDetail.title
     })
   },
   methods: {

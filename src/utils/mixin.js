@@ -17,7 +17,6 @@ export const homeMixin = {
   },
 }
 
-
 export const lazyImgMixin = {
   mounted() {
     let observer = new IntersectionObserver((entries, observer) => {
