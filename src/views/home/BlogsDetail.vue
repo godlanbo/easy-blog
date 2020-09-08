@@ -68,7 +68,6 @@ export default {
 .blogs-detail {
   padding-top: 120px;
   .blogs-detail-content {
-    width: 70%;
     margin: 0 auto;
     padding-bottom: 150px;
     .content-header {
@@ -116,6 +115,21 @@ export default {
         }
       }
     }
+  }
+}
+@media (min-width: 1080px) {
+  .blogs-detail-content {
+    width: 70%;
+  }
+}
+@media (max-width: 1080px) {
+  .blogs-detail-content {
+    width: 80%;
+  }
+}
+@media (max-width: 640px) {
+  .blogs-detail-content {
+    width: 95%;
   }
 }
 </style>

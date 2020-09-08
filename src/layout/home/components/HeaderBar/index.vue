@@ -105,6 +105,9 @@ export default {
     .logo-wrapper {
       @include colorText($line-color);
     }
+    .menu {
+      @include colorText($line-color);
+    }
   }
   .logo-wrapper {
     flex: 0 0 20%;
@@ -252,6 +255,10 @@ export default {
       z-index: 5;
       .nav-item {
         border-bottom: 1px solid #30849a;
+        color: #fff;
+        a:hover::before {
+          transform: scale(0);
+        }
       }
     }
   }
