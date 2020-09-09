@@ -44,6 +44,22 @@ export default {
       markDownContent: '',
     }
   },
+  metaInfo() {
+    return {
+      meta: [
+        { hid: 'keywords', name: 'keywords', content: `${this.pageKeywords}` },
+        { hid: 'description', name: 'description', content: `${this.blogsDetail.title}` },
+      ],
+    }
+  },
+  computed: {
+    pageKeywords() {
+      if (this.blogsDetail.tags) {
+        return this.blogsDetail.tags.join(',')
+      }
+      return ''
+    },
+  },
   created() {
     let id = this.$route.params.id
     getBlogsDetail(id).then((res) => {
