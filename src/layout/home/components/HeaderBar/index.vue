@@ -60,7 +60,8 @@ export default {
   watch: {
     $route() {
       this.getScrollTop()
-    }
+      this.hideMenu()
+    },
   },
   methods: {
     hideMenu() {
@@ -164,7 +165,12 @@ export default {
       height: 100%;
       margin: 0 20px;
       &.active a::before {
-        transform: scaleX(1);
+        @media (max-width: 690px) {
+          transform: scale(0);
+        }
+        @media (min-width: 690px) {
+          transform: scale(1);
+        }
       }
       a {
         width: 100%;
