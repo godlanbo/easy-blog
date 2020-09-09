@@ -41,7 +41,7 @@ export const lazyImgMixin = {
       bgs.forEach(bg => {
         observer.observe(bg)
       })
-    }, 800)
+    }, 1200)
   },
 }
 
