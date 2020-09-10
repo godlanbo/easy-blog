@@ -17,7 +17,7 @@ export default {
     }
   },
   mounted() {
-    getBlogsCategoryList('tags').then(res => {
+    getBlogsCategoryList('tag').then(res => {
       this.categoryList = res.data.categoryList
     })
   },
