@@ -126,7 +126,7 @@ export default {
       height: 100%;
       clip-path: circle(115vw at 50% calc(100px - 115vw + 100vh));
       background-attachment: fixed;
-      background-image: url('/image/head.png');
+      background-image: url('https://i.loli.net/2020/09/18/hWqCkD6gtJuHEAO.png');
       background-repeat: no-repeat;
       background-position: center center;
       background-size: cover;
