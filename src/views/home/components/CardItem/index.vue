@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     linkAddress() {
-      return `#/blogs/${this.data.id}`
+      return `/blogs/${this.data.id}`
     },
     isShowImg() {
       return this.innerWidth > 640 && !!this.data.cover
