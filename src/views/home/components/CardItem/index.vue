@@ -1,7 +1,7 @@
 <template>
   <div class="card-item">
     <div class="card-item-content">
-      <a :href="linkAddress">
+      <router-link :to="linkAddress">
         <figure v-if="isShowImg">
           <img src="/image/default.png" :data-src="data.cover" />
         </figure>
@@ -17,7 +17,7 @@
             <span class="release-time-text">{{data.releaseTime | dateformat}}</span>
           </div>
         </main>
-      </a>
+      </router-link>
     </div>
   </div>
 </template>
