@@ -27,12 +27,12 @@ module.exports = {
     const cdn = {
       css: [
         // element-ui css
-        'https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css'
+        'https://cdn.jsdelivr.net/npm/element-ui@2.13.2/lib/theme-chalk/index.css'
       ],
       js: [
-        `https://unpkg.com/vue/dist/${vueCdn}`,
+        `https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/${vueCdn}`,
         // element-ui js
-        'https://unpkg.com/element-ui@2.13.2/lib/index.js'
+        'https://cdn.jsdelivr.net/npm/element-ui@2.13.2/lib/index.js'
       ]
     }
     config.plugin('html').tap(args => {
