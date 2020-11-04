@@ -31,7 +31,9 @@ export default {
         clearInterval(this.initTask)
         this.initTask = null
       }
-      this.initProgress()
+      this.$nextTick(() => {
+        this.initProgress()
+      })
     },
     initProgress() {
       this.pageHeight = document.documentElement.scrollHeight
@@ -54,13 +56,13 @@ export default {
   destroyed() {
     window.removeEventListener('scroll', this.onScroll)
     window.removeEventListener('resize', this.onResize)
-    window.addEventListener('img-ready', this.initProgress)
+    window.addEventListener('img-ready', this.asyncInitProgress)
   },
   mounted() {
     this.progress = document.querySelector('.progress')
     window.addEventListener('resize', this.onResize)
     window.addEventListener('scroll', this.onScroll)
-    window.addEventListener('img-ready', this.initProgress)
+    window.addEventListener('img-ready', this.asyncInitProgress)
   },
 }
 </script>
