@@ -38,7 +38,7 @@ request.interceptors.response.use(
   },
   error => {
     const { response } = error
-    if (response.status === 401) {
+    if (response?.status === 401) {
       Message({
         type: 'error',
         message: '登录超时，请重新登录',
