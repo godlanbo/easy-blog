@@ -8,16 +8,10 @@ export const homeMixin = {
     }
   },
   async mounted() {
-    // getBlogsList().then(res => {
-    //   this.blogsList = res.data.blogsList
-    // })
     let resBlog = await getBlogsList()
     let resLife = await getLifeList()
     this.blogsList = resBlog.data.blogsList
     this.lifeList = resLife.data.lifeList
-    // getLifeList().then((res) => {
-    //   this.lifeList = res.data.lifeList
-    // })
     // 数据加载完毕后去触发lazyImg收集懒加载图片对象
     let e = new Event('img-ready')
     window.dispatchEvent(e)

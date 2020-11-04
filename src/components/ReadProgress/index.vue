@@ -11,25 +11,32 @@ export default {
       timer: null,
       pageHeight: 0,
       windowHeight: 0,
-      scrollAvail: 0
+      scrollAvail: 0,
+      initTask: null
     }
   },
   watch: {
     $route: {
       immediate: true,
       handler() {
-        setTimeout(() => {
+        this.initTask = setTimeout(() => {
           this.initProgress()
         }, 600)
       },
     },
   },
   methods: {
+    asyncInitProgress() {
+      if (this.initTask) {
+        clearInterval(this.initTask)
+        this.initTask = null
+      }
+      this.initProgress()
+    },
     initProgress() {
       this.pageHeight = document.documentElement.scrollHeight
       this.windowHeight = document.documentElement.clientHeight
       this.scrollAvail = this.pageHeight - this.windowHeight
-      // console.log('route change', document.documentElement.scrollHeight)
     },
     onScroll() {
       let scrollTop = document.documentElement.scrollTop
@@ -47,11 +54,13 @@ export default {
   destroyed() {
     window.removeEventListener('scroll', this.onScroll)
     window.removeEventListener('resize', this.onResize)
+    window.addEventListener('img-ready', this.initProgress)
   },
   mounted() {
     this.progress = document.querySelector('.progress')
     window.addEventListener('resize', this.onResize)
     window.addEventListener('scroll', this.onScroll)
+    window.addEventListener('img-ready', this.initProgress)
   },
 }
 </script>
