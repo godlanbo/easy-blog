@@ -56,14 +56,14 @@ import AvatarDetail from './components/Avatar/index'
 import CardItem from './components/CardItem/index'
 import SectionItem from './components/SectionItem/index'
 import VanillaTilt from 'vanilla-tilt'
-import { homeMixin, lazyImgMixin } from '../../utils/mixin'
+import { listInfoMixin, lazyImgMixin } from '../../utils/mixin'
 export default {
   components: {
     AvatarDetail,
     CardItem,
     SectionItem,
   },
-  mixins: [homeMixin, lazyImgMixin],
+  mixins: [lazyImgMixin, listInfoMixin],
   methods: {
     linkToLife(id) {
       this.$router.push({
@@ -106,7 +106,7 @@ export default {
         })
       }
     },
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -127,7 +127,7 @@ export default {
       clip-path: circle(115vw at 50% calc(100px - 115vw + 100vh));
       background-attachment: fixed;
       // background-image: url('https://i.loli.net/2020/09/18/hWqCkD6gtJuHEAO.png');
-      background-image: url('https://s1.ax1x.com/2020/09/22/wOXeYQ.png');
+      background-image: url('/image/head.png');
       background-repeat: no-repeat;
       background-position: center center;
       background-size: cover;

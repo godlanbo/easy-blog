@@ -35,10 +35,10 @@
 
 <script>
 import CategoryItem from '../CategoryItem/index'
-import { homeMixin } from '../../../../utils/mixin'
+import { listInfoMixin } from '../../../../utils/mixin'
 import { isSameYear } from '../../../../utils/index'
 export default {
-  mixins: [homeMixin],
+  mixins: [listInfoMixin],
   components: {
     CategoryItem,
   },
