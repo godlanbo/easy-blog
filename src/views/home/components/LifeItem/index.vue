@@ -1,26 +1,34 @@
 <template>
   <div class="life-item">
     <div class="life-item-title">
-      <span class="life-item-title-text">{{data.year}}</span>
+      <span class="life-item-title-text">{{ data.year }}</span>
     </div>
     <div class="life-item-content-wrapper">
-      <el-collapse class="life-item-content" v-model="activeItem" @change="onChange" accordion>
+      <el-collapse
+        class="life-item-content"
+        :value="activeItem"
+        @change="onChange"
+        accordion
+      >
         <el-collapse-item
           class="life-item-content-item"
+          :id="`lifeItem${item.id}`"
           v-for="item in data.itemList"
           :key="item.id"
           :name="item.id"
         >
           <template v-slot:title>
-            <span class="title-time">{{item.time | dateformat('MM-DD')}}</span>
-            <span class="title-text">{{item.title}}</span>
+            <span class="title-time">{{
+              item.time | dateformat('MM-DD')
+            }}</span>
+            <span class="title-text">{{ item.title }}</span>
           </template>
           <div class="collapse-item-content-wrapper">
             <div class="img" v-if="item.imgUrl.length !== 0">
               <img :src="item.imgUrl" />
             </div>
             <div class="content">
-              <p>{{item.content}}</p>
+              <p>{{ item.content }}</p>
             </div>
           </div>
         </el-collapse-item>
@@ -44,7 +52,20 @@ export default {
         let e = new Event('resize')
         window.dispatchEvent(e)
       }, 300)
-    },
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      setTimeout(() => {
+        if (this.activeItem !== -1) {
+          let el = document.querySelector(`#lifeItem${this.activeItem}`)
+          el.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          })
+        }
+      }, 550)
+    })
   }
 }
 </script>
@@ -157,7 +178,7 @@ export default {
         }
         .title-text {
           font-size: 18px;
-          @include overflowText(1)
+          @include overflowText(1);
         }
         .title-time {
           font-size: 16px;
