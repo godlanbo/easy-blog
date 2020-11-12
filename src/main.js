@@ -20,6 +20,11 @@ Vue.use(VueMeta, {
   tagIDKeyName: 'hid',
 })
 
+Vue.config.errorHandler = (err, vm, info) => {
+  console.error(err)
+  console.error(info)
+}
+
 Vue.filter('dateformat', (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') => {
   return dayjs(dataStr).format(pattern)
 })
