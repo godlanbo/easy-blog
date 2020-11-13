@@ -89,7 +89,6 @@
 </template>
 
 <script>
-import { getBlogsList } from '../../api'
 import TagItem from '@/components/Tag/index'
 import TagsPanel from './components/TagsPanel/index'
 import { getBlogsCategoryList } from '../../api/home'
@@ -104,7 +103,6 @@ export default {
   },
   data() {
     return {
-      blogsList: [],
       timeCategoryList: [],
       tagCategoryList: [],
       searchText: '', // 输入
@@ -220,10 +218,7 @@ export default {
             type: 'success',
             message: '删除成功!',
           })
-          return getBlogsList()
-        })
-        .then((res) => {
-          this.blogsList = res.data.blogsList
+          this.$store.dispatch('getBlogsList')
         })
         .catch(() => {
           this.$message({
@@ -243,9 +238,6 @@ export default {
     },
   },
   mounted() {
-    getBlogsList().then((res) => {
-      this.blogsList = res.data.blogsList
-    })
     getBlogsCategoryList('time').then((res) => {
       this.timeCategoryList = res.data.categoryList
     })

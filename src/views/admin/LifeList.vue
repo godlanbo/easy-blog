@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import { getLifeList } from '../../api'
 import { getYear } from '../../utils'
 import LifeItem from './components/LifeItem/index'
 import { deleteLife } from '../../api/admin'
@@ -25,11 +24,6 @@ export default {
     LifeItem,
   },
   mixins: [listInfoMixin],
-  data() {
-    return {
-      lifeList: [],
-    }
-  },
   methods: {
     deleteLife(id) {
       this.$alert('确认删除这篇动态？', '提示', {
@@ -58,12 +52,7 @@ export default {
           })
         })
     },
-  },
-  mounted() {
-    getLifeList().then((res) => {
-      this.lifeList = res.data.lifeList
-    })
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
