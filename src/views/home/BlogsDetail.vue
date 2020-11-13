@@ -2,8 +2,10 @@
   <div class="blogs-detail">
     <div class="blogs-detail-content">
       <header class="content-header">
-        <span class="release-time">{{blogsDetail.releaseTime | dateformat}}</span>
-        <span class="title">{{blogsDetail.title}}</span>
+        <span class="release-time">{{
+          blogsDetail.releaseTime | dateformat
+        }}</span>
+        <span class="title">{{ blogsDetail.title }}</span>
       </header>
       <section class="tags">
         <tag-item
@@ -36,38 +38,56 @@ import TagItem from '../../components/Tag/index'
 export default {
   name: 'BlogsDetail',
   components: {
-    TagItem,
+    TagItem
   },
   data() {
     return {
-      blogsDetail: {},
-      markDownContent: '',
+      blogsDetail: {
+        tags: [], // template 不支持可选链式操作，故初始化为空数组
+        title: '',
+        releaseTime: 0
+      },
+      markDownContent: ''
     }
   },
   metaInfo() {
     return {
       meta: [
         { hid: 'keywords', name: 'keywords', content: `${this.pageKeywords}` },
-        { hid: 'description', name: 'description', content: `${this.blogsDetail.title}` },
-      ],
+        {
+          hid: 'description',
+          name: 'description',
+          content: `${this.blogsDetail?.title}`
+        }
+      ]
     }
   },
   computed: {
     pageKeywords() {
-      if (this.blogsDetail.tags) {
+      if (this.blogsDetail?.tags) {
         return this.blogsDetail.tags.join(',')
       }
       return ''
-    },
+    }
   },
   created() {
     let id = this.$route.params.id
-    getBlogsDetail(id).then((res) => {
-      this.blogsDetail = res.data
-      this.blogsDetail.content = this.blogsDetail.content.replace(/&gt;(?=\s)/g, '>')
-      this.blogsDetail.content = this.blogsDetail.content.replace(/&lt;(?!s)/g, '<')
-      this.markDownContent = this.blogsDetail.content
-      document.title = this.blogsDetail.title
+    this.$store.dispatch('getBlogsDetail', id).then((data) => {
+      this.blogsDetail = data
+      if (this.blogsDetail) {
+        this.blogsDetail.content = this.blogsDetail.content.replace(
+          /&gt;(?=\s)/g,
+          '>'
+        )
+        this.blogsDetail.content = this.blogsDetail.content.replace(
+          /&lt;(?!s)/g,
+          '<'
+        )
+        this.markDownContent = this.blogsDetail.content
+        document.title = this.blogsDetail.title
+      } else {
+        this.$router.push('/404')
+      }
     })
   },
   methods: {
@@ -75,11 +95,11 @@ export default {
       this.$router.push({
         path: '/blogs/tags',
         query: {
-          tag,
-        },
+          tag
+        }
       })
-    },
-  },
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
