@@ -19,6 +19,10 @@ export default new Vuex.Store({
     async getLifeList({ commit }) {
       let resLife = await getLifeList()
       return commit('setLifeList', resLife.data.lifeList)
+    },
+    getBlogsDetail({ state }, id) {
+      id = +id
+      return state.blogsList.find(blog => blog.id === +id)
     }
   },
   mutations: {
@@ -30,6 +34,9 @@ export default new Vuex.Store({
     },
     setInfoStatus(state, status) {
       state.isLoadInfo = status
+    },
+    getBlogsDetail(state, id) {
+      return state.blogsList.find(blog => blog.id === id)
     }
   },
   getters: {
