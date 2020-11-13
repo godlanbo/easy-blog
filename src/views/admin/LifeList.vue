@@ -19,38 +19,16 @@ import { getLifeList } from '../../api'
 import { getYear } from '../../utils'
 import LifeItem from './components/LifeItem/index'
 import { deleteLife } from '../../api/admin'
+import { listInfoMixin } from '../../utils/mixin'
 export default {
   components: {
     LifeItem,
   },
+  mixins: [listInfoMixin],
   data() {
     return {
       lifeList: [],
     }
-  },
-  computed: {
-    lifeItemList() {
-      let lifeList = []
-      let item = {}
-      item.itemList = []
-      this.lifeList.sort((a, b) => b.time - a.time)
-      for (let i = 0; i < this.lifeList.length; i++) {
-        if (item.year && getYear(this.lifeList[i].time) == item.year) {
-          item.itemList.push(this.lifeList[i])
-        } else if (item.year && getYear(this.lifeList[i].time) != item.year) {
-          lifeList.push(item)
-          item = {}
-          item.itemList = []
-          item.year = getYear(this.lifeList[i].time)
-          item.itemList.push(this.lifeList[i])
-        } else {
-          item.year = getYear(this.lifeList[i].time)
-          item.itemList.push(this.lifeList[i])
-        }
-      }
-      lifeList.push(item)
-      return lifeList
-    },
   },
   methods: {
     deleteLife(id) {

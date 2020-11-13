@@ -19,28 +19,6 @@ export default {
   },
   mixins: [listInfoMixin, lazyImgMixin],
   computed: {
-    lifeItemList() {
-      let lifeList = []
-      let item = {}
-      item.itemList = []
-      this.lifeList.sort((a, b) => b.time - a.time)
-      for (let i = 0; i < this.lifeList.length; i++) {
-        if (item.year && getYear(this.lifeList[i].time) == item.year) {
-          item.itemList.push(this.lifeList[i])
-        } else if (item.year && getYear(this.lifeList[i].time) != item.year) {
-          lifeList.push(item)
-          item = {}
-          item.itemList = []
-          item.year = getYear(this.lifeList[i].time)
-          item.itemList.push(this.lifeList[i])
-        } else {
-          item.year = getYear(this.lifeList[i].time)
-          item.itemList.push(this.lifeList[i])
-        }
-      }
-      lifeList.push(item)
-      return lifeList
-    },
     activeItem() {
       return Number(this.$route.query.id) || -1
     }

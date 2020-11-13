@@ -22,7 +22,8 @@ export const listInfoMixin = {
   computed: {
     ...mapGetters([
       'blogsList',
-      'lifeList'
+      'lifeList',
+      'lifeItemList'
     ])
   }
 }
