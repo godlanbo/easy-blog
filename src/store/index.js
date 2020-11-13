@@ -14,11 +14,13 @@ export default new Vuex.Store({
   actions: {
     async getBlogsList({ commit }) {
       let resBlog = await getBlogsList()
-      return commit('setBlogsList', resBlog.data.blogsList)
+      commit('setBlogsList', resBlog.data.blogsList)
+      return resBlog.data
     },
     async getLifeList({ commit }) {
       let resLife = await getLifeList()
-      return commit('setLifeList', resLife.data.lifeList)
+      commit('setLifeList', resLife.data.lifeList)
+      return resLife.data
     },
     getBlogsDetail({ state }, id) {
       id = +id
