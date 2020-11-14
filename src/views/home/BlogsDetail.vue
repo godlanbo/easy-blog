@@ -70,17 +70,17 @@ export default {
       return ''
     }
   },
-  created() {
+  mounted() {
     let id = this.$route.params.id
     this.$store.dispatch('getBlogsDetail', id).then((data) => {
-      this.blogsDetail = data
-      if (this.blogsDetail) {
+      if (data) {
+        this.blogsDetail = data
         this.blogsDetail.content = this.blogsDetail.content.replace(
           /&gt;(?=\s)/g,
           '>'
         )
         this.blogsDetail.content = this.blogsDetail.content.replace(
-          /&lt;(?!s)/g,
+          /&lt;(?!\/)/g,
           '<'
         )
         this.markDownContent = this.blogsDetail.content
@@ -106,9 +106,11 @@ export default {
 @import '@/assets/style/globalScript';
 .blogs-detail {
   padding-top: 120px;
+  display: flex;
+  flex-direction: column;
   .blogs-detail-content {
-    margin: 0 auto;
-    padding-bottom: 150px;
+    margin: 0 auto 15px;
+    // padding-bottom: 150px;
     .content-header {
       background: #fff;
       border-radius: 5px;
