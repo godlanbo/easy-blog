@@ -33,8 +33,9 @@
 </template>
 
 <script>
-import { getBlogsDetail } from '../../api/index'
 import TagItem from '../../components/Tag/index'
+import { mapGetters } from 'vuex'
+import { ensurePageLoaded } from '../../utils'
 export default {
   name: 'BlogsDetail',
   components: {
@@ -68,27 +69,23 @@ export default {
         return this.blogsDetail.tags.join(',')
       }
       return ''
+    },
+    ...mapGetters([
+      'isLoadInfo'
+    ])
+  },
+  watch: {
+    isLoadInfo(val) {
+      if (val) {
+        this.getBlogsDetail()
+      }
     }
   },
   mounted() {
-    let id = this.$route.params.id
-    this.$store.dispatch('getBlogsDetail', id).then((data) => {
-      if (data) {
-        this.blogsDetail = data
-        this.blogsDetail.content = this.blogsDetail.content.replace(
-          /&gt;(?=\s)/g,
-          '>'
-        )
-        this.blogsDetail.content = this.blogsDetail.content.replace(
-          /&lt;(?!\/)/g,
-          '<'
-        )
-        this.markDownContent = this.blogsDetail.content
-        document.title = this.blogsDetail.title
-      } else {
-        this.$router.push('/404')
-      }
-    })
+    if (this.isLoadInfo) {
+      this.getBlogsDetail()
+    }
+    window.addEventListener('load', this.notifyReadProgressInit)
   },
   methods: {
     queryTag(tag) {
@@ -98,7 +95,37 @@ export default {
           tag
         }
       })
+    },
+    getBlogsDetail() {
+      let id = this.$route.params.id
+      this.$store.dispatch('getBlogsDetail', id).then((data) => {
+        if (data) {
+          this.blogsDetail = data
+          this.blogsDetail.content = this.blogsDetail.content.replace(
+            /&gt;(?=\s)/g,
+            '>'
+          )
+          this.blogsDetail.content = this.blogsDetail.content.replace(
+            /&lt;(?!\/)/g,
+            '<'
+          )
+          this.markDownContent = this.blogsDetail.content
+          document.title = this.blogsDetail.title
+        } else {
+          this.$router.push('/404')
+        }
+      })
+    },
+    notifyReadProgressInit() {
+      // 确保页面高度稳定后，通知阅读条初始化
+      ensurePageLoaded(() => {
+        let e = new Event('page-ready')
+        window.dispatchEvent(e)
+      })
     }
+  },
+  destroyed() {
+    window.removeEventListener('load', this.notifyReadProgressInit)
   }
 }
 </script>

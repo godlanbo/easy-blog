@@ -48,3 +48,16 @@ export function getYear(date) {
 export function compress(img, opt) {
   return lrz(img, opt)
 }
+
+export function ensurePageLoaded(cb) {
+  let preHeight = document.documentElement.scrollHeight
+  let task = setInterval(() => {
+    let currentHeight = document.documentElement.scrollHeight
+    if (preHeight !== currentHeight) {
+      preHeight = currentHeight
+    } else {
+      clearInterval(task)
+      cb()
+    }
+  }, 50)
+}
