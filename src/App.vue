@@ -20,6 +20,8 @@ export default {
     this.$store.commit('setInfoStatus', true)
     let e = new Event('img-ready')
     window.dispatchEvent(e)
+    e = new Event('page-ready')
+    window.dispatchEvent(e)
   }
 }
 </script>
