@@ -94,7 +94,7 @@ export default {
   display: flex;
   align-items: center;
   height: 60px;
-  z-index: 9999;
+  z-index: 1999;
   transition: color $animationTime $animationType,
     background-color $animationTime $animationType;
   &.active-color-switch {
