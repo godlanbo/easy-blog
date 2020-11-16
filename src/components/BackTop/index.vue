@@ -60,14 +60,14 @@ export default {
   font-weight: bold;
   bottom: 60px;
   right: 30px;
-  z-index: 20;
+  z-index: 2999;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   @include center;
   font-size: 30px;
   background: #f0f3f6;
-  box-shadow: 6px 6px 12px #cccfd1, -6px -6px 12px #ffffff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all $animationTime $animationType;
   .icon-up {
