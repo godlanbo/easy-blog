@@ -9,7 +9,7 @@
       <span class="icon-menu"></span>
     </label>
     <div class="menu-bg" @touchmove.prevent @click="hideMenu"></div>
-    <nav class="nav-wrapper" :class="{'active-color-switch' : isSwtichHeaderBg}">
+    <nav class="nav-wrapper" @touchmove.prevent :class="{'active-color-switch' : isSwtichHeaderBg}">
       <div class="nav-item" :class="{'active' : activeRoute === '/home'}">
         <router-link to="/home">
           <span class="nav-item-text uppercase">home</span>
@@ -264,6 +264,9 @@ export default {
         color: #fff;
         a:hover::before {
           transform: scale(0);
+        }
+        &.active {
+          color: $color-blue;
         }
       }
     }
