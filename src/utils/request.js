@@ -46,6 +46,13 @@ request.interceptors.response.use(
       })
       router.push({ path: `/login?redirect=${router.history._startLocation}` })
     }
+    if (response?.status === 500) {
+      Message({
+        type: 'error',
+        message: '非法操作',
+        duration: 5 * 1000
+      })
+    }
     return Promise.reject(error)
   }
 )
