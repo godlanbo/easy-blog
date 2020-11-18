@@ -71,7 +71,7 @@ export default new Vuex.Store({
         if (state.blogs.hasOwnProperty(key)) {
           return state.blogs[key]
         }
-      })
+      }).reverse()
     },
     lifeList: state => state.lifeList,
     isLoadInfo: state => state.isLoadInfo,
