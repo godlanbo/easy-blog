@@ -29,17 +29,25 @@
         />
       </article>
     </div>
+    <comment
+      @comment-load="handleLoadComment"
+      @on-publish-comment="handleRefreshComment"
+      :commentsList="commentsList"
+      :commentsCount="commentsList.length"
+    ></comment>
   </div>
 </template>
 
 <script>
 import TagItem from '../../components/Tag/index'
+import Comment from './components/comment/index.vue'
 import { mapGetters } from 'vuex'
-import { ensurePageLoaded } from '../../utils'
+import { ensurePageLoaded, normalizeMDContent } from '../../utils'
 export default {
   name: 'BlogsDetail',
   components: {
-    TagItem
+    TagItem,
+    Comment
   },
   data() {
     return {
@@ -48,7 +56,8 @@ export default {
         title: '',
         releaseTime: 0
       },
-      markDownContent: ''
+      markDownContent: '',
+      commentsList: []
     }
   },
   metaInfo() {
@@ -70,9 +79,7 @@ export default {
       }
       return ''
     },
-    ...mapGetters([
-      'isLoadInfo'
-    ])
+    ...mapGetters(['isLoadInfo', 'getCommentsList'])
   },
   watch: {
     isLoadInfo(val) {
@@ -101,14 +108,7 @@ export default {
       this.$store.dispatch('getBlogsDetail', id).then((data) => {
         if (data) {
           this.blogsDetail = data
-          this.blogsDetail.content = this.blogsDetail.content.replace(
-            /&gt;(?=\s)/g,
-            '>'
-          )
-          this.blogsDetail.content = this.blogsDetail.content.replace(
-            /&lt;(?!\/)/g,
-            '<'
-          )
+          this.blogsDetail.content = normalizeMDContent(this.blogsDetail.content)
           this.markDownContent = this.blogsDetail.content
           document.title = this.blogsDetail.title
         } else {
@@ -121,6 +121,19 @@ export default {
       ensurePageLoaded(() => {
         let e = new Event('page-ready')
         window.dispatchEvent(e)
+      })
+    },
+    handleLoadComment() {
+      this.loadComment(false)
+    },
+    // 发表新评论后强制重新加载评论
+    handleRefreshComment() {
+      this.loadComment(true)
+    },
+    loadComment(force) {
+      let id = this.$route.params.id
+      this.$store.dispatch('getCommentsList', { id, force }).then(() => {
+        this.commentsList = this.getCommentsList(id)
       })
     }
   },
