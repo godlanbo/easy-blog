@@ -75,3 +75,15 @@ export function isEmail(val) {
   }
   return false;
 }
+
+export function normalizeMDContent(content) {
+  content = content.replace(
+    /&gt;(?=\s)/g,
+    '>'
+  )
+  content = content.replace(
+    /&lt;(?!\/)/g,
+    '<'
+  )
+  return content
+}
