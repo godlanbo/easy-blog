@@ -2,8 +2,11 @@
 @import './transition.scss';
 
 $text-color: #2c3f51;
-$line-color: linear-gradient(to right, #30849a, #031013);
+$theme-color: #30849a;
+$line-color: linear-gradient(to right, $theme-color, #031013);
 $bg-color: #f0f3f6;
+$bg-green: #73ffa0;
+$focus-border-shadow: 0px 0px 0px 3px rgba(48 ,132 ,154, .5);
 // $color-blue: #1965fe;
 $color-blue: #0ab9e6;
 
