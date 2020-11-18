@@ -49,7 +49,6 @@ export default {
     }
   }
   .blogs-list-wrapper {
-    padding: 20px 20px 80px;
     margin: 0 auto;
     .blogs-list {
       width: 100%;
@@ -66,6 +65,7 @@ export default {
 @media (min-width: 1280px) {
   .blogs {
     .blogs-list-wrapper {
+      padding: 20px 20px 80px;
       width: 75%;
       .blogs-list-item {
         max-width: 33.33%;
@@ -76,6 +76,7 @@ export default {
 @media (max-width: 1280px) {
   .blogs {
     .blogs-list-wrapper {
+      padding: 20px 10px 80px;
       width: 80%;
       .blogs-list-item {
         max-width: 50%;
@@ -86,7 +87,8 @@ export default {
 @media (max-width: 640px) {
   .blogs {
     .blogs-list-wrapper {
-      width: 90%;
+      padding: 20px 0 80px;
+      width: 95%;
       .blogs-list-item {
         max-width: 100%;
       }
