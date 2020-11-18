@@ -46,7 +46,8 @@ export default new Vuex.Store({
       list.forEach(blog => {
         blog.comments = []
         blog.commentsLoaded = false
-        state.blogs[blog.id] = blog
+        // 为了使getter更新
+        Vue.set(state.blogs, blog.id, blog)
       })
     },
     setLifeList(state, list) {
@@ -58,7 +59,7 @@ export default new Vuex.Store({
     setCommentsList(state, { list, blogId }) {
       list.forEach(comment => {
         comment.content = mavonEditor.markdownIt.render(normalizeMDContent(comment.content))
-        state.commentsList[comment.cid] = comment
+        Vue.set(state.commentsList, comment.cid, comment)
         state.blogs[blogId].comments.push(comment.cid)
       })
       state.blogs[blogId].commentsLoaded = true
