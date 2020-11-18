@@ -95,12 +95,14 @@ import { getBlogsCategoryList } from '../../api/home'
 import { isSameYear, getYear } from '../../utils'
 import { setLocalStorage } from '../../utils/localStorage'
 import { deleteBlog } from '../../api/admin'
+import { listInfoMixin } from '../../utils/mixin'
 export default {
   name: 'blogList',
   components: {
     TagItem,
     TagsPanel,
   },
+  mixins: [listInfoMixin],
   data() {
     return {
       timeCategoryList: [],
