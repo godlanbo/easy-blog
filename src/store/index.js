@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { getBlogsList, getLifeList } from '../api'
-import { getYear } from '../utils'
+import { getBlogsList, getCommentsList, getLifeList } from '../api'
+import { getYear, normalizeMDContent } from '../utils'
+import mavonEditor from 'mavon-editor'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    blogsList: [],
+    blogs: {},
     lifeList: [],
-    isLoadInfo: false
+    isLoadInfo: false,
+    commentsList: {}
   },
   actions: {
     async getBlogsList({ commit }) {
@@ -23,13 +25,29 @@ export default new Vuex.Store({
       return resLife.data
     },
     getBlogsDetail({ state }, id) {
-      id = +id
-      return state.blogsList.find(blog => blog.id === +id)
+      return state.blogs[id]
+    },
+    async getCommentsList({ commit, state }, { id, force }) {
+      if (state.blogs[id].commentsLoaded && !force) {
+        return Promise.resolve({ commentsList: state.blogs[id].comments })
+      } else {
+        let resComment = await getCommentsList(id)
+        state.blogs[id].comments = [] // 如果是强制刷新，可能导致blog的comments列表重复
+        commit('setCommentsList', {
+          list: resComment.data.commentsList,
+          blogId: id
+        })
+        return resComment.data
+      }
     }
   },
   mutations: {
     setBlogsList(state, list) {
-      state.blogsList = list
+      list.forEach(blog => {
+        blog.comments = []
+        blog.commentsLoaded = false
+        state.blogs[blog.id] = blog
+      })
     },
     setLifeList(state, list) {
       state.lifeList = list
@@ -37,12 +55,23 @@ export default new Vuex.Store({
     setInfoStatus(state, status) {
       state.isLoadInfo = status
     },
-    getBlogsDetail(state, id) {
-      return state.blogsList.find(blog => blog.id === id)
+    setCommentsList(state, { list, blogId }) {
+      list.forEach(comment => {
+        comment.content = mavonEditor.markdownIt.render(normalizeMDContent(comment.content))
+        state.commentsList[comment.cid] = comment
+        state.blogs[blogId].comments.push(comment.cid)
+      })
+      state.blogs[blogId].commentsLoaded = true
     }
   },
   getters: {
-    blogsList: state => state.blogsList,
+    blogsList: (state) => {
+      return Object.keys(state.blogs).map(key => {
+        if (state.blogs.hasOwnProperty(key)) {
+          return state.blogs[key]
+        }
+      })
+    },
     lifeList: state => state.lifeList,
     isLoadInfo: state => state.isLoadInfo,
     lifeItemList: (state) => {
@@ -67,6 +96,9 @@ export default new Vuex.Store({
       }
       lifeList.push(item)
       return lifeList
+    },
+    getCommentsList: (state) => (id) => {
+      return state.blogs[id].comments.map(cid => state.commentsList[cid])
     }
   }
 })
