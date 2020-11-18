@@ -16,3 +16,9 @@ export function getBlogsDetail(id) {
     url: `/blog/${id}`
   })
 }
+
+export function getCommentsList(id) {
+  return request({
+    url: `/comment/${id}`
+  })
+}

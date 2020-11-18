@@ -92,3 +92,10 @@ export function deleteLife(id) {
     }
   })
 }
+
+export function deleteComment(blogId, cid) {
+  return request({
+    url: `/comment/${blogId}/${cid}`,
+    method: 'DELETE'
+  })
+}
