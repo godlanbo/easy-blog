@@ -104,10 +104,16 @@ export default {
       @include colorText($line-color);
     }
     .logo-wrapper {
-      @include colorText($line-color);
+      /* safari 浏览器兼容，块级元素无法继承background-image和background-clip属性 */
+      .icon-logo, .logo-text {
+        @include colorText($line-color);
+      }
     }
     .menu {
-      @include colorText($line-color);
+      /* safari 浏览器兼容，块级元素无法继承background-image和background-clip属性 */
+      .icon-menu {
+        @include colorText($line-color);
+      }
     }
   }
   .logo-wrapper {
