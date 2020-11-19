@@ -9,6 +9,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     blogs: {},
+    blogsListArr: [],
+    currentBlogIndex: -1,
     lifeList: [],
     isLoadInfo: false,
     commentsList: {}
@@ -24,7 +26,8 @@ export default new Vuex.Store({
       commit('setLifeList', resLife.data.lifeList)
       return resLife.data
     },
-    getBlogsDetail({ state }, id) {
+    getBlogsDetail({ state, commit }, id) {
+      commit('setCurrentBlogIndex', state.blogsListArr.findIndex(bid => bid === +id))
       return state.blogs[id]
     },
     async getCommentsList({ commit, state }, { id, force }) {
@@ -48,6 +51,7 @@ export default new Vuex.Store({
         blog.commentsLoaded = false
         // 为了使getter更新
         Vue.set(state.blogs, blog.id, blog)
+        state.blogsListArr.push(blog.id)
       })
     },
     setLifeList(state, list) {
@@ -63,6 +67,9 @@ export default new Vuex.Store({
         state.blogs[blogId].comments.push(comment.cid)
       })
       state.blogs[blogId].commentsLoaded = true
+    },
+    setCurrentBlogIndex(state, index) {
+      state.currentBlogIndex = index
     }
   },
   getters: {
@@ -72,6 +79,11 @@ export default new Vuex.Store({
           return state.blogs[key]
         }
       }).reverse()
+    },
+    blogsListArr: (state) => state.blogsListArr,
+    currentBlogIndex: (state) => state.currentBlogIndex,
+    getBlogsDetail: (state) => (id) => {
+      return state.blogs[id]
     },
     lifeList: state => state.lifeList,
     isLoadInfo: state => state.isLoadInfo,
