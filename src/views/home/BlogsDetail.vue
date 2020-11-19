@@ -29,6 +29,14 @@
         />
       </article>
     </div>
+    <div class="blogs-skip-wrapper" v-if="preBlog || nextBlog">
+      <div class="pre-btn skip-btn" v-if="preBlog" @click="onClickSkipBlog(preBlog.id)">
+        <span>← {{ preBlog.title }}</span>
+      </div>
+      <div class="next-btn skip-btn" v-if="nextBlog" @click="onClickSkipBlog(nextBlog.id)">
+        <span>{{ nextBlog.title }} →</span>
+      </div>
+    </div>
     <comment
       @comment-load="handleLoadComment"
       @on-publish-comment="handleRefreshComment"
@@ -79,18 +87,34 @@ export default {
       }
       return ''
     },
-    ...mapGetters(['isLoadInfo', 'getCommentsList'])
+    ...mapGetters(['isLoadInfo', 'getCommentsList', 'blogsListArr', 'currentBlogIndex', 'getBlogsDetail']),
+    preBlog() {
+      if (this.currentBlogIndex > 0) {
+        let { title, id } = this.getBlogsDetail(this.blogsListArr[this.currentBlogIndex - 1])
+        return { title, id }
+      } else {
+        return null
+      }
+    },
+    nextBlog() {
+      if (this.currentBlogIndex < this.blogsListArr.length - 1) {
+        let { title, id } = this.getBlogsDetail(this.blogsListArr[this.currentBlogIndex + 1])
+        return { title, id }
+      } else {
+        return null
+      }
+    }
   },
   watch: {
     isLoadInfo(val) {
       if (val) {
-        this.getBlogsDetail()
+        this.getBlogsDetailAsync()
       }
     }
   },
   mounted() {
     if (this.isLoadInfo) {
-      this.getBlogsDetail()
+      this.getBlogsDetailAsync()
     }
     window.addEventListener('load', this.notifyReadProgressInit)
   },
@@ -103,7 +127,11 @@ export default {
         }
       })
     },
-    getBlogsDetail() {
+    onClickSkipBlog(blogId) {
+      this.$router.push(`/blogs/${blogId}`)
+      this.$router.go(0)
+    },
+    getBlogsDetailAsync() {
       let id = this.$route.params.id
       this.$store.dispatch('getBlogsDetail', id).then((data) => {
         if (data) {
@@ -192,6 +220,36 @@ export default {
           font-size: 16px !important;
         }
       }
+    }
+  }
+  .blogs-skip-wrapper {
+    width: 70%;
+    margin: 0 auto 15px;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 30px 0;
+    .skip-btn {
+      font-size: 24px;
+      font-weight: 600;
+      color: $text-color;
+      padding: 5px 40px;
+      cursor: pointer;
+      span {
+        transition: background-size .3s ease;
+        background-image: linear-gradient(to right, $bg-green, $bg-green);
+        background-repeat: no-repeat;
+        background-size: 0% 35%;
+        background-position: 0 bottom;
+        &:hover {
+          background-size: 100% 35%;
+        }
+      }
+    }
+    .pre-btn {
+      text-align: left;
+    }
+    .next-btn {
+      text-align: right;
     }
   }
 }
