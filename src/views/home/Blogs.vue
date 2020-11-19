@@ -69,6 +69,7 @@ export default {
       width: 75%;
       .blogs-list-item {
         max-width: 33.33%;
+        min-width: 33.33%;
       }
     }
   }
@@ -80,6 +81,7 @@ export default {
       width: 80%;
       .blogs-list-item {
         max-width: 50%;
+        min-width: 50%;
       }
     }
   }
@@ -91,6 +93,7 @@ export default {
       width: 95%;
       .blogs-list-item {
         max-width: 100%;
+        min-width: 100%;
       }
     }
   }
