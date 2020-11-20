@@ -27,13 +27,26 @@
             ></el-input>
           </div>
         </div>
-        <el-input
-          v-model="postComment.content"
-          type="textarea"
-          :rows="5"
-          resize="none"
-          placeholder="这里是输入内容/支持markdown格式"
-        ></el-input>
+        <div
+          class="comment-input-wrapper"
+          :class="{ 'on-focus': commentInputIsFocus }"
+        >
+          <el-input
+            v-model="postComment.content"
+            type="textarea"
+            :rows="5"
+            @focus="onFocusCommentInput"
+            @blur="onBlurCommentInput"
+            resize="none"
+            placeholder="这里是输入内容/支持markdown格式"
+          ></el-input>
+          <div class="input-toolbar">
+            <div class="toolbar-item emoji" v-popover:popover>
+              <span class="icon-emoji"></span>
+            </div>
+            
+          </div>
+        </div>
         <div class="publish-comment-form-footer">
           <div class="tips">
             <span
@@ -68,16 +81,27 @@
               <span class="publish-time-text">{{ item.publishTime }}</span>
             </div>
           </div>
-          <div class="comment-item-body-content markdown-body" v-html="item.content"></div>
+          <div
+            class="comment-item-body-content markdown-body"
+            v-html="item.content"
+          ></div>
         </div>
       </div>
     </div>
+    <el-popover ref="popover" placement="left" width="290" trigger="click">
+      <div class="emoji-list-wrapper" @click="handleEmojiSelect">
+        <div class="emoji-item" v-for="(emoji, index) in emojisList" :key="index">
+          <span>{{ emoji }}</span>
+        </div>
+      </div>
+    </el-popover>
   </div>
 </template>
 
 <script>
 import { publishComment } from '../../../../api/home'
 import { isEmail } from '../../../../utils'
+import { emoji } from '../../../../utils/emoji'
 export default {
   name: 'comment',
   props: {
@@ -97,7 +121,9 @@ export default {
         nickName: '',
         email: '',
         content: ''
-      }
+      },
+      commentInputIsFocus: false,
+      emojisList: emoji
     }
   },
   updated() {
@@ -108,6 +134,15 @@ export default {
     })
   },
   methods: {
+    handleEmojiSelect(event) {
+      this.postComment.content += event.target.innerText
+    },
+    onFocusCommentInput() {
+      this.commentInputIsFocus = true
+    },
+    onBlurCommentInput() {
+      this.commentInputIsFocus = false
+    },
     resetPost() {
       this.postComment = {
         nickName: '',
@@ -149,7 +184,7 @@ export default {
     },
     onSubmitComment() {
       if (this.validatePost()) {
-        publishComment(this.postComment, this.$route.params.id).then(res => {
+        publishComment(this.postComment, this.$route.params.id).then((res) => {
           this.$message({
             type: 'success',
             message: res.message
@@ -221,17 +256,50 @@ export default {
           }
         }
       }
-      .el-textarea {
+      .comment-input-wrapper {
+        &.on-focus,
+        &:hover {
+          .el-textarea /deep/ textarea {
+            box-shadow: 0px -3px 0px rgba(48, 132, 154, 0.5),
+              3px 0px 0px rgba(48, 132, 154, 0.5),
+              -3px 0px 0px rgba(48, 132, 154, 0.5);
+            border-color: $theme-color;
+            border-bottom-color: #DCDFE6;
+          }
+          .input-toolbar {
+            box-shadow: 0px 3px 0px rgba(48, 132, 154, 0.5),
+              3px 0px 0px rgba(48, 132, 154, 0.5),
+              -3px 0px 0px rgba(48, 132, 154, 0.5);
+            border-color: $theme-color;
+          }
+        }
         margin-bottom: 15px;
-        /deep/ textarea {
+        .el-textarea /deep/ textarea {
           font-size: 16px;
           font-family: Arial;
           padding: 20px 15px;
           transition: box-shadow 0.2s ease;
-          &:hover,
-          &:focus {
-            border-color: $theme-color;
-            box-shadow: $focus-border-shadow;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+        .input-toolbar {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          padding: 5px 15px;
+          background-color: #fff;
+          border: 1px solid #DCDFE6;
+          border-top: unset;
+          border-bottom-left-radius: 4px;
+          border-bottom-right-radius: 4px;
+          transition: box-shadow 0.2s ease;
+          .toolbar-item {
+            height: 100%;
+            @include center;
+            color: #aaa;
+            font-size: 20px;
+            padding: 5px;
+            cursor: pointer;
           }
         }
       }
@@ -316,6 +384,23 @@ export default {
           padding: 15px;
         }
       }
+    }
+  }
+}
+.emoji-list-wrapper {
+  display: flex;
+  height: 200px;
+  justify-content: flex-start;
+  overflow-y: scroll;
+  flex-wrap: wrap;
+  .emoji-item {
+    flex: 0 0 30px;
+    @include center;
+    padding: 5px;
+    cursor: pointer;
+    transition: transform .15s cubic-bezier(.2,0,.13,2);
+    &:hover {
+      transform: scale(1.25);
     }
   }
 }
