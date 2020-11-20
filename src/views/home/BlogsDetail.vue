@@ -223,17 +223,24 @@ export default {
     }
   }
   .blogs-skip-wrapper {
-    width: 70%;
     margin: 0 auto 15px;
     border-radius: 5px;
     background-color: #fff;
-    padding: 30px 0;
+    padding: 20px 0;
     .skip-btn {
       font-size: 24px;
       font-weight: 600;
       color: $text-color;
-      padding: 5px 40px;
       cursor: pointer;
+      @media (min-width: 1080px) {
+        padding: 10px 40px;
+      }
+      @media (max-width: 1080px) {
+        padding: 10px 20px;
+      }
+      @media (max-width: 640px) {
+        padding: 10px 15px;
+      }
       span {
         transition: background-size .3s ease;
         background-image: linear-gradient(to right, $bg-green, $bg-green);
@@ -254,12 +261,14 @@ export default {
   }
 }
 @media (min-width: 1080px) {
-  .blogs-detail-content {
+  .blogs-detail-content,
+  .blogs-skip-wrapper {
     width: 70%;
   }
 }
 @media (max-width: 1080px) {
-  .blogs-detail-content {
+  .blogs-detail-content,
+  .blogs-skip-wrapper {
     width: 80%;
   }
 }
@@ -269,6 +278,9 @@ export default {
     /deep/ pre {
       padding: 16px 0 !important;
     }
+  }
+  .blogs-skip-wrapper {
+    width: 95%;
   }
 }
 </style>
