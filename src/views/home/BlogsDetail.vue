@@ -15,19 +15,7 @@
           @select="queryTag"
         ></tag-item>
       </section>
-      <article class="content">
-        <mavon-editor
-          class="content-view"
-          :value="markDownContent"
-          :editable="false"
-          :toolbarsFlag="false"
-          defaultOpen="preview"
-          :subfield="false"
-          :ishljs="true"
-          :boxShadow="false"
-          codeStyle="monokai"
-        />
-      </article>
+      <article class="content markdown-body" v-html="markDownContent"></article>
     </div>
     <div class="blogs-skip-wrapper" v-if="preBlog || nextBlog">
       <div class="pre-btn skip-btn" v-if="preBlog" @click="onClickSkipBlog(preBlog.id)">
@@ -49,6 +37,7 @@
 <script>
 import TagItem from '../../components/Tag/index'
 import Comment from './components/comment/index.vue'
+import prism from 'prismjs'
 import { mapGetters } from 'vuex'
 import { ensurePageLoaded, normalizeMDContent } from '../../utils'
 export default {
@@ -137,7 +126,10 @@ export default {
         if (data) {
           this.blogsDetail = data
           this.blogsDetail.content = normalizeMDContent(this.blogsDetail.content)
-          this.markDownContent = this.blogsDetail.content
+          this.markDownContent = this.$markDown.render(this.blogsDetail.content)
+          this.$nextTick(() => {
+            prism.highlightAllUnder(document)
+          })
           document.title = this.blogsDetail.title
         } else {
           this.$router.push('/404')
@@ -213,12 +205,15 @@ export default {
       width: 100%;
       border-radius: 5px;
       overflow: hidden;
-      .content-view {
-        // height: 100vh;
-        width: 100%;
-        /deep/ code {
-          font-size: 16px !important;
-        }
+      background-color: #fff;
+      @media (min-width: 1080px) {
+        padding: 40px 30px;
+      }
+      @media (max-width: 1080px) {
+        padding: 40px 20px;
+      }
+      @media (max-width: 640px) {
+        padding: 40px 10px;
       }
     }
   }
@@ -275,9 +270,6 @@ export default {
 @media (max-width: 640px) {
   .blogs-detail-content {
     width: 95%;
-    /deep/ pre {
-      padding: 16px 0 !important;
-    }
   }
   .blogs-skip-wrapper {
     width: 95%;
