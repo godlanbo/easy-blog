@@ -221,11 +221,13 @@ export default {
       padding: 20px 0px;
       justify-content: flex-start;
       .home-blogs-section-list-item {
+        width: 33.33%;
         max-width: 33.33%;
       }
     }
     .home-life-section {
       .home-life-section-list-item {
+        width: 45%;
         max-width: 45%;
       }
     }
@@ -237,12 +239,14 @@ export default {
       width: 80%;
       justify-content: space-between;
       .home-blogs-section-list-item {
+        width: 50%;
         max-width: 50%;
       }
     }
     .home-life-section {
       width: 80%;
       .home-life-section-list-item {
+        width: 45%;
         max-width: 45%;
       }
     }
@@ -256,6 +260,7 @@ export default {
         padding: 20px 0;
         justify-content: flex-start;
         .home-blogs-section-list-item {
+          width: 100%;
           max-width: 100%;
         }
       }
@@ -263,6 +268,7 @@ export default {
     .home-life-section {
       width: 90%;
       .home-life-section-list-item {
+        width: 100%;
         max-width: 100%;
       }
     }
