@@ -27,7 +27,7 @@
     "@vue/cli-service": "~4.5.0",
     "dayjs": "^1.8.33",
     "mockjs": "^1.1.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
   }
