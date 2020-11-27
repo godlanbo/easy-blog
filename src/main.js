@@ -6,6 +6,7 @@ import dayjs from 'dayjs'
 import ElementUI from 'element-ui'
 import './assets/style/global.scss'
 import './assets/style/icon.css'
+import './assets/style/markdown.css'
 // import './mock/index'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
@@ -13,9 +14,12 @@ import './permission'
 import VueMeta from 'vue-meta'
 
 Vue.config.productionTip = (process.env.NODE_ENV !== 'development')
-Vue.prototype.$markDown = mavonEditor.markdownIt
+Vue.prototype.$markDown = mavonEditor.markdownIt.set({
+  langPrefix: 'language-'
+})
 Vue.use(mavonEditor)
 Vue.use(ElementUI)
+
 Vue.use(VueMeta, {
   tagIDKeyName: 'hid',
 })
