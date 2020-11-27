@@ -78,11 +78,11 @@ export function isEmail(val) {
 
 export function normalizeMDContent(content) {
   content = content.replace(
-    /&gt;(?=\s)/g,
+    /(?<!script)&gt;/g,
     '>'
   )
   content = content.replace(
-    /&lt;(?!\/)/g,
+    /&lt;(?!(script|\/script))/g,
     '<'
   )
   return content
