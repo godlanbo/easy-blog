@@ -77,10 +77,15 @@ export function isEmail(val) {
 }
 
 export function normalizeMDContent(content) {
+  // content = content.replace(
+  //   /(?<!script)&gt;/g,
+  //   '>'
+  // )
+  // safari 无法支持正则后置断言，降级处理
   content = content.replace(
-    /(?<!script)&gt;/g,
+    /&gt;/g,
     '>'
-  )
+  ).replace(/(script)>/g, '$1&gt;')
   content = content.replace(
     /&lt;(?!(script|\/script))/g,
     '<'
