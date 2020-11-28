@@ -128,6 +128,10 @@ export default {
           this.blogsDetail.content = normalizeMDContent(this.blogsDetail.content)
           this.markDownContent = this.$markDown.render(this.blogsDetail.content)
           this.$nextTick(() => {
+            let preCents = document.querySelectorAll('.extra-class')
+            preCents.forEach(preCItem => {
+              preCItem.outerHTML = `<div class="${Array.from(preCItem.classList).join(' ')}">${preCItem.innerHTML}</div>`
+            })
             prism.highlightAllUnder(document)
           })
           document.title = this.blogsDetail.title

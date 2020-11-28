@@ -15,7 +15,16 @@ import VueMeta from 'vue-meta'
 
 Vue.config.productionTip = (process.env.NODE_ENV !== 'development')
 Vue.prototype.$markDown = mavonEditor.markdownIt.set({
-  langPrefix: 'language-'
+  langPrefix: 'language-',
+  highlight: (str, lang) => {
+    let res = 
+      `<pre class="language-${lang} extra-class">` +
+          `<pre class="language-${lang}">` +
+            `<code>${str.replace(/</g, '&lt;')}</code>` +
+          `</pre>` +
+        `</pre>`
+    return res
+  }
 })
 Vue.use(mavonEditor)
 Vue.use(ElementUI)

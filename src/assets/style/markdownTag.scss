@@ -1,0 +1,96 @@
+div[class*="language-"] {
+  position: relative;
+  &:before {
+    position: absolute;
+    z-index: 3;
+    top: .8em;
+    right: 1em;
+    font-size: 1em;
+    font-weight: 600;
+    color: hsla(0,0%,100%,.4);
+  }
+}
+div[class~='language-js']:before {
+  content: 'js';
+}
+div[class~='language-ts']:before {
+  content: 'ts';
+}
+div[class~='language-html']:before {
+  content: 'html';
+}
+div[class~='language-md']:before {
+  content: 'md';
+}
+div[class~='language-vue']:before {
+  content: 'vue';
+}
+div[class~='language-css']:before {
+  content: 'css';
+}
+div[class~='language-sass']:before {
+  content: 'sass';
+}
+div[class~='language-scss']:before {
+  content: 'scss';
+}
+div[class~='language-less']:before {
+  content: 'less';
+}
+div[class~='language-stylus']:before {
+  content: 'stylus';
+}
+div[class~='language-go']:before {
+  content: 'go';
+}
+div[class~='language-java']:before {
+  content: 'java';
+}
+div[class~='language-c']:before {
+  content: 'c';
+}
+div[class~='language-sh']:before {
+  content: 'sh';
+}
+div[class~='language-yaml']:before {
+  content: 'yaml';
+}
+div[class~='language-py']:before {
+  content: 'py';
+}
+div[class~='language-docker']:before {
+  content: 'docker';
+}
+div[class~='language-dockerfile']:before {
+  content: 'dockerfile';
+}
+div[class~='language-makefile']:before {
+  content: 'makefile';
+}
+div[class~='language-javascript']:before {
+  content: 'js';
+}
+div[class~='language-typescript']:before {
+  content: 'ts';
+}
+div[class~='language-markup']:before {
+  content: 'html';
+}
+div[class~='language-markdown']:before {
+  content: 'md';
+}
+div[class~='language-json']:before {
+  content: 'json';
+}
+div[class~='language-ruby']:before {
+  content: 'rb';
+}
+div[class~='language-python']:before {
+  content: 'py';
+}
+div[class~='language-bash']:before {
+  content: 'sh';
+}
+div[class~='language-php']:before {
+  content: 'php';
+}
