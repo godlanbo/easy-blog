@@ -173,7 +173,7 @@ export default {
       @include center;
       height: 100%;
       margin: 0 20px;
-      color: transparent;
+      color: inherit;
       &.active a::before {
         @media (max-width: 690px) {
           transform: scale(0);
