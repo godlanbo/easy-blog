@@ -247,6 +247,12 @@
   margin-bottom: 10px;
 }
 
+.markdown-body p img {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .markdown-body blockquote {
   margin: 0;
 }
