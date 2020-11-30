@@ -122,16 +122,25 @@ export default {
     width: 70%;
     margin: 0 auto;
     .blogs-category-header {
+      display: flex;
+      align-items: center;
       width: 100%;
       border-radius: 5px;
       background: #fff;
       padding: 25px 35px;
       margin-bottom: 5px;
+      @media (max-width: 640px) {
+        flex-direction: column;
+      }
       .header-title {
         font-size: 45px;
         font-weight: 600;
         color: $text-color;
         margin-right: 40px;
+        @media (max-width: 640px) {
+          margin-bottom: 15px;
+          margin-right: 0px;
+        }
       }
       .header-desc {
         font-size: 20px;
@@ -152,11 +161,15 @@ export default {
         padding: 25px 0;
         .blogs-category-content-list-item {
           flex: 1;
+          width: 100%;
         }
       }
       .blogs-category-list {
         background: #fff;
         padding: 25px 10px;
+        @media (max-width: 1080px) {
+          padding: 25px 30px;
+        }
         border-radius: 5px;
         .blogs-category-list-item {
           padding: 15px 20px;
@@ -173,6 +186,7 @@ export default {
           transition: all 0.1s $animationType;
           cursor: pointer;
           &-text {
+            white-space: nowrap;
             padding-right: 5px;
           }
           &:hover {
@@ -220,7 +234,6 @@ export default {
         margin-bottom: 5px;
         display: flex;
         flex-flow: row wrap;
-        justify-content: center;
         .blogs-category-list-item {
           margin: 10px 20px 10px 0;
           flex: 0 1 20%;
