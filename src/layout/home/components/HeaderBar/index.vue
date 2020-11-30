@@ -10,31 +10,31 @@
     </label>
     <div class="menu-bg" @touchmove.prevent @click="hideMenu"></div>
     <nav class="nav-wrapper" @touchmove.prevent :class="{'active-color-switch' : isSwtichHeaderBg}">
-      <div class="nav-item" :class="{'active' : activeRoute === '/home'}">
-        <router-link to="/home">
+      <router-link to="/home" class="nav-item" :class="{'active' : activeRoute === '/home'}">
+        <a>
           <span class="nav-item-text uppercase">home</span>
-        </router-link>
-      </div>
-      <div class="nav-item" :class="{'active' : activeRoute === '/blogs'}">
-        <router-link to="/blogs">
+        </a>
+      </router-link>
+      <router-link to="/blogs" class="nav-item" :class="{'active' : activeRoute === '/blogs'}">
+        <a>
           <span class="nav-item-text uppercase">blogs</span>
-        </router-link>
-      </div>
-      <div class="nav-item" :class="{'active' : activeRoute === '/archive'}">
-        <router-link to="/archive?time=2020">
+        </a>
+      </router-link>
+      <router-link to="/archive?time=2020" class="nav-item" :class="{'active' : activeRoute === '/archive'}">
+        <a>
           <span class="nav-item-text uppercase">archive</span>
-        </router-link>
-      </div>
-      <div class="nav-item" :class="{'active' : activeRoute === '/life'}">
-        <router-link to="/life">
+        </a>
+      </router-link>
+      <router-link to="/life" class="nav-item" :class="{'active' : activeRoute === '/life'}">
+        <a>
           <span class="nav-item-text uppercase">life</span>
-        </router-link>
-      </div>
-      <div class="nav-item">
-        <a href="https://github.com/godlanbo" target="_blank">
+        </a>
+      </router-link>
+      <a href="https://github.com/godlanbo" target="_blank" class="nav-item">
+        <a>
           <span class="nav-item-text uppercase">github</span>
         </a>
-      </div>
+      </a>
     </nav>
   </header>
 </template>
@@ -155,6 +155,9 @@ export default {
     height: 100%;
     display: flex;
     justify-content: flex-end;
+    > a {
+      text-decoration: none;
+    }
     &.active-color-switch {
       .nav-item a::before {
         background-image: $line-color;
@@ -170,6 +173,7 @@ export default {
       @include center;
       height: 100%;
       margin: 0 20px;
+      color: transparent;
       &.active a::before {
         @media (max-width: 690px) {
           transform: scale(0);
