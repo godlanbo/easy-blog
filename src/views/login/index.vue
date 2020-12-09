@@ -93,7 +93,7 @@ export default {
   width: 100vw;
   height: 100vh;
   @include center;
-  background-image: url(https://i.loli.net/2019/11/17/GAYyzeKsiWjP5qO.jpg);
+  background-image: url('/image/loginBack.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
