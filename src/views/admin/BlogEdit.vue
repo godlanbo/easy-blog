@@ -57,7 +57,7 @@
       </div>
       <tags-panel
         :tags-item-list="tagCategoryList"
-        :initial-selected="initialSelected"
+        :selected-tags="selectedTags"
         :can-edit="true"
         @select-change="onSelectTag"
         @add-tag="onAddTag"
@@ -94,13 +94,17 @@ export default {
       tagCategoryList: [],
       blog: {},
       mode: 'create',
-      initialSelected: [],
-      coverFile: null,
+      coverFile: null
+    }
+  },
+  computed: {
+    selectedTags() {
+      return this.tagCategoryList.map(tag => this.blog.tags.includes(tag.name))
     }
   },
   methods: {
     onSelectTag(arr, index) {
-      this.blog.tags.push(this.tagCategoryList[index].name)
+      this.blog.tags = this.tagCategoryList.filter((tag, idx) => arr[idx]).map(tagItem => tagItem.name)
     },
     onAddTag(value) {
       addTag(value).then((res) => {
@@ -222,15 +226,6 @@ export default {
       this.blog = getLocalStorage('blog')
       if (this.blog) {
         this.mode = 'edit'
-        let initialSelected = new Array(this.tagCategoryList.length)
-        this.tagCategoryList.forEach((item, index) => {
-          if (this.blog.tags.includes(item.name)) {
-            initialSelected[index] = true
-          } else {
-            initialSelected[index] = false
-          }
-        })
-        this.initialSelected = initialSelected
       } else {
         this.blog = this.getEmptyBlog()
       }

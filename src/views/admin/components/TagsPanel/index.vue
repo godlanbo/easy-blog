@@ -35,7 +35,7 @@ export default {
       type: Number,
       default: 0
     },
-    initialSelected: {
+    selectedTags: {
       type: Array,
       default: () => []
     },
@@ -46,7 +46,6 @@ export default {
   },
   data() {
     return {
-      selectedTags: [],
       addTagText: '',
       addTagPanelVisible: false
     }
@@ -59,32 +58,8 @@ export default {
       this.$emit('add-tag', this.addTagText)
     },
     onSelectTag(index) {
-      this.selectedTags.splice(index, 1, !this.selectedTags[index])
-      this.$emit('select-change', this.selectedTags, index)
-    }
-  },
-  watch: {
-    initialSelected(val) {
-      this.selectedTags = [].concat(this.initialSelected)
-    },
-    tagsItemList(val, oldVal) {
-      if (this.initialSelected.length !== 0) {
-        return
-      }
-      if (this.selectedTags.length === 0) {
-        this.selectedTags = new Array(val.length).fill(false)
-      } else {
-        let old = oldVal.filter((val, index) => {
-          return this.selectedTags[index]
-        })
-        this.selectedTags = new Array(val.length).fill(false)
-        old.forEach(item => {
-          let index = val.findIndex(tag => tag.name === item.name)
-          if (index !== -1) {
-            this.selectedTags.splice(index, 1, true)
-          }
-        })
-      }
+      this.selectedTags[index] = !this.selectedTags[index]
+      this.$emit('select-change', this.selectedTags)
     }
   }
 }
