@@ -97,9 +97,12 @@ export default {
         padding: 20px 30px;
         .tags-wrapper {
           display: flex;
-          padding-bottom: 15px;
+          flex-wrap: wrap;
+          padding-bottom: 5px;
           .tags-item {
             padding-right: 10px;
+            padding-bottom: 5px;
+            white-space: nowrap;
             color: #ccc;
             &:hover {
               color: $color-blue;
