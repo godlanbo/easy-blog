@@ -15,15 +15,18 @@ const routes = [
     children: [{
       path: 'home',
       name: 'Home',
-      component: () => import('@/views/home/Home')
+      component: () => import('@/views/home/Home'),
+      meta: { title: 'Godlanbo的博客' }
     }, {
       path: 'blogs',
       name: 'Blogs',
-      component: () => import('@/views/home/Blogs')
+      component: () => import('@/views/home/Blogs'),
+      meta: { title: '博客列表' }
     }, {
       path: 'blogs/tags',
       name: 'BlogsTags',
-      component: () => import('@/views/home/BlogsTags')
+      component: () => import('@/views/home/BlogsTags'),
+      meta: { title: '博客标签分类' }
     }, {
       path: 'blogs/:id',
       name: 'BlogsDetail',
@@ -31,18 +34,21 @@ const routes = [
     }, {
       path: 'archive',
       name: 'Archive',
-      component: () => import('@/views/home/Archive')
+      component: () => import('@/views/home/Archive'),
+      meta: { title: '博客归档' }
     }, {
       path: 'life',
       name: 'Life',
-      component: () => import('@/views/home/Life')
+      component: () => import('@/views/home/Life'),
+      meta: { title: '我的动态' }
     }]
   },
   {
     path: '/login',
     name: 'Login',
     hidden: true,
-    component: () => import('@/views/login/index')
+    component: () => import('@/views/login/index'),
+    meta: { title: '登录管理后台' }
   },
   {
     path: '/dashboard',
@@ -93,6 +99,7 @@ const routes = [
     path: '/404',
     name: '404 Not Found',
     component: () => import('@/views/404/index'),
+    meta: { title: '你走丢了' },
     hidden: true
   },
   {
