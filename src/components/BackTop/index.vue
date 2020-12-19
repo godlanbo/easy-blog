@@ -66,7 +66,7 @@ export default {
   border-radius: 50%;
   @include center;
   font-size: 30px;
-  background: #f0f3f6;
+  background: #fff;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all $animationTime $animationType;
@@ -77,7 +77,7 @@ export default {
   }
   &:hover {
     transform: scale(1.08);
-    box-shadow: 10px 10px 20px #cccfd1, -10px -10px 20px #ffffff;
+    box-shadow: 0 8px 24px 0 rgba(187,191,196,.2);
   }
 }
 @media (max-width: 640px) {
