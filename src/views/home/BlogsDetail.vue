@@ -225,19 +225,22 @@ export default {
     margin: 0 auto 15px;
     border-radius: 5px;
     background-color: #fff;
-    padding: 20px 0;
+    padding: 10px 0;
     .skip-btn {
-      font-size: 24px;
       font-weight: 600;
       color: $text-color;
+      white-space: nowrap;
       cursor: pointer;
       @media (min-width: 1080px) {
+        font-size: 24px;
         padding: 10px 40px;
       }
       @media (max-width: 1080px) {
+        font-size: 20px;
         padding: 10px 20px;
       }
       @media (max-width: 640px) {
+        font-size: 18px;
         padding: 10px 15px;
       }
       span {
