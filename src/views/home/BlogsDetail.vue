@@ -199,7 +199,7 @@ export default {
       width: 100%;
       background: #fff;
       border-radius: 5px;
-      padding: 25px 30px;
+      padding: 25px 30px 10px;
       display: flex;
       flex-flow: row wrap;
       align-items: center;

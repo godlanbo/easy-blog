@@ -37,6 +37,7 @@ export default {
   &.showBg {
     color: $text-color;
     margin-right: 15px;
+    margin-bottom: 15px;
     background-color: $bg-color;
     &:hover {
       background: $color-blue;
