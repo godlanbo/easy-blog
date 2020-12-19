@@ -19,10 +19,10 @@
     </div>
     <div class="blogs-skip-wrapper" v-if="preBlog || nextBlog">
       <div class="pre-btn skip-btn" v-if="preBlog" @click="onClickSkipBlog(preBlog.id)">
-        <span>← {{ preBlog.title }}</span>
+        <span>← {{ normalizeBlogTitle(preBlog.title) }}</span>
       </div>
       <div class="next-btn skip-btn" v-if="nextBlog" @click="onClickSkipBlog(nextBlog.id)">
-        <span>{{ nextBlog.title }} →</span>
+        <span>{{ normalizeBlogTitle(nextBlog.title) }} →</span>
       </div>
     </div>
     <comment
@@ -108,6 +108,13 @@ export default {
     window.addEventListener('load', this.notifyReadProgressInit)
   },
   methods: {
+    normalizeBlogTitle(title) {
+      if (title.length <= 20) {
+        return title
+      } else {
+        return title.slice(0, 20) + '...'
+      }
+    },
     queryTag(tag) {
       this.$router.push({
         path: '/blogs/tags',
