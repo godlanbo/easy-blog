@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <read-progress></read-progress>
+    <rss></rss>
     <back-top></back-top>
     <header-bar></header-bar>
     <transition name="slide-up" mode="out-in">
@@ -17,12 +18,14 @@ import HeaderBar from './components/HeaderBar/index'
 import FooterBar from './components/FooterBar/index'
 import ReadProgress from '@/components/ReadProgress/index'
 import BackTop from '@/components/BackTop/index'
+import Rss from '@/components/Rss/index'
 export default {
   components: {
     HeaderBar,
     FooterBar,
     ReadProgress,
-    BackTop
+    BackTop,
+    Rss
   }
 }
 </script>
