@@ -22,3 +22,14 @@ export function getCommentsList(id) {
     url: `/comment/${id}`
   })
 }
+
+export function addSubEmail(email) {
+  return request({
+    url: '/emailSub',
+    method: 'POST',
+    data: {
+      token: 'godlanbo',
+      email
+    }
+  })
+}
