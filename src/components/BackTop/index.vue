@@ -65,7 +65,7 @@ export default {
   height: 50px;
   border-radius: 50%;
   @include center;
-  font-size: 30px;
+  font-size: 25px;
   background: #fff;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   cursor: pointer;
