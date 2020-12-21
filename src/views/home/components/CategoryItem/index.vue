@@ -65,11 +65,11 @@ export default {
   margin: 0 auto 15px;
   padding: 15px 25px 15px 0;
   overflow: hidden;
-  // border-bottom: 3px solid $bg-color;
+  border-bottom: 2px solid $bg-color;
   cursor: pointer;
   .release-time {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 400;
     color: #ccc;
     margin-bottom: 15px;
     padding-left: 15px;
@@ -88,7 +88,7 @@ export default {
     margin-bottom: 25px;
     padding-left: 15px;
     .content-text {
-      line-height: 1.2;
+      line-height: 1.5;
       @include overflowText(2);
     }
   }
