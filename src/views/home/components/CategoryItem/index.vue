@@ -75,17 +75,18 @@ export default {
     padding-left: 15px;
   }
   .title {
-    font-size: 30px;
+    font-size: 24px;
+    line-height: 1.5;
     font-weight: 800;
     color: $text-color;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     padding-left: 15px;
   }
   .content {
     font-size: 16px;
     font-size: 400;
     color: $text-color;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     padding-left: 15px;
     .content-text {
       line-height: 1.5;
