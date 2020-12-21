@@ -172,10 +172,11 @@ export default {
         }
         border-radius: 5px;
         .blogs-category-list-item {
+          width: 70%;
+          margin: 0 auto 20px;
           padding: 15px 20px;
           border-radius: 6px;
           background: #f0f3f6;
-          // box-shadow: 5px 5px 10px #cccfd1, -5px -5px 10px #ffffff;
           box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
           color: $text-color;
           display: flex;
@@ -185,6 +186,15 @@ export default {
           font-weight: 600;
           transition: all 0.1s $animationType;
           cursor: pointer;
+          @media (max-width: 1080px) {
+            margin: 10px 10px 10px 0;
+            flex: 0 1 20%;
+            font-size: 20px;
+          }
+          @media (max-width: 640px) {
+            padding: 10px;
+            font-size: 18px;
+          }
           &-text {
             white-space: nowrap;
             padding-right: 5px;
@@ -213,10 +223,6 @@ export default {
       }
       .blogs-category-list {
         flex: 0 1 25%;
-        .blogs-category-list-item {
-          width: 70%;
-          margin: 0 auto 20px;
-        }
       }
     }
   }
@@ -234,10 +240,6 @@ export default {
         margin-bottom: 5px;
         display: flex;
         flex-flow: row wrap;
-        .blogs-category-list-item {
-          margin: 10px 20px 10px 0;
-          flex: 0 1 20%;
-        }
       }
     }
   }
