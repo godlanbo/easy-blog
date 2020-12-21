@@ -184,6 +184,7 @@ export default {
         background-repeat: no-repeat;
         background-size: cover;
         color: #fff;
+        cursor: pointer;
         .content {
           position: absolute;
           left: 50%;
@@ -200,6 +201,16 @@ export default {
             font-size: 16px;
             white-space: nowrap;
           }
+        }
+        &::before {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 7px;
+          left: 0;
+          top: 0;
+          background-color: rgba(0, 0, 0, .3);
         }
       }
     }
