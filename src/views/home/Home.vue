@@ -80,6 +80,18 @@ export default {
         return `linear-gradient(to right, #30849a, #031013)`
       }
     },
+    initVanillaTilt() {
+      VanillaTilt.init(
+        document.querySelectorAll('.home-life-section-list-item'),
+        {
+          glare: true,
+          reverse: true,
+          scale: 1.1,
+          max: 10,
+          'max-glare': 0.5,
+        }
+      )
+    }
   },
   computed: {
     blogsItemList() {
@@ -93,19 +105,15 @@ export default {
     lifeList(val) {
       if (val.length) {
         this.$nextTick(() => {
-          VanillaTilt.init(
-            document.querySelectorAll('.home-life-section-list-item'),
-            {
-              glare: true,
-              reverse: true,
-              scale: 1.1,
-              max: 10,
-              'max-glare': 0.5,
-            }
-          )
+          this.initVanillaTilt()
         })
       }
     },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.initVanillaTilt()
+    })
   }
 }
 </script>
