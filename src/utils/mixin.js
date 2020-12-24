@@ -1,23 +1,5 @@
 import { mapGetters } from 'vuex';
-// import { getBlogsList, getLifeList } from './../api/index';
 
-// export const homeMixin = {
-//   data() {
-//     return {
-//       blogsList: [],
-//       lifeList: [],
-//     }
-//   },
-//   async mounted() {
-//     let resBlog = await getBlogsList()
-//     let resLife = await getLifeList()
-//     this.blogsList = resBlog.data.blogsList
-//     this.lifeList = resLife.data.lifeList
-//     // 数据加载完毕后去触发lazyImg收集懒加载图片对象
-//     let e = new Event('img-ready')
-//     window.dispatchEvent(e)
-//   },
-// }
 export const listInfoMixin = {
   computed: {
     ...mapGetters([
