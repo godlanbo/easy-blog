@@ -8,7 +8,7 @@
     <div></div>
     <el-button style="width: 100%" @click="handleSub('rss')">Rss订阅</el-button>
     <template v-slot:reference>
-      <transition name="slide-right-1">
+      <transition name="slide-right-2">
         <div class="rss" v-show="toolListVisible">
           <span class="icon-sub"></span>
         </div>
@@ -53,11 +53,11 @@ export default {
 .rss {
   position: fixed;
   font-weight: bold;
-  bottom: 125px;
+  bottom: $tool-item-size + $tool-item-gap + $base-distance;
   right: $toolListRight;
   z-index: 2999;
-  width: 50px;
-  height: 50px;
+  width: $tool-item-size;
+  height: $tool-item-size;
   border-radius: 50%;
   @include center;
   font-size: 25px;

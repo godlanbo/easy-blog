@@ -7,8 +7,14 @@ $line-color: linear-gradient(to right, $theme-color, #031013);
 $bg-color: #f0f3f6;
 $bg-green: #73ffa0;
 $focus-border-shadow: 0px 0px 0px 3px rgba(48 ,132 ,154, .5);
-// $color-blue: #1965fe;
 $color-blue: #0ab9e6;
+
+// base toolList bottom distance
+$base-distance: 60px;
+// gap per toolList item
+$tool-item-gap: 15px;
+// toolList item size
+$tool-item-size: 50px;
 
 $menuText:#bfcbd9;
 $menuActiveText:#409EFF;

@@ -1,5 +1,5 @@
 <template>
-  <transition name="slide-right-2">
+  <transition name="slide-right-3">
     <div class="backTop" @click="handleBackTop" v-show="toolListVisible">
       <span class="icon-up"></span>
     </div>
@@ -40,11 +40,11 @@ export default {
 .backTop {
   position: fixed;
   font-weight: bold;
-  bottom: 60px;
+  bottom: $base-distance;
   right: $toolListRight;
   z-index: 2999;
-  width: 50px;
-  height: 50px;
+  width: $tool-item-size;
+  height: $tool-item-size;
   border-radius: 50%;
   @include center;
   font-size: 25px;
