@@ -48,13 +48,13 @@ export default {
   border-radius: 50%;
   @include center;
   font-size: 25px;
+  color: #aaa;
   background: #fff;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all $animationTime $animationType;
   .icon-up {
     @include center;
-    color: #aaa;
     font-weight: bold;
   }
   &:hover {

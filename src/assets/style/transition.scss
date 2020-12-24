@@ -19,9 +19,11 @@ $small-toolListRight: 10px;
 }
 
 @for $i from 1 through 3 {
-  .slide-right-#{$i}-enter-active,
+  .slide-right-#{$i}-enter-active {
+    transition: all 0.2s cubic-bezier(.2,0,.13,2) #{($i - 1) * 0.1s} !important;
+  }
   .slide-right-#{$i}-leave-active {
-    transition: all 0.2s $animationType #{($i - 1) * 0.1s};
+    transition: all 0.2s ease #{($i - 1) * 0.1s} !important;
   }
   .slide-right-#{$i}-enter, .slide-right-#{$i}-leave-to {
     transform: translateX(calc(100% + #{$toolListRight}));
