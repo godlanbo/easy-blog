@@ -1,30 +1,20 @@
 <template>
-  <div class="backTop" @click="handleBackTop">
-    <span class="icon-up"></span>
-  </div>
+  <transition name="slide-right-2">
+    <div class="backTop" @click="handleBackTop" v-show="toolListVisible">
+      <span class="icon-up"></span>
+    </div>
+  </transition>
 </template>
 <script>
+import { popoverToolListMixin } from '../../utils/mixin'
 const cubic = (value) => Math.pow(value, 3)
 const easeInOutCubic = (value) =>
   value < 0.5 ? cubic(value * 2) / 2 : 1 - cubic((1 - value) * 2) / 2
 
 export default {
   name: 'BackTop',
+  mixins: [popoverToolListMixin],
   methods: {
-    handleScroll() {
-      const scrollTop =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop
-      const backTop = document.querySelector('.backTop')
-      if (scrollTop > 200) {
-        backTop.style.visibility = 'visible'
-        backTop.style.opacity = 1
-      } else {
-        backTop.style.visibility = 'hidden'
-        backTop.style.opacity = 0
-      }
-    },
     handleBackTop() {
       const el = document.documentElement
       const beginTime = Date.now()
@@ -42,24 +32,16 @@ export default {
       }
       rAF(frameFunc)
     },
-  },
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  destroyed() {
-    window.removeEventListener('scroll', this.handleScroll)
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
 @import '@/assets/style/globalScript';
 .backTop {
-  visibility: hidden;
-  opacity: 0;
   position: fixed;
   font-weight: bold;
   bottom: 60px;
-  right: 30px;
+  right: $toolListRight;
   z-index: 2999;
   width: 50px;
   height: 50px;
@@ -82,7 +64,7 @@ export default {
 }
 @media (max-width: 640px) {
   .backTop {
-    right: 10px !important;
+    right: $small-toolListRight;
   }
 }
 </style>

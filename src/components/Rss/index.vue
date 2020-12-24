@@ -8,32 +8,22 @@
     <div></div>
     <el-button style="width: 100%" @click="handleSub('rss')">Rss订阅</el-button>
     <template v-slot:reference>
-      <div class="rss">
-        <span class="icon-sub"></span>
-      </div>
+      <transition name="slide-right-1">
+        <div class="rss" v-show="toolListVisible">
+          <span class="icon-sub"></span>
+        </div>
+      </transition>
     </template>
   </el-popover>
 </template>
 <script>
 import { isEmail } from '../../utils'
 import { addSubEmail } from '../../api/index'
+import { popoverToolListMixin } from '../../utils/mixin'
 export default {
   name: 'Rss',
+  mixins: [popoverToolListMixin],
   methods: {
-    handleScroll() {
-      const scrollTop =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop
-      const backTop = document.querySelector('.rss')
-      if (scrollTop > 200) {
-        backTop.style.visibility = 'visible'
-        backTop.style.opacity = 1
-      } else {
-        backTop.style.visibility = 'hidden'
-        backTop.style.opacity = 0
-      }
-    },
     handleSub(type) {
       if (type === 'rss') {
         window.open('http://godlanbo.com/rss/index.xml', '_blank')
@@ -55,24 +45,16 @@ export default {
           .catch(() => {})
       }
     }
-  },
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  destroyed() {
-    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
 <style lang="scss" scoped>
 @import '@/assets/style/globalScript';
 .rss {
-  visibility: hidden;
-  opacity: 0;
   position: fixed;
   font-weight: bold;
   bottom: 125px;
-  right: 30px;
+  right: $toolListRight;
   z-index: 2999;
   width: 50px;
   height: 50px;
@@ -95,7 +77,7 @@ export default {
 }
 @media (max-width: 640px) {
   .rss {
-    right: 10px !important;
+    right: $small-toolListRight;
   }
 }
 </style>

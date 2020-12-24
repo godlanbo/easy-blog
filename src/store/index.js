@@ -13,7 +13,8 @@ export default new Vuex.Store({
     currentBlogIndex: -1,
     lifeList: [],
     isLoadInfo: false,
-    commentsList: {}
+    commentsList: {},
+    toolListVisible: false
   },
   actions: {
     async getBlogsList({ commit }) {
@@ -45,6 +46,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setToolListVisible(state, newStatus) {
+      state.toolListVisible = newStatus
+    },
     setBlogsList(state, list) {
       list.forEach(blog => {
         blog.comments = []
@@ -112,6 +116,7 @@ export default new Vuex.Store({
     },
     getCommentsList: (state) => (id) => {
       return state.blogs[id].comments.map(cid => state.commentsList[cid])
-    }
+    },
+    toolListVisible: (state) => state.toolListVisible
   }
 })

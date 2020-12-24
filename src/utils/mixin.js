@@ -1,4 +1,4 @@
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export const listInfoMixin = {
   computed: {
@@ -94,5 +94,35 @@ export const editMixin = {
     } else {
       next()
     }
+  }
+}
+
+export const popoverToolListMixin = {
+  computed: {
+    ...mapGetters([
+      'toolListVisible'
+    ])
+  },
+  methods: {
+    ...mapMutations([
+      'setToolListVisible'
+    ]),
+    handleScroll() {
+      const scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop
+      if (scrollTop > 200) {
+        this.setToolListVisible(true)
+      } else {
+        this.setToolListVisible(false)
+      }
+    },
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }

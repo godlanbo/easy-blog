@@ -1,6 +1,9 @@
 $animationTime: .3s;
 $animationType: ease;
 
+$toolListRight: 30px;
+$small-toolListRight: 10px;
+
 .slide-up-enter-active,
 .slide-up-leave-active {
   transition: all $animationTime $animationType;
@@ -13,4 +16,26 @@ $animationType: ease;
 .slide-up-enter-to, .slide-up-leave {
   transform: translateY(0);
   opacity: 1;
+}
+
+@for $i from 1 through 3 {
+  .slide-right-#{$i}-enter-active,
+  .slide-right-#{$i}-leave-active {
+    transition: all 0.2s $animationType #{($i - 1) * 0.1s};
+  }
+  .slide-right-#{$i}-enter, .slide-right-#{$i}-leave-to {
+    transform: translateX(calc(100% + #{$toolListRight}));
+    visibility: hidden;
+    opacity: 0;
+  }
+  @media (max-width: 640px) {
+    .slide-right-#{$i}-enter, .slide-right-#{$i}-leave-to {
+      transform: translateX(calc(100% + #{$small-toolListRight}));
+    }
+  }
+  .slide-right-#{$i}-enter-to, .slide-right-#{$i}-leave {
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+  }
 }
