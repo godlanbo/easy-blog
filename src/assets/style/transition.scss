@@ -1,4 +1,4 @@
-$animationTime: .3s;
+$animationTime: 0.3s;
 $animationType: ease;
 
 $toolListRight: 30px;
@@ -9,35 +9,104 @@ $small-toolListRight: 10px;
   transition: all $animationTime $animationType;
 }
 
-.slide-up-enter, .slide-up-leave-to {
+.slide-up-enter,
+.slide-up-leave-to {
   transform: translateY(-40px);
   opacity: 0;
 }
-.slide-up-enter-to, .slide-up-leave {
+.slide-up-enter-to,
+.slide-up-leave {
   transform: translateY(0);
+  opacity: 1;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all $animationTime $animationType 0.1s;
+}
+
+.slide-left-enter,
+.slide-left-leave-to {
+  transform: translateX(-40px);
+  opacity: 0;
+}
+.slide-left-enter-to,
+.slide-left-leave {
+  transform: translateX(0);
   opacity: 1;
 }
 
 @for $i from 1 through 3 {
   .slide-right-#{$i}-enter-active {
-    transition: all 0.2s cubic-bezier(.2,0,.13,2) #{($i - 1) * 0.1s} !important;
+    transition: all
+      0.2s
+      cubic-bezier(0.2, 0, 0.13, 2)
+      #{($i - 1) *
+      0.1s} !important;
   }
   .slide-right-#{$i}-leave-active {
     transition: all 0.2s ease #{($i - 1) * 0.1s} !important;
   }
-  .slide-right-#{$i}-enter, .slide-right-#{$i}-leave-to {
+  .slide-right-#{$i}-enter,
+  .slide-right-#{$i}-leave-to {
     transform: translateX(calc(100% + #{$toolListRight}));
     visibility: hidden;
     opacity: 0;
   }
   @media (max-width: 640px) {
-    .slide-right-#{$i}-enter, .slide-right-#{$i}-leave-to {
+    .slide-right-#{$i}-enter,
+    .slide-right-#{$i}-leave-to {
       transform: translateX(calc(100% + #{$small-toolListRight}));
     }
   }
-  .slide-right-#{$i}-enter-to, .slide-right-#{$i}-leave {
+  .slide-right-#{$i}-enter-to,
+  .slide-right-#{$i}-leave {
     transform: translateX(0);
     visibility: visible;
     opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0%,
+  to {
+    transform: translateZ(0);
+  }
+  10% {
+    transform: translate3d(-10px, 0, 0);
+  }
+  30% {
+    transform: translate3d(-8px, 0, 0);
+  }
+  50% {
+    transform: translate3d(-6px, 0, 0);
+  }
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  90% {
+    transform: translate3d(-2px, 0, 0);
+  }
+  20% {
+    transform: translate3d(10px, 0, 0);
+  }
+  40% {
+    transform: translate3d(8px, 0, 0);
+  }
+  60% {
+    transform: translate3d(6px, 0, 0);
+  }
+  80% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+@keyframes circle-scale {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
   }
 }
