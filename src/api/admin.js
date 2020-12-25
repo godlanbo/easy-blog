@@ -99,3 +99,16 @@ export function deleteComment(blogId, cid) {
     method: 'DELETE'
   })
 }
+
+export function deleteMessageRecord(index) {
+  return request({
+    url: `/messageBoard/${index}`,
+    method: 'DELETE'
+  })
+}
+
+export function getMessageRecords() {
+  return request({
+    url: '/messageBoard',
+  })
+}

@@ -33,3 +33,11 @@ export function addSubEmail(email) {
     }
   })
 }
+
+export function sendMessageBoard(messageData) {
+  return request({
+    url: '/messageBoard',
+    method: 'POST',
+    data: messageData
+  })
+}
