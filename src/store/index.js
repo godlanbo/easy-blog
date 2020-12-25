@@ -14,7 +14,8 @@ export default new Vuex.Store({
     lifeList: [],
     isLoadInfo: false,
     commentsList: {},
-    toolListVisible: false
+    toolListVisible: false,
+    messageBoardVisible: false
   },
   actions: {
     async getBlogsList({ commit }) {
@@ -46,6 +47,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    toggleMessageBoard(state) {
+      state.messageBoardVisible = !state.messageBoardVisible
+    },
     setToolListVisible(state, newStatus) {
       state.toolListVisible = newStatus
     },
@@ -117,6 +121,7 @@ export default new Vuex.Store({
     getCommentsList: (state) => (id) => {
       return state.blogs[id].comments.map(cid => state.commentsList[cid])
     },
-    toolListVisible: (state) => state.toolListVisible
+    toolListVisible: (state) => state.toolListVisible,
+    messageBoardVisible: (state) => state.messageBoardVisible
   }
 })

@@ -100,12 +100,14 @@ export const editMixin = {
 export const popoverToolListMixin = {
   computed: {
     ...mapGetters([
-      'toolListVisible'
+      'toolListVisible',
+      'messageBoardVisible'
     ])
   },
   methods: {
     ...mapMutations([
-      'setToolListVisible'
+      'setToolListVisible',
+      'toggleMessageBoard'
     ]),
     handleScroll() {
       const scrollTop =
@@ -116,6 +118,9 @@ export const popoverToolListMixin = {
         this.setToolListVisible(true)
       } else {
         this.setToolListVisible(false)
+        if (this.messageBoardVisible) {
+          this.toggleMessageBoard()
+        }
       }
     },
   },
