@@ -12,9 +12,11 @@
                 在这里留下你想对我说的🎉
               </p>
             </div>
-            <div class="header-avatar">
-              <img src="/image/avatar.jpeg" />
-            </div>
+            <transition name="slide-up">
+              <div v-show="messageBoardVisible" class="header-avatar">
+                <img src="/image/avatar.jpeg" />
+              </div>
+            </transition>
           </div>
           <div class="header-title">
             <span class="header-title-text">😀 确保输入的邮箱有效，方便我回复您</span>
@@ -280,6 +282,7 @@ export default {
       .header-avatar {
         flex: 1;
         position: relative;
+        transition-delay: 0.3s;
         img {
           position: absolute;
           left: 0;
@@ -331,6 +334,12 @@ export default {
       &.shake-message {
         animation: shake 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
       }
+    }
+  }
+  @media (max-width: 640px) {
+    & {
+      width: calc(100vw - 14px);
+      right: 7px;
     }
   }
 }
