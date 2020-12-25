@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <read-progress></read-progress>
+    <message-board></message-board>
     <rss></rss>
     <back-top></back-top>
     <header-bar></header-bar>
@@ -19,13 +20,15 @@ import FooterBar from './components/FooterBar/index'
 import ReadProgress from '@/components/ReadProgress/index'
 import BackTop from '@/components/BackTop/index'
 import Rss from '@/components/Rss/index'
+import MessageBoard from '@/components/MessageBoard/index'
 export default {
   components: {
     HeaderBar,
     FooterBar,
     ReadProgress,
     BackTop,
-    Rss
+    Rss,
+    MessageBoard
   }
 }
 </script>
