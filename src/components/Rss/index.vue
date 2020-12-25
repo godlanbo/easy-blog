@@ -9,7 +9,11 @@
     <el-button style="width: 100%" @click="handleSub('rss')">Rss订阅</el-button>
     <template v-slot:reference>
       <transition name="slide-right-2">
-        <div class="rss" v-show="toolListVisible">
+        <div
+          class="rss"
+          v-show="toolListVisible"
+          :class="{'message-board-visible': messageBoardVisible}"
+        >
           <span class="icon-sub"></span>
         </div>
       </transition>
@@ -55,7 +59,7 @@ export default {
   font-weight: bold;
   bottom: $tool-item-size + $tool-item-gap + $base-distance;
   right: $toolListRight;
-  z-index: 2999;
+  z-index: 3000;
   width: $tool-item-size;
   height: $tool-item-size;
   border-radius: 50%;
@@ -68,11 +72,14 @@ export default {
   transition: all $animationTime $animationType;
   .icon-sub {
     @include center;
-    font-weight: bold;
   }
   &:hover {
     transform: scale(1.08);
     box-shadow: 0 8px 24px 0 rgba(187, 191, 196, 0.2);
+  }
+  &.message-board-visible {
+    bottom: $base-distance;
+    box-shadow: unset;
   }
 }
 @media (max-width: 640px) {

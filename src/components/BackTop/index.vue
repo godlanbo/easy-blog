@@ -1,6 +1,11 @@
 <template>
   <transition name="slide-right-3">
-    <div class="backTop" @click="handleBackTop" v-show="toolListVisible">
+    <div
+      class="backTop"
+      @click="handleBackTop"
+      v-show="toolListVisible"
+      :class="{'message-board-visible': messageBoardVisible}"
+    >
       <span class="icon-up"></span>
     </div>
   </transition>
@@ -55,11 +60,14 @@ export default {
   transition: all $animationTime $animationType;
   .icon-up {
     @include center;
-    font-weight: bold;
   }
   &:hover {
     transform: scale(1.08);
     box-shadow: 0 8px 24px 0 rgba(187,191,196,.2);
+  }
+  &.message-board-visible {
+    bottom: $base-distance;
+    box-shadow: unset;
   }
 }
 @media (max-width: 640px) {
