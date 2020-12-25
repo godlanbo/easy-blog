@@ -12,9 +12,9 @@
                 在这里留下你想对我说的🎉
               </p>
             </div>
-            <figure class="header-avatar">
-              <img src="/image/avatar.jpeg">
-            </figure>
+            <div class="header-avatar">
+              <img src="/image/avatar.jpeg" />
+            </div>
           </div>
           <div class="header-title">
             <span class="header-title-text">😀 确保输入的邮箱有效，方便我回复您</span>
