@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <section class="home-title-section">
-      <div class="title-section-background-img" />
+      <div
+        class="title-section-background-img"
+        :style="{ 'background-image' : headImgURL }" />
       <avatar-detail
         class="title-section-avatar"
         title="GodLanBo"
@@ -100,6 +102,9 @@ export default {
     lifeItemList() {
       return this.lifeList.slice(0, 4)
     },
+    headImgURL() {
+      return `url(${process.env.VUE_APP_HEAD_IMG})`
+    }
   },
   watch: {
     lifeList(val) {
@@ -134,8 +139,6 @@ export default {
       height: 100%;
       clip-path: circle(115vw at 50% calc(100px - 115vw + 100vh));
       background-attachment: fixed;
-      // background-image: url('https://i.loli.net/2020/09/18/hWqCkD6gtJuHEAO.png');
-      background-image: url('/image/head.png');
       background-repeat: no-repeat;
       background-position: center center;
       background-size: cover;
