@@ -30,7 +30,7 @@ export default {
   methods: {
     handleSub(type) {
       if (type === 'rss') {
-        window.open('http://godlanbo.com/rss/index.xml', '_blank')
+        window.open('https://godlanbo.com/rss/index.xml', '_blank')
       } else {
         this.$prompt('请输入邮箱', '邮件订阅', {
           confirmButtonText: '确定',
