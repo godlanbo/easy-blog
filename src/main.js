@@ -12,6 +12,11 @@ import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import './permission'
 import VueMeta from 'vue-meta'
+if (process.env.NODE_ENV === 'development') {
+  import('./assets/style/fontDev.scss')
+} else {
+  import('./assets/style/font.scss')
+}
 
 Vue.config.productionTip = (process.env.NODE_ENV !== 'development')
 Vue.prototype.$markDown = mavonEditor.markdownIt.set({
