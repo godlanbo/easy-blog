@@ -50,6 +50,20 @@
         </div>
       </div>
     </section-item>
+    <div class="friend-link-wrapper">
+      <header class="friend-link-title">My Links</header>
+      <div class="links-wrapper">
+        <template v-for="(item, index) in links">
+          <el-tooltip :content="item.name" placement="bottom">
+            <div class="link-item">
+              <a :href="item.link" target="_blank">
+                <img :src="item.coverUrl" :alt="item.name">
+              </a>
+            </div>
+          </el-tooltip>
+        </template>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -59,6 +73,7 @@ import CardItem from './components/CardItem/index'
 import SectionItem from './components/SectionItem/index'
 import VanillaTilt from 'vanilla-tilt'
 import { listInfoMixin, lazyImgMixin } from '../../utils/mixin'
+import links from '../../links'
 export default {
   components: {
     AvatarDetail,
@@ -66,6 +81,11 @@ export default {
     SectionItem,
   },
   mixins: [lazyImgMixin, listInfoMixin],
+  data() {
+    return {
+      links: links
+    }
+  },
   methods: {
     linkToLife(id) {
       this.$router.push({
@@ -174,7 +194,7 @@ export default {
   }
   .home-life-section {
     margin-top: 15px !important;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
     .home-life-section-list {
       width: 100%;
       padding: 20px 0px;
@@ -222,6 +242,55 @@ export default {
           left: 0;
           top: 0;
           background-color: rgba(0, 0, 0, .3);
+        }
+      }
+    }
+  }
+  .friend-link-wrapper {
+    padding: 0 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 100px;
+    header {
+      font-size: 35px;
+      font-weight: 600;
+      @include colorText($line-color);
+      margin-bottom: 30px;
+    }
+    .links-wrapper {
+      display: flex;
+      width: 60%;
+      margin: 0 auto;
+      justify-content: center;
+      flex-wrap: wrap;
+      @media (max-width: 1280px) {
+        width: 80%;
+      }
+      @media (max-width: 640px) {
+        width: 100%;
+      }
+      .link-item {
+        flex: 0 1 120px;
+        border-radius: 50%;
+        border: 4px solid #fff;
+        margin: 30px 20px;
+        overflow: hidden;
+        transition: transform $animationTime $animationType;
+        @media (max-width: 1280px) {
+          flex: 0 1 100px;
+        }
+        @media (max-width: 640px) {
+          flex: 0 1 80px;
+          margin: 20px 10px;
+        }
+        img {
+          width: 100%;
+          object-fit: fill;
+          vertical-align: top;
+        }
+        &:hover {
+          transform: scale(1.1);
         }
       }
     }
