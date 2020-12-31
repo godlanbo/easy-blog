@@ -22,3 +22,6 @@ html {
 * {
   box-sizing: border-box;
 }
+.el-tooltip__popper {
+  transform: translateY(5px);
+}
