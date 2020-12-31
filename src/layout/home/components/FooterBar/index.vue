@@ -1,6 +1,6 @@
 <template>
   <footer class="footer-wrapper">
-    <span>Copyright <span class="copyright">©</span> 2020 GodLanBo.</span>
+    <span>Copyright <span class="copyright">©</span> 2020 🔥GodLanBo🔥.</span>
   </footer>
 </template>
 <script>
