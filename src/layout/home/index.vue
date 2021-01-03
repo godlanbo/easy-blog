@@ -39,6 +39,6 @@ export default {
   width: 100%;
   box-sizing: border-box;
   background-color: $bg-color;
-  min-height: calc(100vh + 100px)
+  min-height: calc(100vh + 100px);
 }
 </style>

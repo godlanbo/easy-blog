@@ -6,7 +6,12 @@
           <div class="time-order-title">
             <span class="time-order-title-text">排列顺序</span>
           </div>
-          <el-button size="mini" class="time-order-btn" @click="switchSortType">{{sortTypeText}}</el-button>
+          <el-button
+            size="mini"
+            class="time-order-btn"
+            @click="switchSortType"
+            >{{ sortTypeText }}</el-button
+          >
         </div>
         <div class="time-year-wrapper">
           <div class="time-year-title">
@@ -15,7 +20,7 @@
           <div class="time-year-drop">
             <el-dropdown @command="onSelectCommand">
               <el-button size="mini">
-                {{filterTime}}
+                {{ filterTime }}
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </el-button>
               <template v-slot:dropdown>
@@ -25,7 +30,8 @@
                     v-for="(item, index) in timeCategoryList"
                     :command="item.name"
                     :key="index"
-                  >{{item.name}}</el-dropdown-item>
+                    >{{ item.name }}</el-dropdown-item
+                  >
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
@@ -40,19 +46,34 @@
           @click="onClickBlogItem(item)"
         >
           <div class="title-wrapper">
-            <span class="title-text">{{item.title}}</span>
+            <span class="title-text">{{ item.title }}</span>
           </div>
           <div class="tags">
-            <tag-item v-for="(item, index) in item.tags" :key="index" :tag="item" :showBg="false"></tag-item>
+            <tag-item
+              v-for="(item, index) in item.tags"
+              :key="index"
+              :tag="item"
+              :showBg="false"
+            ></tag-item>
           </div>
           <div class="release-detail-and-handle-wrapper">
             <div class="release-detail">
-              <span class="release-time">日期 {{item.releaseTime | dateformat('YYYY年MM月DD日')}}</span>
-              <span class="author">作者 {{item.author}}</span>
+              <span class="release-time"
+                >日期
+                {{ item.releaseTime | dateformat('YYYY年MM月DD日') }}</span
+              >
+              <span class="author">作者 {{ item.author }}</span>
             </div>
             <div class="handle">
-              <el-button size="mini" @click.stop="onEditBlog(index)">编辑</el-button>
-              <el-button type="danger" size="mini" @click.stop="onDeleteBlog(index)">删除</el-button>
+              <el-button size="mini" @click.stop="onEditBlog(index)"
+                >编辑</el-button
+              >
+              <el-button
+                type="danger"
+                size="mini"
+                @click.stop="onDeleteBlog(index)"
+                >删除</el-button
+              >
             </div>
           </div>
         </div>
@@ -77,7 +98,13 @@
           v-model="searchText"
           @keyup.enter="onSearch"
         />
-        <el-button class="search-btn" size="small" type="primary" @click="onSearch">搜索</el-button>
+        <el-button
+          class="search-btn"
+          size="small"
+          type="primary"
+          @click="onSearch"
+          >搜索</el-button
+        >
       </div>
       <tags-panel
         :tags-item-list="tagCategoryList"
@@ -100,7 +127,7 @@ export default {
   name: 'blogList',
   components: {
     TagItem,
-    TagsPanel,
+    TagsPanel
   },
   mixins: [listInfoMixin],
   data() {
@@ -113,7 +140,7 @@ export default {
       sortType: 'up',
       selectedTags: [],
       pageLength: 7,
-      currentPage: 1,
+      currentPage: 1
     }
   },
   computed: {
@@ -123,13 +150,13 @@ export default {
     blogsItemList() {
       let list = this.blogsList
       if (this.filterText !== '') {
-        list = list.filter((item) => {
+        list = list.filter(item => {
           return item.title.indexOf(this.filterText) !== -1
         })
       }
 
       if (this.filterTime !== '不限') {
-        list = list.filter((item) => {
+        list = list.filter(item => {
           return getYear(item.releaseTime) == this.filterTime
         })
       }
@@ -142,7 +169,7 @@ export default {
           }
         })
 
-        list = list.filter((item) => {
+        list = list.filter(item => {
           let r = true
           for (let i = 0; i < filterTag.length; i++) {
             r = r && item.tags.includes(filterTag[i])
@@ -167,11 +194,11 @@ export default {
     },
     totalLength() {
       let len = 0
-      this.blogsItemList.forEach((item) => {
+      this.blogsItemList.forEach(item => {
         len += item.length
       })
       return len
-    },
+    }
   },
   methods: {
     onCurrentPageChange(page) {
@@ -179,7 +206,7 @@ export default {
     },
     onClickBlogItem(item) {
       this.$router.push({
-        path: `/blogs/${item.id}`,
+        path: `/blogs/${item.id}`
       })
     },
     onSearch() {
@@ -201,8 +228,8 @@ export default {
       this.$router.push({
         path: '/blog/list',
         query: {
-          mode: 'edit',
-        },
+          mode: 'edit'
+        }
       })
     },
     onDeleteBlog(index) {
@@ -210,22 +237,22 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
-        showCancelButton: true,
+        showCancelButton: true
       })
         .then(() => {
           return deleteBlog(this.blogsItemList[this.currentPage - 1][index].id)
         })
-        .then((res) => {
+        .then(res => {
           this.$message({
             type: 'success',
-            message: '删除成功!',
+            message: '删除成功!'
           })
           this.$store.dispatch('getBlogsList')
         })
         .catch(() => {
           this.$message({
             type: 'info',
-            message: '已取消删除',
+            message: '已取消删除'
           })
         })
     },
@@ -237,16 +264,16 @@ export default {
     },
     switchSortType() {
       this.sortType = this.sortType === 'up' ? 'down' : 'up'
-    },
+    }
   },
   mounted() {
-    getBlogsCategoryList('time').then((res) => {
+    getBlogsCategoryList('time').then(res => {
       this.timeCategoryList = res.data.categoryList
     })
-    getBlogsCategoryList('tag').then((res) => {
+    getBlogsCategoryList('tag').then(res => {
       this.tagCategoryList = res.data.categoryList
     })
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>

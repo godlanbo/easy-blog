@@ -22,8 +22,8 @@ export default {
         this.initTask = setTimeout(() => {
           this.initProgress()
         }, 600)
-      },
-    },
+      }
+    }
   },
   methods: {
     asyncInitProgress() {
@@ -51,7 +51,7 @@ export default {
           this.timer = null
         }, 150)
       }
-    },
+    }
   },
   destroyed() {
     window.removeEventListener('scroll', this.onScroll)
@@ -63,7 +63,7 @@ export default {
     window.addEventListener('resize', this.onResize)
     window.addEventListener('scroll', this.onScroll)
     window.addEventListener('page-ready', this.asyncInitProgress)
-  },
+  }
 }
 </script>
 <style lang="scss">

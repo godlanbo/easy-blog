@@ -5,13 +5,13 @@
         <img src="/image/avatar.jpeg" />
       </a>
       <div class="avatar-detail-text">
-        <div class="title">{{title}}</div>
-        <div class="place">{{place}}</div>
+        <div class="title">{{ title }}</div>
+        <div class="place">{{ place }}</div>
       </div>
     </div>
     <div class="avatar-detail-content">
       <p>
-        {{content}}
+        {{ content }}
       </p>
     </div>
     <div class="avatar-icons">

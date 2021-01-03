@@ -1,9 +1,9 @@
 <template>
   <section class="home-section-item">
     <div class="home-section-item-header">
-      <span class="title">{{title}}</span>
+      <span class="title">{{ title }}</span>
       <div class="more-link-btn" @click="linkTo">
-        <span>{{btnText}}</span>
+        <span>{{ btnText }}</span>
       </div>
     </div>
     <slot></slot>
@@ -20,8 +20,8 @@ export default {
   methods: {
     linkTo() {
       this.$router.push(this.linkToAddress)
-    },
-  },
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

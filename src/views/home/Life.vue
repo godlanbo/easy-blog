@@ -4,7 +4,12 @@
       <span class="life-title-text">My Life</span>
     </div>
     <section class="life-list-wrapper">
-      <life-item v-for="(item, index) in lifeItemList" :key="index" :data="item" :activeItem="activeItem"></life-item>
+      <life-item
+        v-for="(item, index) in lifeItemList"
+        :key="index"
+        :data="item"
+        :activeItem="activeItem"
+      ></life-item>
     </section>
   </div>
 </template>
@@ -15,7 +20,7 @@ import { getYear } from '../../utils'
 import { listInfoMixin, lazyImgMixin } from '../../utils/mixin'
 export default {
   components: {
-    LifeItem,
+    LifeItem
   },
   mixins: [listInfoMixin, lazyImgMixin],
   computed: {

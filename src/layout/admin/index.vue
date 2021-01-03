@@ -18,8 +18,8 @@ import HeaderBar from './components/HeaderBar/index'
 export default {
   components: {
     SideBar,
-    HeaderBar,
-  },
+    HeaderBar
+  }
 }
 </script>
 <style lang="scss" scoped>

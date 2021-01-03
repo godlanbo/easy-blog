@@ -21,7 +21,7 @@ import { deleteLife } from '../../api/admin'
 import { listInfoMixin } from '../../utils/mixin'
 export default {
   components: {
-    LifeItem,
+    LifeItem
   },
   mixins: [listInfoMixin],
   methods: {
@@ -30,28 +30,28 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
-        showCancelButton: true,
+        showCancelButton: true
       })
         .then(() => {
           return deleteLife(id)
         })
-        .then((res) => {
+        .then(res => {
           this.$message({
             type: 'success',
-            message: '删除成功!',
+            message: '删除成功!'
           })
           return getLifeList()
         })
-        .then((res) => {
+        .then(res => {
           this.lifeList = res.data.lifeList
         })
         .catch(() => {
           this.$message({
             type: 'info',
-            message: '已取消删除',
+            message: '已取消删除'
           })
         })
-    },
+    }
   }
 }
 </script>

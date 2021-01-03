@@ -1,14 +1,19 @@
 import Mock from 'mockjs'
-import { blogsList, lifeList } from './../utils/mock';
+import { blogsList, lifeList } from './../utils/mock'
 
 Mock.mock(/\/blog\/\d+$/, 'get', {
-  'status': 200,
-  'data': {
+  status: 200,
+  data: {
     'id|1-20': 20,
-    'cover|1': ['/image/demo1.png', '/image/demo3.png', '/image/avatar.jpeg', '/image/demo2.jpg'],
-    'title': 'JS事件循环之异步任务',
-    'tags': ['Vue', 'Sass'],
-    'author': 'GodLanBo',
+    'cover|1': [
+      '/image/demo1.png',
+      '/image/demo3.png',
+      '/image/avatar.jpeg',
+      '/image/demo2.jpg'
+    ],
+    title: 'JS事件循环之异步任务',
+    tags: ['Vue', 'Sass'],
+    author: 'GodLanBo',
     releaseTime: 1597407302225,
     content: `# JS事件循环之异步任务
 
@@ -113,43 +118,56 @@ Mock.mock(/\/blog\/\d+$/, 'get', {
 //     ]
 //   }
 // })
-let timeCategoryList = [{
-  name: 2020,
-  num: 32
-}, {
-  name: 2019,
-  num: 30
-}, {
-  name: 2018,
-  num: 31
-}, {
-  name: 2017,
-  num: 16
-}, {
-  name: 2016,
-  num: 3
-}]
-let tagCategoryList = [{
-  name: 'Vue',
-  num: 32
-}, {
-  name: 'Node',
-  num: 21
-}, {
-  name: 'Axios',
-  num: 31
-}, {
-  name: 'javascript',
-  num: 16
-}, {
-  name: 'mysql',
-  num: 3
-}, {
-  name: 'Sass',
-  num: 2
-}]
+let timeCategoryList = [
+  {
+    name: 2020,
+    num: 32
+  },
+  {
+    name: 2019,
+    num: 30
+  },
+  {
+    name: 2018,
+    num: 31
+  },
+  {
+    name: 2017,
+    num: 16
+  },
+  {
+    name: 2016,
+    num: 3
+  }
+]
+let tagCategoryList = [
+  {
+    name: 'Vue',
+    num: 32
+  },
+  {
+    name: 'Node',
+    num: 21
+  },
+  {
+    name: 'Axios',
+    num: 31
+  },
+  {
+    name: 'javascript',
+    num: 16
+  },
+  {
+    name: 'mysql',
+    num: 3
+  },
+  {
+    name: 'Sass',
+    num: 2
+  }
+]
 
-Mock.mock(/\/blog\/categoryList/, 'get', (options) => {
+Mock.mock(/\/blog\/categoryList/, 'get', options => {
   let url = options.url
   let type = url.split('?')[1].split('=')[1]
   let data = {}
@@ -166,9 +184,9 @@ Mock.mock(/\/blog\/categoryList/, 'get', (options) => {
 Mock.mock(/\/blog\/list$/, 'get', {
   status: 200,
   data: {
-    "blogsList|8": [
+    'blogsList|8': [
       {
-        "id|+1": 1,
+        'id|+1': 1,
         cover: '/image/demo1.png',
         title: 'JS事件循环之异步任务',
         tags: ['Vue', 'Sass'],
@@ -185,7 +203,7 @@ Mock.mock(/\/blog\/list$/, 'get', {
     ]
   }
 })
-Mock.mock(/\/life\/list$/, 'get', (options) => {
+Mock.mock(/\/life\/list$/, 'get', options => {
   return {
     status: 200,
     data: {
@@ -193,7 +211,7 @@ Mock.mock(/\/life\/list$/, 'get', (options) => {
     }
   }
 })
-Mock.mock(/\/admin\/tag$/, 'post', (options) => {
+Mock.mock(/\/admin\/tag$/, 'post', options => {
   let data = JSON.parse(options.body)
   tagCategoryList.push({
     name: data.tag,
@@ -206,7 +224,7 @@ Mock.mock(/\/admin\/tag$/, 'post', (options) => {
     }
   }
 })
-Mock.mock(/\/admin\/login$/, 'post', (options) => {
+Mock.mock(/\/admin\/login$/, 'post', options => {
   let { account, password } = JSON.parse(options.body)
   return {
     status: 200,

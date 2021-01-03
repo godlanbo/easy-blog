@@ -43,32 +43,32 @@ export default {
     return {
       postData: {
         username: '',
-        password: '',
+        password: ''
       },
-      redirect: '',
+      redirect: ''
     }
   },
   watch: {
     $route: {
-      handler: function (route) {
+      handler: function(route) {
         this.redirect = route.query && route.query.redirect
       },
-      immediate: true,
-    },
+      immediate: true
+    }
   },
   methods: {
     validateLoginInfo() {
       if (this.postData.username.length === 0) {
         this.$message({
           type: 'warning',
-          message: '账号为必填',
+          message: '账号为必填'
         })
         return false
       }
       if (this.postData.password.length === 0) {
         this.$message({
           type: 'warning',
-          message: '密码不能为空',
+          message: '密码不能为空'
         })
         return false
       }
@@ -79,12 +79,12 @@ export default {
         this.postData.password = encode(this.postData.password)
         login(this.postData).then(() => {
           this.$router.push({
-            path: this.redirect || '/dashboard',
+            path: this.redirect || '/dashboard'
           })
         })
       }
-    },
-  },
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

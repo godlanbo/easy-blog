@@ -12,11 +12,11 @@ import BlogEdit from './BlogEdit'
 export default {
   components: {
     BlogList,
-    BlogEdit,
+    BlogEdit
   },
   data() {
     return {
-      mode: 'BlogList',
+      mode: 'BlogList'
     }
   },
   watch: {
@@ -27,7 +27,7 @@ export default {
       } else {
         this.mode = 'BlogList'
       }
-    },
+    }
   },
   created() {
     let mode = this.$route.query.mode
@@ -36,7 +36,7 @@ export default {
     } else {
       this.mode = 'BlogList'
     }
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>

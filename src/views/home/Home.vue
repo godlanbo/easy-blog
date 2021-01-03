@@ -3,16 +3,18 @@
     <section class="home-title-section">
       <div
         class="title-section-background-img"
-        :style="{ 'background-image' : headImgURL }" />
+        :style="{ 'background-image': headImgURL }"
+      />
       <avatar-detail
         class="title-section-avatar"
         title="GodLanBo"
         place="CrazyForCode"
         content="Always on the road!"
       ></avatar-detail>
-      <span
-        class="title-section-desc"
-      >I use this website to witness my journey in Front-end Development.</span>
+      <span class="title-section-desc"
+        >I use this website to witness my journey in Front-end
+        Development.</span
+      >
     </section>
     <section-item
       title="New Blogs"
@@ -22,7 +24,11 @@
       v-if="blogsItemList.length"
     >
       <div class="home-blogs-section-list">
-        <div class="home-blogs-section-list-item" v-for="item in blogsItemList" :key="item.id">
+        <div
+          class="home-blogs-section-list-item"
+          v-for="item in blogsItemList"
+          :key="item.id"
+        >
           <card-item :data="item"></card-item>
         </div>
       </div>
@@ -40,12 +46,14 @@
           v-for="item in lifeItemList"
           :key="item.id"
           :data-src="lifeItemImg(item)"
-          :style="{'background-image': '/image/default.png'}"
+          :style="{ 'background-image': '/image/default.png' }"
           @click="linkToLife(item.id)"
         >
           <div class="content">
-            <div class="title">「{{item.title}}」</div>
-            <div class="time">{{item.time | dateformat('YYYY年MM月DD日')}}</div>
+            <div class="title">「{{ item.title }}」</div>
+            <div class="time">
+              {{ item.time | dateformat('YYYY年MM月DD日') }}
+            </div>
           </div>
         </div>
       </div>
@@ -57,7 +65,7 @@
           <el-tooltip :content="item.name" placement="bottom">
             <div class="link-item">
               <a :href="item.link" target="_blank">
-                <img :src="item.coverUrl" :alt="item.name">
+                <img :src="item.coverUrl" :alt="item.name" />
               </a>
             </div>
           </el-tooltip>
@@ -78,7 +86,7 @@ export default {
   components: {
     AvatarDetail,
     CardItem,
-    SectionItem,
+    SectionItem
   },
   mixins: [lazyImgMixin, listInfoMixin],
   data() {
@@ -91,8 +99,8 @@ export default {
       this.$router.push({
         path: '/life',
         query: {
-          id,
-        },
+          id
+        }
       })
     },
     lifeItemImg(item) {
@@ -110,7 +118,7 @@ export default {
           reverse: true,
           scale: 1.1,
           max: 10,
-          'max-glare': 0.5,
+          'max-glare': 0.5
         }
       )
     }
@@ -133,7 +141,7 @@ export default {
           this.initVanillaTilt()
         })
       }
-    },
+    }
   },
   mounted() {
     this.$nextTick(() => {
@@ -241,7 +249,7 @@ export default {
           border-radius: 7px;
           left: 0;
           top: 0;
-          background-color: rgba(0, 0, 0, .3);
+          background-color: rgba(0, 0, 0, 0.3);
         }
       }
     }

@@ -17,7 +17,7 @@ import CardItem from './components/CardItem/index.vue'
 import { listInfoMixin, lazyImgMixin } from '../../utils/mixin'
 export default {
   components: {
-    CardItem,
+    CardItem
   },
   mixins: [listInfoMixin, lazyImgMixin]
 }

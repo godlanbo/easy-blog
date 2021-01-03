@@ -18,10 +18,18 @@
       <article class="content markdown-body" v-html="markDownContent"></article>
     </div>
     <div class="blogs-skip-wrapper" v-if="preBlog || nextBlog">
-      <div class="pre-btn skip-btn" v-if="preBlog" @click="onClickSkipBlog(preBlog.id)">
+      <div
+        class="pre-btn skip-btn"
+        v-if="preBlog"
+        @click="onClickSkipBlog(preBlog.id)"
+      >
         <span>← {{ normalizeBlogTitle(preBlog.title) }}</span>
       </div>
-      <div class="next-btn skip-btn" v-if="nextBlog" @click="onClickSkipBlog(nextBlog.id)">
+      <div
+        class="next-btn skip-btn"
+        v-if="nextBlog"
+        @click="onClickSkipBlog(nextBlog.id)"
+      >
         <span>{{ normalizeBlogTitle(nextBlog.title) }} →</span>
       </div>
     </div>
@@ -76,10 +84,18 @@ export default {
       }
       return ''
     },
-    ...mapGetters(['isLoadInfo', 'getCommentsList', 'blogsListArr', 'currentBlogIndex', 'getBlogsDetail']),
+    ...mapGetters([
+      'isLoadInfo',
+      'getCommentsList',
+      'blogsListArr',
+      'currentBlogIndex',
+      'getBlogsDetail'
+    ]),
     preBlog() {
       if (this.currentBlogIndex > 0) {
-        let { title, id } = this.getBlogsDetail(this.blogsListArr[this.currentBlogIndex - 1])
+        let { title, id } = this.getBlogsDetail(
+          this.blogsListArr[this.currentBlogIndex - 1]
+        )
         return { title, id }
       } else {
         return null
@@ -87,7 +103,9 @@ export default {
     },
     nextBlog() {
       if (this.currentBlogIndex < this.blogsListArr.length - 1) {
-        let { title, id } = this.getBlogsDetail(this.blogsListArr[this.currentBlogIndex + 1])
+        let { title, id } = this.getBlogsDetail(
+          this.blogsListArr[this.currentBlogIndex + 1]
+        )
         return { title, id }
       } else {
         return null
@@ -129,15 +147,19 @@ export default {
     },
     getBlogsDetailAsync() {
       let id = this.$route.params.id
-      this.$store.dispatch('getBlogsDetail', id).then((data) => {
+      this.$store.dispatch('getBlogsDetail', id).then(data => {
         if (data) {
           this.blogsDetail = data
-          this.blogsDetail.content = normalizeMDContent(this.blogsDetail.content)
+          this.blogsDetail.content = normalizeMDContent(
+            this.blogsDetail.content
+          )
           this.markDownContent = this.$markDown.render(this.blogsDetail.content)
           this.$nextTick(() => {
             let preCents = document.querySelectorAll('.extra-class')
             preCents.forEach(preCItem => {
-              preCItem.outerHTML = `<div class="${Array.from(preCItem.classList).join(' ')}">${preCItem.innerHTML}</div>`
+              preCItem.outerHTML = `<div class="${Array.from(
+                preCItem.classList
+              ).join(' ')}">${preCItem.innerHTML}</div>`
             })
             prism.highlightAllUnder(document)
           })
@@ -251,7 +273,7 @@ export default {
         padding: 10px 15px;
       }
       span {
-        transition: background-size .3s ease;
+        transition: background-size 0.3s ease;
         background-image: linear-gradient(to right, $bg-green, $bg-green);
         background-repeat: no-repeat;
         background-size: 0% 35%;

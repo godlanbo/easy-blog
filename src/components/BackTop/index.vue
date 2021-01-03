@@ -4,7 +4,7 @@
       class="backTop"
       @click="handleBackTop"
       v-show="toolListVisible"
-      :class="{'message-board-visible': messageBoardVisible}"
+      :class="{ 'message-board-visible': messageBoardVisible }"
     >
       <span class="icon-up"></span>
     </div>
@@ -12,8 +12,8 @@
 </template>
 <script>
 import { popoverToolListMixin } from '../../utils/mixin'
-const cubic = (value) => Math.pow(value, 3)
-const easeInOutCubic = (value) =>
+const cubic = value => Math.pow(value, 3)
+const easeInOutCubic = value =>
   value < 0.5 ? cubic(value * 2) / 2 : 1 - cubic((1 - value) * 2) / 2
 
 export default {
@@ -24,8 +24,7 @@ export default {
       const el = document.documentElement
       const beginTime = Date.now()
       const beginValue = el.scrollTop
-      const rAF =
-        window.requestAnimationFrame || ((func) => setTimeout(func, 16))
+      const rAF = window.requestAnimationFrame || (func => setTimeout(func, 16))
       const frameFunc = () => {
         const progress = (Date.now() - beginTime) / 500
         if (progress < 1) {
@@ -36,7 +35,7 @@ export default {
         }
       }
       rAF(frameFunc)
-    },
+    }
   }
 }
 </script>
@@ -63,7 +62,7 @@ export default {
   }
   &:hover {
     transform: scale(1.08);
-    box-shadow: 0 8px 24px 0 rgba(187,191,196,.2);
+    box-shadow: 0 8px 24px 0 rgba(187, 191, 196, 0.2);
   }
   &.message-board-visible {
     bottom: $base-distance;

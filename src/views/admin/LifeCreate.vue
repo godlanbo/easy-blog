@@ -1,6 +1,10 @@
 <template>
   <div class="life-create">
-    <el-input class="title" v-model="lifeItem.title" placeholder="请输入标题"></el-input>
+    <el-input
+      class="title"
+      v-model="lifeItem.title"
+      placeholder="请输入标题"
+    ></el-input>
     <div class="content-wrapper">
       <div class="upload-img-wrapper">
         <div class="img-preview" v-if="lifeItem.imgUrl">
@@ -31,7 +35,13 @@
       </div>
     </div>
     <div class="submit-wrapper">
-      <el-button class="submit-btn" size="mini" type="success" @click="releaseLife">发 布</el-button>
+      <el-button
+        class="submit-btn"
+        size="mini"
+        type="success"
+        @click="releaseLife"
+        >发 布</el-button
+      >
     </div>
   </div>
 </template>
@@ -45,7 +55,7 @@ export default {
   data() {
     return {
       lifeItem: this.getEmptyItem(),
-      img: '',
+      img: ''
     }
   },
   methods: {
@@ -53,7 +63,7 @@ export default {
       this.img = file
       let reader = new FileReader()
       reader.readAsDataURL(file)
-      reader.onload = (e) => {
+      reader.onload = e => {
         this.lifeItem.imgUrl = e.currentTarget.result
       }
       return false
@@ -62,7 +72,7 @@ export default {
       return {
         title: '',
         content: '',
-        imgUrl: '',
+        imgUrl: ''
       }
     },
     uploadImg() {
@@ -72,22 +82,22 @@ export default {
     },
     releaseLife() {
       this.uploadImg()
-        .then((res) => {
+        .then(res => {
           this.lifeItem.imgUrl = res.data.imgUrl
           return newLife(this.lifeItem)
         })
-        .then((res) => {
+        .then(res => {
           this.lifeItem = this.getEmptyItem()
           this.$message({
             type: 'success',
-            message: res.message,
+            message: res.message
           })
         })
-        .catch((err) => {
+        .catch(err => {
           console.error(err)
         })
-    },
-  },
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

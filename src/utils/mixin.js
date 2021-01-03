@@ -1,12 +1,8 @@
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex'
 
 export const listInfoMixin = {
   computed: {
-    ...mapGetters([
-      'blogsList',
-      'lifeList',
-      'lifeItemList'
-    ])
+    ...mapGetters(['blogsList', 'lifeList', 'lifeItemList'])
   }
 }
 
@@ -17,9 +13,7 @@ export const lazyImgMixin = {
     }
   },
   computed: {
-    ...mapGetters([
-      'isLoadInfo'
-    ])
+    ...mapGetters(['isLoadInfo'])
   },
   methods: {
     initObserverImg() {
@@ -56,7 +50,7 @@ export const lazyImgMixin = {
     } else {
       this.initObserverImg()
     }
-  },
+  }
 }
 
 export const editMixin = {
@@ -85,12 +79,14 @@ export const editMixin = {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
-        showCancelButton: true,
-      }).then(() => {
-        next()
-      }).catch(() => {
-        next(false)
+        showCancelButton: true
       })
+        .then(() => {
+          next()
+        })
+        .catch(() => {
+          next(false)
+        })
     } else {
       next()
     }
@@ -99,16 +95,10 @@ export const editMixin = {
 
 export const popoverToolListMixin = {
   computed: {
-    ...mapGetters([
-      'toolListVisible',
-      'messageBoardVisible'
-    ])
+    ...mapGetters(['toolListVisible', 'messageBoardVisible'])
   },
   methods: {
-    ...mapMutations([
-      'setToolListVisible',
-      'toggleMessageBoard'
-    ]),
+    ...mapMutations(['setToolListVisible', 'toggleMessageBoard']),
     handleScroll() {
       const scrollTop =
         window.pageYOffset ||
@@ -122,7 +112,7 @@ export const popoverToolListMixin = {
           this.toggleMessageBoard()
         }
       }
-    },
+    }
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll)

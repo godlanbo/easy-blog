@@ -29,7 +29,10 @@ export default new Vuex.Store({
       return resLife.data
     },
     getBlogsDetail({ state, commit }, id) {
-      commit('setCurrentBlogIndex', state.blogsListArr.findIndex(bid => bid === +id))
+      commit(
+        'setCurrentBlogIndex',
+        state.blogsListArr.findIndex(bid => bid === +id)
+      )
       return state.blogs[id]
     },
     async getCommentsList({ commit, state }, { id, force }) {
@@ -70,7 +73,9 @@ export default new Vuex.Store({
     },
     setCommentsList(state, { list, blogId }) {
       list.forEach(comment => {
-        comment.content = mavonEditor.markdownIt.render(normalizeMDContent(comment.content))
+        comment.content = mavonEditor.markdownIt.render(
+          normalizeMDContent(comment.content)
+        )
         Vue.set(state.commentsList, comment.cid, comment)
         state.blogs[blogId].comments.push(comment.cid)
       })
@@ -81,21 +86,23 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    blogsList: (state) => {
-      return Object.keys(state.blogs).map(key => {
-        if (state.blogs.hasOwnProperty(key)) {
-          return state.blogs[key]
-        }
-      }).reverse()
+    blogsList: state => {
+      return Object.keys(state.blogs)
+        .map(key => {
+          if (state.blogs.hasOwnProperty(key)) {
+            return state.blogs[key]
+          }
+        })
+        .reverse()
     },
-    blogsListArr: (state) => state.blogsListArr,
-    currentBlogIndex: (state) => state.currentBlogIndex,
-    getBlogsDetail: (state) => (id) => {
+    blogsListArr: state => state.blogsListArr,
+    currentBlogIndex: state => state.currentBlogIndex,
+    getBlogsDetail: state => id => {
       return state.blogs[id]
     },
     lifeList: state => state.lifeList,
     isLoadInfo: state => state.isLoadInfo,
-    lifeItemList: (state) => {
+    lifeItemList: state => {
       let lifeList = []
       let item = {}
       item.itemList = []
@@ -118,10 +125,10 @@ export default new Vuex.Store({
       lifeList.push(item)
       return lifeList
     },
-    getCommentsList: (state) => (id) => {
+    getCommentsList: state => id => {
       return state.blogs[id].comments.map(cid => state.commentsList[cid])
     },
-    toolListVisible: (state) => state.toolListVisible,
-    messageBoardVisible: (state) => state.messageBoardVisible
+    toolListVisible: state => state.toolListVisible,
+    messageBoardVisible: state => state.messageBoardVisible
   }
 })

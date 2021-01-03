@@ -1,14 +1,22 @@
 module.exports = {
-  presets: [
-    '@vue/cli-plugin-babel/preset'
-  ],
+  presets: ['@vue/cli-plugin-babel/preset'],
   plugins: [
     [
-      "prismjs",
+      'prismjs',
       {
-        "languages": ["html", "css", "javascript", "typescript", "http", "scss", "nginx", "sql", "markup"],
-        "theme": "okaidia",
-        "css": true
+        languages: [
+          'html',
+          'css',
+          'javascript',
+          'typescript',
+          'http',
+          'scss',
+          'nginx',
+          'sql',
+          'markup'
+        ],
+        theme: 'okaidia',
+        css: true
       }
     ]
   ]

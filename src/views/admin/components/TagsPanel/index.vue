@@ -1,5 +1,8 @@
 <template>
-  <div class="tags-panel" :style="{top : stickyTop === 0 ? 'unset' : `${stickyTop}px`}">
+  <div
+    class="tags-panel"
+    :style="{ top: stickyTop === 0 ? 'unset' : `${stickyTop}px` }"
+  >
     <div class="title-wrapper">
       <span class="title-text">标签</span>
     </div>
@@ -9,12 +12,21 @@
         v-for="(item, index) in tagsItemList"
         :key="index"
         :tag="item.name"
-        :class="{'is-selected' : selectedTags[index]}"
+        :class="{ 'is-selected': selectedTags[index] }"
         @select="onSelectTag(index)"
       ></tag-item>
-      <tag-item class="tag-item" v-if="canEdit" tag="+" @select="triggleAddTagPanel"></tag-item>
+      <tag-item
+        class="tag-item"
+        v-if="canEdit"
+        tag="+"
+        @select="triggleAddTagPanel"
+      ></tag-item>
     </div>
-    <div class="add-tag" :class="{'is-open' : addTagPanelVisible}" v-if="canEdit">
+    <div
+      class="add-tag"
+      :class="{ 'is-open': addTagPanelVisible }"
+      v-if="canEdit"
+    >
       <el-input class="input-tag" size="mini" v-model="addTagText"></el-input>
       <el-button type="primary" size="mini" @click="onAddTag">确定</el-button>
     </div>

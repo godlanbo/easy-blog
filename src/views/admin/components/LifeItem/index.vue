@@ -1,7 +1,7 @@
 <template>
   <div class="life-item">
     <div class="life-item-title">
-      <span class="life-item-title-text">{{data.year}}</span>
+      <span class="life-item-title-text">{{ data.year }}</span>
     </div>
     <div class="life-item-content-wrapper">
       <el-collapse class="life-item-content" accordion>
@@ -12,16 +12,23 @@
           :name="item.id"
         >
           <template v-slot:title>
-            <span class="title-time">{{item.time | dateformat('MM-DD')}}</span>
-            <span class="title-text">{{item.title}}</span>
-            <el-button type="danger" size="mini" @click.stop="deleteLife(item.id)">删除</el-button>
+            <span class="title-time">{{
+              item.time | dateformat('MM-DD')
+            }}</span>
+            <span class="title-text">{{ item.title }}</span>
+            <el-button
+              type="danger"
+              size="mini"
+              @click.stop="deleteLife(item.id)"
+              >删除</el-button
+            >
           </template>
           <div class="collapse-item-content-wrapper">
             <div class="img" v-if="item.imgUrl.length !== 0">
               <img :src="item.imgUrl" />
             </div>
             <div class="content">
-              <p>{{item.content}}</p>
+              <p>{{ item.content }}</p>
             </div>
           </div>
         </el-collapse-item>
@@ -39,7 +46,7 @@ export default {
     deleteLife(id) {
       this.$emit('on-delete', id)
     }
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -152,7 +159,7 @@ export default {
         }
         .title-text {
           font-size: 18px;
-          @include overflowText(1)
+          @include overflowText(1);
         }
         .title-time {
           font-size: 16px;

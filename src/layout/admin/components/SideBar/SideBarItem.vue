@@ -7,13 +7,17 @@
           :class="`icon-${singleMenuItem.meta.icon}`"
           class="sidebar-item-icon"
         ></div>
-        <span>{{singleMenuItem.meta.title}}</span>
+        <span>{{ singleMenuItem.meta.title }}</span>
       </el-menu-item>
     </template>
     <el-submenu v-else :index="route.path">
       <template v-slot:title>
-        <div v-if="route.meta.icon" :class="`icon-${route.meta.icon}`" class="sidebar-item-icon"></div>
-        <span>{{route.meta.title}}</span>
+        <div
+          v-if="route.meta.icon"
+          :class="`icon-${route.meta.icon}`"
+          class="sidebar-item-icon"
+        ></div>
+        <span>{{ route.meta.title }}</span>
       </template>
       <sidebar-item
         v-for="child in route.children"
@@ -32,16 +36,16 @@ export default {
   props: {
     route: {
       type: Object,
-      required: true,
+      required: true
     },
     basePath: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
-      singleMenuItem: null,
+      singleMenuItem: null
     }
   },
   methods: {
@@ -62,8 +66,8 @@ export default {
       } else {
         return `${this.basePath}`
       }
-    },
-  },
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

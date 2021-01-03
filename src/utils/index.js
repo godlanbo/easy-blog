@@ -1,9 +1,8 @@
 import dayjs from 'dayjs'
 import lrz from 'lrz'
 const cubic = value => Math.pow(value, 3)
-const easeInOutCubic = value => value < 0.5
-  ? cubic(value * 2) / 2
-  : 1 - cubic((1 - value) * 2) / 2
+const easeInOutCubic = value =>
+  value < 0.5 ? cubic(value * 2) / 2 : 1 - cubic((1 - value) * 2) / 2
 
 export function handleScroll(start, end) {
   let el = document.documentElement
@@ -63,17 +62,30 @@ export function ensurePageLoaded(cb) {
 }
 
 export function isEmail(val) {
-  var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-  var domains = ["qq.com", "163.com", "vip.163.com", "263.net", "yeah.net", "sohu.com", "sina.cn", "sina.com", "eyou.com", "gmail.com", "hotmail.com", "42du.cn"];
+  var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
+  var domains = [
+    'qq.com',
+    '163.com',
+    'vip.163.com',
+    '263.net',
+    'yeah.net',
+    'sohu.com',
+    'sina.cn',
+    'sina.com',
+    'eyou.com',
+    'gmail.com',
+    'hotmail.com',
+    '42du.cn'
+  ]
   if (pattern.test(val)) {
-    var domain = val.substring(val.indexOf("@") + 1);
+    var domain = val.substring(val.indexOf('@') + 1)
     for (var i = 0; i < domains.length; i++) {
       if (domain === domains[i]) {
-        return true;
+        return true
       }
     }
   }
-  return false;
+  return false
 }
 
 export function normalizeMDContent(content) {
@@ -82,13 +94,7 @@ export function normalizeMDContent(content) {
   //   '>'
   // )
   // safari 无法支持正则后置断言，降级处理
-  content = content.replace(
-    /&gt;/g,
-    '>'
-  ).replace(/(script)>/g, '$1&gt;')
-  content = content.replace(
-    /&lt;(?!(script|\/script))/g,
-    '<'
-  )
+  content = content.replace(/&gt;/g, '>').replace(/(script)>/g, '$1&gt;')
+  content = content.replace(/&lt;(?!(script|\/script))/g, '<')
   return content
 }

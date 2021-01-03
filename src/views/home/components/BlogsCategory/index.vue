@@ -2,8 +2,8 @@
   <div class="blogs-category">
     <div class="blogs-category-content-wrapper">
       <header class="blogs-category-header">
-        <span class="header-title">#{{title}}</span>
-        <span class="header-desc">共计{{totalNum}}篇文章</span>
+        <span class="header-title">#{{ title }}</span>
+        <span class="header-desc">共计{{ totalNum }}篇文章</span>
       </header>
       <div class="blogs-category-content">
         <main class="blogs-category-content-list">
@@ -20,12 +20,12 @@
           <div
             class="blogs-category-list-item"
             v-for="(item, index) in categoryList"
-            :class="{'isSelected':item.name == title}"
+            :class="{ isSelected: item.name == title }"
             :key="index"
             @click="switchQuery(item.name)"
           >
-            <span class="blogs-category-list-item-text">{{item.name}}</span>
-            <span class="blogs-category-list-item-num">{{item.num}}</span>
+            <span class="blogs-category-list-item-text">{{ item.name }}</span>
+            <span class="blogs-category-list-item-num">{{ item.num }}</span>
           </div>
         </aside>
       </div>
@@ -40,32 +40,32 @@ import { isSameYear } from '../../../../utils/index'
 export default {
   mixins: [listInfoMixin],
   components: {
-    CategoryItem,
+    CategoryItem
   },
   props: {
     categoryList: Array,
-    type: String,
+    type: String
   },
   data() {
     return {
-      title: '',
+      title: ''
     }
   },
   computed: {
     categoryContentList() {
       if (this.type === 'tag') {
-        return this.blogsList.filter((blog) => {
+        return this.blogsList.filter(blog => {
           return blog.tags.indexOf(this.title) !== -1
         })
       } else {
-        return this.blogsList.filter((blog) => {
+        return this.blogsList.filter(blog => {
           return isSameYear(blog.releaseTime, this.title)
         })
       }
     },
     totalNum() {
       let totalNum = 0
-      this.categoryList.forEach((item) => {
+      this.categoryList.forEach(item => {
         if (item.name == this.title && this.type === 'tag') {
           totalNum = item.num
         } else if (item.name == this.title && this.type === 'time') {
@@ -73,12 +73,12 @@ export default {
         }
       })
       return totalNum
-    },
+    }
   },
   watch: {
     $route(value) {
       this.initHeader()
-    },
+    }
   },
   methods: {
     switchQuery(queryString) {
@@ -89,15 +89,15 @@ export default {
         this.$router.replace({
           path: '/blogs/tags',
           query: {
-            tag: queryString,
-          },
+            tag: queryString
+          }
         })
       } else {
         this.$router.replace({
           path: '/archive',
           query: {
-            time: queryString,
-          },
+            time: queryString
+          }
         })
       }
     },
@@ -106,13 +106,13 @@ export default {
     },
     linkToBlogsDetail(id) {
       this.$router.push({
-        path: `/blogs/${id}`,
+        path: `/blogs/${id}`
       })
-    },
+    }
   },
   mounted() {
     this.initHeader()
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -177,7 +177,8 @@ export default {
           padding: 15px 20px;
           border-radius: 6px;
           background: #f0f3f6;
-          box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+            0 4px 6px -2px rgba(0, 0, 0, 0.05);
           color: $text-color;
           display: flex;
           justify-content: space-between;

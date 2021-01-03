@@ -5,13 +5,13 @@
     <span></span>
     <span></span>
     <div class="release-time">
-      <span class="release-time-text">{{data.releaseTime | dateformat}}</span>
+      <span class="release-time-text">{{ data.releaseTime | dateformat }}</span>
     </div>
     <div class="title">
-      <span class="title-text">{{data.title}}</span>
+      <span class="title-text">{{ data.title }}</span>
     </div>
     <div class="content">
-      <p class="content-text">{{data.content}}</p>
+      <p class="content-text">{{ data.content }}</p>
     </div>
   </div>
 </template>
@@ -19,8 +19,8 @@
 <script>
 export default {
   props: {
-    data: Object,
-  },
+    data: Object
+  }
 }
 </script>
 <style lang="scss" scoped>

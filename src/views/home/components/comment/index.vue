@@ -44,7 +44,6 @@
             <div class="toolbar-item emoji" v-popover:popover>
               <span class="icon-emoji"></span>
             </div>
-            
           </div>
         </div>
         <div class="publish-comment-form-footer">
@@ -90,7 +89,11 @@
     </div>
     <el-popover ref="popover" placement="left" width="290" trigger="click">
       <div class="emoji-list-wrapper" @click="handleEmojiSelect">
-        <div class="emoji-item" v-for="(emoji, index) in emojisList" :key="index">
+        <div
+          class="emoji-item"
+          v-for="(emoji, index) in emojisList"
+          :key="index"
+        >
           <span>{{ emoji }}</span>
         </div>
       </div>
@@ -184,7 +187,7 @@ export default {
     },
     onSubmitComment() {
       if (this.validatePost()) {
-        publishComment(this.postComment, this.$route.params.id).then((res) => {
+        publishComment(this.postComment, this.$route.params.id).then(res => {
           this.$message({
             type: 'success',
             message: res.message
@@ -264,7 +267,7 @@ export default {
               3px 0px 0px rgba(48, 132, 154, 0.5),
               -3px 0px 0px rgba(48, 132, 154, 0.5);
             border-color: $theme-color;
-            border-bottom-color: #DCDFE6;
+            border-bottom-color: #dcdfe6;
           }
           .input-toolbar {
             box-shadow: 0px 3px 0px rgba(48, 132, 154, 0.5),
@@ -288,7 +291,7 @@ export default {
           justify-content: flex-end;
           padding: 5px 15px;
           background-color: #fff;
-          border: 1px solid #DCDFE6;
+          border: 1px solid #dcdfe6;
           border-top: unset;
           border-bottom-left-radius: 4px;
           border-bottom-right-radius: 4px;
@@ -398,7 +401,7 @@ export default {
     @include center;
     padding: 5px;
     cursor: pointer;
-    transition: transform .15s cubic-bezier(.2,0,.13,2);
+    transition: transform 0.15s cubic-bezier(0.2, 0, 0.13, 2);
     &:hover {
       transform: scale(1.25);
     }

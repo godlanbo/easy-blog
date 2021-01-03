@@ -12,36 +12,43 @@ const routes = [
     redirect: '/home',
     hidden: true,
     component: layoutHome,
-    children: [{
-      path: 'home',
-      name: 'Home',
-      component: () => import('@/views/home/Home'),
-      meta: { title: 'Godlanbo的博客' }
-    }, {
-      path: 'blogs',
-      name: 'Blogs',
-      component: () => import('@/views/home/Blogs'),
-      meta: { title: '博客列表' }
-    }, {
-      path: 'blogs/tags',
-      name: 'BlogsTags',
-      component: () => import('@/views/home/BlogsTags'),
-      meta: { title: '博客标签分类' }
-    }, {
-      path: 'blogs/:id',
-      name: 'BlogsDetail',
-      component: () => import('@/views/home/BlogsDetail')
-    }, {
-      path: 'archive',
-      name: 'Archive',
-      component: () => import('@/views/home/Archive'),
-      meta: { title: '博客归档' }
-    }, {
-      path: 'life',
-      name: 'Life',
-      component: () => import('@/views/home/Life'),
-      meta: { title: '我的动态' }
-    }]
+    children: [
+      {
+        path: 'home',
+        name: 'Home',
+        component: () => import('@/views/home/Home'),
+        meta: { title: 'Godlanbo的博客' }
+      },
+      {
+        path: 'blogs',
+        name: 'Blogs',
+        component: () => import('@/views/home/Blogs'),
+        meta: { title: '博客列表' }
+      },
+      {
+        path: 'blogs/tags',
+        name: 'BlogsTags',
+        component: () => import('@/views/home/BlogsTags'),
+        meta: { title: '博客标签分类' }
+      },
+      {
+        path: 'blogs/:id',
+        name: 'BlogsDetail',
+        component: () => import('@/views/home/BlogsDetail')
+      },
+      {
+        path: 'archive',
+        name: 'Archive',
+        component: () => import('@/views/home/Archive'),
+        meta: { title: '博客归档' }
+      },
+      {
+        path: 'life',
+        name: 'Life',
+        component: () => import('@/views/home/Life'),
+        meta: { title: '我的动态' }
+      }
+    ]
   },
   {
     path: '/login',
@@ -54,46 +61,54 @@ const routes = [
     path: '/dashboard',
     redirect: '/dashboard/index',
     component: layoutAdmin,
-    children: [{
-      path: 'index',
-      name: 'Dashboard',
-      component: () => import('@/views/admin/Dashboard'),
-      meta: { title: '仪表盘', icon: 'dashboard' }
-    }]
+    children: [
+      {
+        path: 'index',
+        name: 'Dashboard',
+        component: () => import('@/views/admin/Dashboard'),
+        meta: { title: '仪表盘', icon: 'dashboard' }
+      }
+    ]
   },
   {
     path: '/blog',
     component: layoutAdmin,
     name: 'BlogEdit',
     meta: { title: '博客', icon: 'edit' },
-    children: [{
-      path: 'list',
-      name: 'List',
-      component: () => import('@/views/admin/BlogView'),
-      meta: { title: '博客列表' }
-    }, {
-      path: 'create',
-      name: 'Create',
-      component: () => import('@/views/admin/BlogEdit'),
-      meta: { title: '创建博客' }
-    }]
+    children: [
+      {
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/admin/BlogView'),
+        meta: { title: '博客列表' }
+      },
+      {
+        path: 'create',
+        name: 'Create',
+        component: () => import('@/views/admin/BlogEdit'),
+        meta: { title: '创建博客' }
+      }
+    ]
   },
   {
     path: '/mylife',
     component: layoutAdmin,
     meta: { title: '我的生活', icon: 'life' },
     name: 'MyLife',
-    children: [{
-      path: 'list',
-      name: 'LifeList',
-      component: () => import('@/views/admin/LifeList'),
-      meta: { title: '动态列表' }
-    }, {
-      path: 'create',
-      name: 'LifeCreate',
-      component: () => import('@/views/admin/LifeCreate'),
-      meta: { title: '新的动态' }
-    }]
+    children: [
+      {
+        path: 'list',
+        name: 'LifeList',
+        component: () => import('@/views/admin/LifeList'),
+        meta: { title: '动态列表' }
+      },
+      {
+        path: 'create',
+        name: 'LifeCreate',
+        component: () => import('@/views/admin/LifeCreate'),
+        meta: { title: '新的动态' }
+      }
+    ]
   },
   {
     path: '/404',
@@ -108,8 +123,6 @@ const routes = [
     hidden: true
   }
 ]
-
-
 
 const router = new VueRouter({
   mode: 'history',
@@ -129,7 +142,5 @@ const router = new VueRouter({
     }
   }
 })
-
-
 
 export default router

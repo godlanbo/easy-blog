@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { getToken } from './auth';
-import { Message } from 'element-ui';
-import router from './../router/index';
+import { getToken } from './auth'
+import { Message } from 'element-ui'
+import router from './../router/index'
 
 const request = axios.create({
   baseURL: `${process.env.VUE_APP_BASE_URL}/api`,
@@ -58,4 +58,3 @@ request.interceptors.response.use(
 )
 
 export default request
-

@@ -18,16 +18,16 @@ if (process.env.NODE_ENV === 'development') {
   import('./assets/style/font.scss')
 }
 
-Vue.config.productionTip = (process.env.NODE_ENV !== 'development')
+Vue.config.productionTip = process.env.NODE_ENV !== 'development'
 Vue.prototype.$markDown = mavonEditor.markdownIt.set({
   langPrefix: 'language-',
   highlight: (str, lang) => {
-    let res = 
+    let res =
       `<pre class="language-${lang} extra-class">` +
-          `<pre class="language-${lang}">` +
-            `<code>${str.replace(/</g, '&lt;')}</code>` +
-          `</pre>` +
-        `</pre>`
+      `<pre class="language-${lang}">` +
+      `<code>${str.replace(/</g, '&lt;')}</code>` +
+      `</pre>` +
+      `</pre>`
     return res
   }
 })
@@ -35,7 +35,7 @@ Vue.use(mavonEditor)
 Vue.use(ElementUI)
 
 Vue.use(VueMeta, {
-  tagIDKeyName: 'hid',
+  tagIDKeyName: 'hid'
 })
 
 Vue.config.errorHandler = (err, vm, info) => {

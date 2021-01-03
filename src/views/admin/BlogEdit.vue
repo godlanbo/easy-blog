@@ -2,7 +2,12 @@
   <div class="blog-edit-container">
     <div class="blog-content-wrapper">
       <div class="title-wrapper">
-        <input type="text" class="title-text" v-model="blog.title" placeholder="输入文章标题" />
+        <input
+          type="text"
+          class="title-text"
+          v-model="blog.title"
+          placeholder="输入文章标题"
+        />
       </div>
       <div class="content-wrapper">
         <mavon-editor
@@ -35,7 +40,9 @@
           >
             <el-button size="mini" type="primary">点击上传</el-button>
           </el-upload>
-          <el-button size="mini" type="primary" @click="getRandomCover">随机获取</el-button>
+          <el-button size="mini" type="primary" @click="getRandomCover"
+            >随机获取</el-button
+          >
         </div>
       </div>
       <div class="release-info-wrapper" v-if="mode === 'edit'">
@@ -46,12 +53,12 @@
           <div class="author line">
             <span class="el-icon-user mark"></span>
             <span class="text">作者：</span>
-            <span>{{blog.author}}</span>
+            <span>{{ blog.author }}</span>
           </div>
           <div class="release-tim line">
             <span class="el-icon-date mark"></span>
             <span class="text">发布时间：</span>
-            <span>{{blog.releaseTime | dateformat('YYYY年MM月DD日')}}</span>
+            <span>{{ blog.releaseTime | dateformat('YYYY年MM月DD日') }}</span>
           </div>
         </div>
       </div>
@@ -62,11 +69,9 @@
         @select-change="onSelectTag"
         @add-tag="onAddTag"
       ></tags-panel>
-      <el-button
-        class="submit-btn"
-        type="success"
-        @click="onSaveBlogEdit"
-      >{{mode === 'create' ? '发布' : '保存'}}</el-button>
+      <el-button class="submit-btn" type="success" @click="onSaveBlogEdit">{{
+        mode === 'create' ? '发布' : '保存'
+      }}</el-button>
     </div>
   </div>
 </template>
@@ -79,14 +84,14 @@ import {
   uploadImg,
   newBlog,
   updateBlog,
-  deletImg,
+  deletImg
 } from '../../api/admin'
 import { getLocalStorage, removeLocalStorage } from '../../utils/localStorage'
 import { editMixin } from '../../utils/mixin'
 export default {
   name: 'blogEdit',
   components: {
-    TagsPanel,
+    TagsPanel
   },
   mixins: [editMixin],
   data() {
@@ -104,10 +109,12 @@ export default {
   },
   methods: {
     onSelectTag(arr, index) {
-      this.blog.tags = this.tagCategoryList.filter((tag, idx) => arr[idx]).map(tagItem => tagItem.name)
+      this.blog.tags = this.tagCategoryList
+        .filter((tag, idx) => arr[idx])
+        .map(tagItem => tagItem.name)
     },
     onAddTag(value) {
-      addTag(value).then((res) => {
+      addTag(value).then(res => {
         this.tagCategoryList = res.data.tagCategoryList
       })
     },
@@ -124,28 +131,28 @@ export default {
     updateBlog() {
       if (this.coverFile) {
         this.uploadImage(this.coverFile)
-          .then((res) => {
+          .then(res => {
             this.blog.cover = res.data.imgUrl
             return updateBlog(this.blog)
           })
-          .then((res) => {
+          .then(res => {
             this.$message({
               type: 'success',
-              message: '更新博客成功',
+              message: '更新博客成功'
             })
           })
-          .catch((err) => {
+          .catch(err => {
             console.error(err)
           })
       } else {
         updateBlog(this.blog)
-          .then((res) => {
+          .then(res => {
             this.$message({
               type: 'success',
-              message: '更新博客成功',
+              message: '更新博客成功'
             })
           })
-          .catch((err) => {
+          .catch(err => {
             console.error(err)
           })
       }
@@ -155,34 +162,34 @@ export default {
         cover: '',
         title: '',
         content: '',
-        tags: [],
+        tags: []
       }
     },
     releaseBlog() {
       if (this.coverFile) {
         this.uploadImage(this.coverFile)
-          .then((res) => {
+          .then(res => {
             this.blog.cover = res.data.imgUrl
             return newBlog(this.blog)
           })
-          .then((res) => {
+          .then(res => {
             this.$message({
               type: 'success',
-              message: '发布成功',
+              message: '发布成功'
             })
           })
-          .catch((err) => {
+          .catch(err => {
             console.error(err)
           })
       } else {
         newBlog(this.blog)
-          .then((res) => {
+          .then(res => {
             this.$message({
               type: 'success',
-              message: '发布成功',
+              message: '发布成功'
             })
           })
-          .catch((err) => {
+          .catch(err => {
             console.error(err)
           })
       }
@@ -196,32 +203,32 @@ export default {
       this.coverFile = file
       let reader = new FileReader()
       reader.readAsDataURL(file)
-      reader.onload = (e) => {
+      reader.onload = e => {
         this.blog.cover = e.currentTarget.result
       }
       return false
     },
     onImgAdd(pos, file) {
-      this.uploadImage(file).then((res) => {
+      this.uploadImage(file).then(res => {
         this.$refs.md.$img2Url(pos, res.data.imgUrl)
       })
     },
     onImgDel(pos) {
       const fileName = pos[0].split('/').pop()
       deletImg(fileName)
-        .then((res) => {
+        .then(res => {
           this.$message({
             type: 'success',
-            message: res.message,
+            message: res.message
           })
         })
-        .catch((err) => {
+        .catch(err => {
           console.error(err)
         })
-    },
+    }
   },
   mounted() {
-    getBlogsCategoryList('tag').then((res) => {
+    getBlogsCategoryList('tag').then(res => {
       this.tagCategoryList = res.data.categoryList
       this.blog = getLocalStorage('blog')
       if (this.blog) {

@@ -23,11 +23,11 @@ import style from '@/assets/style/globalScript.scss'
 import SidebarItem from './SideBarItem'
 export default {
   components: {
-    SidebarItem,
+    SidebarItem
   },
   data() {
     return {
-      activeMenu: '',
+      activeMenu: ''
     }
   },
   watch: {
@@ -35,19 +35,19 @@ export default {
       immediate: true,
       handler(val) {
         this.activeMenu = val.path
-      },
-    },
+      }
+    }
   },
   computed: {
     style() {
       return style
     },
     routes() {
-      return this.$router.options.routes.filter((route) => {
+      return this.$router.options.routes.filter(route => {
         return !route.hidden
       })
-    },
-  },
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

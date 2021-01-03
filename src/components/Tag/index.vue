@@ -1,7 +1,7 @@
 <template>
-  <div class="tag" :class="{ 'showBg' : showBg }" @click.prevent="onSelect(tag)">
-    <span class="tag-text uppercase" v-if="tag !== '+'">#{{tag}}</span>
-    <span class="tag-text uppercase" v-else>{{tag}}</span>
+  <div class="tag" :class="{ showBg: showBg }" @click.prevent="onSelect(tag)">
+    <span class="tag-text uppercase" v-if="tag !== '+'">#{{ tag }}</span>
+    <span class="tag-text uppercase" v-else>{{ tag }}</span>
   </div>
 </template>
 <script>
@@ -9,17 +9,17 @@ export default {
   props: {
     tag: {
       type: String,
-      default: '',
+      default: ''
     },
     showBg: {
       type: Boolean,
-      default: true,
+      default: true
     }
   },
   methods: {
     onSelect(tag) {
       this.$emit('select', tag)
-    },
+    }
   }
 }
 </script>

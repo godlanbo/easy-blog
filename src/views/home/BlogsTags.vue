@@ -20,7 +20,7 @@ export default {
     getBlogsCategoryList('tag').then(res => {
       this.categoryList = res.data.categoryList
     })
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>

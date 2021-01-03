@@ -7,14 +7,21 @@
         </figure>
         <main>
           <div class="tags-wrapper">
-            <div class="tags-item" v-for="(item, index) in data.tags" :key="index" @click.prevent="queryTag(item)">
-              <span class="tags-item-text uppercase">#{{item}}</span>
+            <div
+              class="tags-item"
+              v-for="(item, index) in data.tags"
+              :key="index"
+              @click.prevent="queryTag(item)"
+            >
+              <span class="tags-item-text uppercase">#{{ item }}</span>
             </div>
           </div>
-          <div class="title">{{data.title}}</div>
-          <p class="content">{{detail}}</p>
+          <div class="title">{{ data.title }}</div>
+          <p class="content">{{ detail }}</p>
           <div class="release-time">
-            <span class="release-time-text">{{data.releaseTime | dateformat}}</span>
+            <span class="release-time-text">{{
+              data.releaseTime | dateformat
+            }}</span>
           </div>
         </main>
       </router-link>
@@ -25,7 +32,7 @@
 <script>
 export default {
   props: {
-    data: Object,
+    data: Object
   },
   data() {
     return {
@@ -40,7 +47,9 @@ export default {
       return this.innerWidth > 640 && !!this.data.cover
     },
     detail() {
-      return this.$markDown.render(this.data.content.slice(0, 100).replace(/&gt;/g, '>')).replace(/<.*?>/g, '')
+      return this.$markDown
+        .render(this.data.content.slice(0, 100).replace(/&gt;/g, '>'))
+        .replace(/<.*?>/g, '')
     }
   },
   methods: {
@@ -61,7 +70,7 @@ export default {
   },
   destroyed() {
     window.removeEventListener('resize', this.init)
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>

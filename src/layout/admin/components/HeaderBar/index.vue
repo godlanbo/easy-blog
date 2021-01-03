@@ -14,7 +14,7 @@ export default {
       removeToken()
       this.$router.push('/login')
     }
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -34,7 +34,7 @@ export default {
     cursor: pointer;
     transition: transform $animationTime $animationType;
     &:hover {
-      transform: scale(.96);
+      transform: scale(0.96);
     }
   }
 }

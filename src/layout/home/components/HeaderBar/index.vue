@@ -1,5 +1,8 @@
 <template>
-  <header class="header-wrapper" :class="{'active-color-switch' : isSwtichHeaderBg}">
+  <header
+    class="header-wrapper"
+    :class="{ 'active-color-switch': isSwtichHeaderBg }"
+  >
     <div class="logo-wrapper">
       <span class="icon-logo"></span>
       <span class="logo-text">GodLanBo</span>
@@ -9,23 +12,43 @@
       <span class="icon-menu"></span>
     </label>
     <div class="menu-bg" @touchmove.prevent @click="hideMenu"></div>
-    <nav class="nav-wrapper" @touchmove.prevent :class="{'active-color-switch' : isSwtichHeaderBg}">
-      <router-link to="/home" class="nav-item" :class="{'active' : activeRoute === '/home'}">
+    <nav
+      class="nav-wrapper"
+      @touchmove.prevent
+      :class="{ 'active-color-switch': isSwtichHeaderBg }"
+    >
+      <router-link
+        to="/home"
+        class="nav-item"
+        :class="{ active: activeRoute === '/home' }"
+      >
         <a>
           <span class="nav-item-text uppercase">home</span>
         </a>
       </router-link>
-      <router-link to="/blogs" class="nav-item" :class="{'active' : activeRoute === '/blogs'}">
+      <router-link
+        to="/blogs"
+        class="nav-item"
+        :class="{ active: activeRoute === '/blogs' }"
+      >
         <a>
           <span class="nav-item-text uppercase">blogs</span>
         </a>
       </router-link>
-      <router-link to="/archive?time=2020" class="nav-item" :class="{'active' : activeRoute === '/archive'}">
+      <router-link
+        to="/archive?time=2020"
+        class="nav-item"
+        :class="{ active: activeRoute === '/archive' }"
+      >
         <a>
           <span class="nav-item-text uppercase">archive</span>
         </a>
       </router-link>
-      <router-link to="/life" class="nav-item" :class="{'active' : activeRoute === '/life'}">
+      <router-link
+        to="/life"
+        class="nav-item"
+        :class="{ active: activeRoute === '/life' }"
+      >
         <a>
           <span class="nav-item-text uppercase">life</span>
         </a>
@@ -44,7 +67,7 @@ export default {
   data() {
     return {
       menuVisible: false,
-      scrollTop: 0,
+      scrollTop: 0
     }
   },
   computed: {
@@ -55,13 +78,13 @@ export default {
       let switchLimit = document.documentElement.clientHeight + 50
       this.scrollTop = document.documentElement.scrollTop
       return this.scrollTop >= switchLimit || this.activeRoute !== '/home'
-    },
+    }
   },
   watch: {
     $route() {
       this.getScrollTop()
       this.hideMenu()
-    },
+    }
   },
   methods: {
     hideMenu() {
@@ -69,14 +92,14 @@ export default {
     },
     getScrollTop() {
       this.scrollTop = document.documentElement.scrollTop
-    },
+    }
   },
   mounted() {
     window.addEventListener('scroll', this.getScrollTop)
   },
   destroyed() {
     window.removeEventListener('scroll', this.getScrollTop)
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -98,14 +121,15 @@ export default {
   transition: color $animationTime $animationType,
     background-color $animationTime $animationType;
   &.active-color-switch {
-    background-color: rgba(240, 243, 246, .7);
+    background-color: rgba(240, 243, 246, 0.7);
     color: transparent;
     .nav-item-text {
       @include colorText($line-color);
     }
     .logo-wrapper {
       /* safari 浏览器兼容，块级元素无法继承background-image和background-clip属性 */
-      .icon-logo, .logo-text {
+      .icon-logo,
+      .logo-text {
         @include colorText($line-color);
       }
     }

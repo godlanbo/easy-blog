@@ -1,10 +1,14 @@
-import { setLocalStorage, removeLocalStorage, getLocalStorage } from "./localStorage"
+import {
+  setLocalStorage,
+  removeLocalStorage,
+  getLocalStorage
+} from './localStorage'
 import CryptoJS from 'crypto-js'
 
 const tokenKey = 'Admin-token'
 
 export function setToken(value) {
-  return setLocalStorage(tokenKey, value, { exp : 3600 * 24 })
+  return setLocalStorage(tokenKey, value, { exp: 3600 * 24 })
 }
 
 export function removeToken() {
@@ -20,5 +24,7 @@ export function encode(s) {
 }
 
 export function decode(s) {
-  return CryptoJS.AES.decrypt(s, CryptoJS.SHA256('cfc').toString()).toString(CryptoJS.enc.Utf8)
+  return CryptoJS.AES.decrypt(s, CryptoJS.SHA256('cfc').toString()).toString(
+    CryptoJS.enc.Utf8
+  )
 }

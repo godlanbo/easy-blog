@@ -12,7 +12,7 @@
         <div
           class="rss"
           v-show="toolListVisible"
-          :class="{'message-board-visible': messageBoardVisible}"
+          :class="{ 'message-board-visible': messageBoardVisible }"
         >
           <span class="icon-sub"></span>
         </div>
@@ -40,7 +40,8 @@ export default {
         })
           .then(({ value }) => {
             return addSubEmail(value)
-          }).then(res => {
+          })
+          .then(res => {
             this.$message({
               type: 'success',
               message: '订阅成功'
