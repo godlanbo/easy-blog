@@ -62,7 +62,7 @@
       <header class="friend-link-title">My Links</header>
       <div class="links-wrapper">
         <template v-for="(item, index) in links">
-          <el-tooltip :content="item.name" placement="bottom">
+          <el-tooltip :content="item.name" placement="bottom" :key="index">
             <div class="link-item">
               <a :href="item.link" target="_blank">
                 <img :src="item.coverUrl" :alt="item.name" />

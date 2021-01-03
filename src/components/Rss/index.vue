@@ -41,7 +41,7 @@ export default {
           .then(({ value }) => {
             return addSubEmail(value)
           })
-          .then(res => {
+          .then(() => {
             this.$message({
               type: 'success',
               message: '订阅成功'

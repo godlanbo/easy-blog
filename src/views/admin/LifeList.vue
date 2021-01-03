@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import { getYear } from '../../utils'
 import LifeItem from './components/LifeItem/index'
 import { deleteLife } from '../../api/admin'
+import { getLifeList } from '../../api/index'
 import { listInfoMixin } from '../../utils/mixin'
 export default {
   components: {
@@ -35,7 +35,7 @@ export default {
         .then(() => {
           return deleteLife(id)
         })
-        .then(res => {
+        .then(() => {
           this.$message({
             type: 'success',
             message: '删除成功!'

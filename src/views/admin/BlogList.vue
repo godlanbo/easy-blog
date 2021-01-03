@@ -119,7 +119,7 @@
 import TagItem from '@/components/Tag/index'
 import TagsPanel from './components/TagsPanel/index'
 import { getBlogsCategoryList } from '../../api/home'
-import { isSameYear, getYear } from '../../utils'
+import { getYear } from '../../utils'
 import { setLocalStorage } from '../../utils/localStorage'
 import { deleteBlog } from '../../api/admin'
 import { listInfoMixin } from '../../utils/mixin'
@@ -181,7 +181,7 @@ export default {
       let tempList = []
 
       let offset = 0
-      while (1) {
+      for (;;) {
         let end =
           offset + this.pageLength >= list.length
             ? list.length
@@ -242,7 +242,7 @@ export default {
         .then(() => {
           return deleteBlog(this.blogsItemList[this.currentPage - 1][index].id)
         })
-        .then(res => {
+        .then(() => {
           this.$message({
             type: 'success',
             message: '删除成功!'

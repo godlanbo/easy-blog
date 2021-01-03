@@ -76,7 +76,7 @@ export default {
     }
   },
   watch: {
-    $route(value) {
+    $route() {
       this.initHeader()
     }
   },

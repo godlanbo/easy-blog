@@ -16,7 +16,6 @@
 
 <script>
 import LifeItem from './components/LifeItem/index'
-import { getYear } from '../../utils'
 import { listInfoMixin, lazyImgMixin } from '../../utils/mixin'
 export default {
   components: {

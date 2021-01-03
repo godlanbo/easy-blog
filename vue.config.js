@@ -39,5 +39,6 @@ module.exports = {
       args[0].cdn = cdn
       return args
     })
+    config.module.rule('eslint').use('eslint-loader')
   }
 }

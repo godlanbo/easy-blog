@@ -62,7 +62,7 @@ export function ensurePageLoaded(cb) {
 }
 
 export function isEmail(val) {
-  var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
+  var pattern = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/
   var domains = [
     'qq.com',
     '163.com',

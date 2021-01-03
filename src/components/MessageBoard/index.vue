@@ -8,7 +8,7 @@
             <div class="header-banner">
               <h2 class="banner-title">嗨，你好👋</h2>
               <p class="banner-content">
-                欢迎来到我的个人博客</br>
+                欢迎来到我的个人博客<br />
                 在这里留下你想对我说的🎉
               </p>
             </div>
@@ -19,7 +19,9 @@
             </transition>
           </div>
           <div class="header-title">
-            <span class="header-title-text">😀 确保输入的邮箱有效，方便我回复您</span>
+            <span class="header-title-text"
+              >😀 确保输入的邮箱有效，方便我回复您</span
+            >
           </div>
         </div>
         <div class="message-board-body">
@@ -27,7 +29,8 @@
             class="input-box"
             type="text"
             placeholder="请输入邮箱地址"
-            v-model="messageData.email">
+            v-model="messageData.email"
+          >
           </el-input>
           <div style="margin: 5px 0;"></div>
           <el-input
@@ -36,7 +39,8 @@
             resize="none"
             autosize
             placeholder="请输入你想说的内容"
-            v-model="messageData.message">
+            v-model="messageData.message"
+          >
           </el-input>
         </div>
         <div class="message-board-footer"></div>
@@ -47,10 +51,16 @@
         class="message-board-toggle-btn"
         v-show="toolListVisible"
         @click="handleClickToggleBtn"
-        :class="{'message-board-visible': messageBoardVisible}"
+        :class="{ 'message-board-visible': messageBoardVisible }"
       >
-        <span class="icon icon-issue" :class="{ active: !messageBoardVisible }"></span>
-        <span class="icon icon-send" :class="{ active: messageBoardVisible }"></span>
+        <span
+          class="icon icon-issue"
+          :class="{ active: !messageBoardVisible }"
+        ></span>
+        <span
+          class="icon icon-send"
+          :class="{ active: messageBoardVisible }"
+        ></span>
       </div>
     </transition>
   </div>
@@ -74,7 +84,9 @@ export default {
   methods: {
     resetForm() {
       this.toggleMessageBoard()
-      setLocalStorage('guest-email', this.messageData.email, { exp: 30 * 24 * 3600 })
+      setLocalStorage('guest-email', this.messageData.email, {
+        exp: 30 * 24 * 3600
+      })
       this.messageData.message = ''
     },
     validateForm() {
@@ -110,15 +122,17 @@ export default {
           600
         )
         if (this.validateForm()) {
-          sendMessageBoard(this.messageData).then(res => {
-            this.$message({
-              type: 'success',
-              message: res.message
+          sendMessageBoard(this.messageData)
+            .then(res => {
+              this.$message({
+                type: 'success',
+                message: res.message
+              })
+              this.resetForm()
             })
-            this.resetForm()
-          }).catch(({ message }) => {
-            console.log(message)
-          })
+            .catch(({ message }) => {
+              console.log(message)
+            })
         }
       } else {
         this.toggleMessageBoard()
@@ -204,7 +218,8 @@ export default {
     &.btn-wave {
       &::before {
         // 前面快，后面稍正常
-        animation: circle-scale 0.6s 0s running cubic-bezier(0.26, 1.32, 1, 0.99) both;
+        animation: circle-scale 0.6s 0s running
+          cubic-bezier(0.26, 1.32, 1, 0.99) both;
       }
     }
   }

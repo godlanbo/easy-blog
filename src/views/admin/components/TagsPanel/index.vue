@@ -41,7 +41,7 @@ export default {
   props: {
     tagsItemList: {
       type: Array,
-      default: []
+      default: () => []
     },
     stickyTop: {
       type: Number,

@@ -62,13 +62,13 @@ export const editMixin = {
   watch: {
     blog: {
       deep: true,
-      handler(val) {
+      handler() {
         this.isShowLeaveWarning = true
       }
     },
     lifeItem: {
       deep: true,
-      handler(val) {
+      handler() {
         this.isShowLeaveWarning = true
       }
     }

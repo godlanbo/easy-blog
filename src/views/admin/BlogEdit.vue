@@ -108,7 +108,7 @@ export default {
     }
   },
   methods: {
-    onSelectTag(arr, index) {
+    onSelectTag(arr) {
       this.blog.tags = this.tagCategoryList
         .filter((tag, idx) => arr[idx])
         .map(tagItem => tagItem.name)
@@ -135,7 +135,7 @@ export default {
             this.blog.cover = res.data.imgUrl
             return updateBlog(this.blog)
           })
-          .then(res => {
+          .then(() => {
             this.$message({
               type: 'success',
               message: '更新博客成功'
@@ -146,7 +146,7 @@ export default {
           })
       } else {
         updateBlog(this.blog)
-          .then(res => {
+          .then(() => {
             this.$message({
               type: 'success',
               message: '更新博客成功'
@@ -172,7 +172,7 @@ export default {
             this.blog.cover = res.data.imgUrl
             return newBlog(this.blog)
           })
-          .then(res => {
+          .then(() => {
             this.$message({
               type: 'success',
               message: '发布成功'
@@ -183,7 +183,7 @@ export default {
           })
       } else {
         newBlog(this.blog)
-          .then(res => {
+          .then(() => {
             this.$message({
               type: 'success',
               message: '发布成功'

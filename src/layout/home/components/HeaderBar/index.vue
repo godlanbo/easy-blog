@@ -76,7 +76,6 @@ export default {
     },
     isSwtichHeaderBg() {
       let switchLimit = document.documentElement.clientHeight + 50
-      this.scrollTop = document.documentElement.scrollTop
       return this.scrollTop >= switchLimit || this.activeRoute !== '/home'
     }
   },

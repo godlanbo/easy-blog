@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { encode, decode } from '../../utils/auth'
+import { encode } from '../../utils/auth'
 import { login } from '../../api/admin'
 export default {
   data() {
