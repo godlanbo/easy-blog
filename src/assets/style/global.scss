@@ -2,8 +2,10 @@
 @import './transition.scss';
 @import './markdownTag.scss';
 
-html {
-  font-family: 'Fira Sans', 'Helvetica', "Microsoft YaHei", sans-serif;
+@layer base {
+  html {
+    font-family: 'Fira Sans', 'Helvetica', "Microsoft YaHei", sans-serif;
+  }
 }
 .uppercase {
   text-transform: uppercase;
