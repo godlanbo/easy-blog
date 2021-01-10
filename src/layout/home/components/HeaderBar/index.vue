@@ -3,17 +3,26 @@
     class="header-wrapper"
     :class="{ 'active-color-switch': isSwtichHeaderBg }"
   >
-    <div class="logo-wrapper">
+    <div
+      class="logo-wrapper ml-12 lg:ml-8 md:ml-6 text-3xl sm:text-2xl h-full font-extrabold text-current flex justify-center items-center"
+    >
       <span class="icon-logo"></span>
       <span class="logo-text">GodLanBo</span>
     </div>
-    <input type="checkbox" id="check" v-model="menuVisible" />
-    <label class="menu" for="check">
+    <input type="checkbox" class="hidden" id="check" v-model="menuVisible" />
+    <label
+      class="menu hidden md:flex md:items-center md:justify-center text-current absolute top-0 select-none bottom-0 right-5 cursor-pointer"
+      for="check"
+    >
       <span class="icon-menu"></span>
     </label>
-    <div class="menu-bg" @touchmove.prevent @click="hideMenu"></div>
+    <div
+      class="menu-bg fixed top-0 left-0 bg-opacity-30 bg-black w-screen h-screen z-10 hidden"
+      @touchmove.prevent
+      @click="hideMenu"
+    ></div>
     <nav
-      class="nav-wrapper"
+      class="nav-wrapper mr-12 lg:mr-8 md:mr-6 flex-1 h-full flex justify-end"
       @touchmove.prevent
       :class="{ 'active-color-switch': isSwtichHeaderBg }"
     >
@@ -105,7 +114,6 @@ export default {
 @import '@/assets/style/globalScript';
 .header-wrapper {
   width: 100%;
-  position: relative;
   position: fixed;
   top: 0;
   left: 0;
@@ -141,43 +149,14 @@ export default {
   }
   .logo-wrapper {
     flex: 0 0 20%;
-    height: 100%;
-    font-weight: 800;
-    color: inherit;
-    @include center;
     .icon-logo {
       margin-bottom: 5px;
     }
   }
-  #check {
-    display: none;
-  }
   .menu {
-    color: inherit;
     font-size: 28px;
-    position: absolute;
-    top: 0;
-    user-select: none;
-    bottom: 0;
-    right: 20px;
-    @include center;
-    cursor: pointer;
-  }
-  .menu-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.3);
-    width: 100vw;
-    height: 100vh;
-    z-index: 4;
-    display: none;
   }
   .nav-wrapper {
-    flex: 1;
-    height: 100%;
-    display: flex;
-    justify-content: flex-end;
     > a {
       text-decoration: none;
     }
@@ -236,39 +215,8 @@ export default {
     }
   }
 }
-@media (min-width: 690px) {
+@screen md {
   .header-wrapper {
-    .logo-wrapper {
-      margin-left: 50px;
-      font-size: 32px;
-    }
-    .menu {
-      display: none;
-    }
-    .menu-bg {
-      display: none;
-    }
-  }
-}
-@media (max-width: 790px) {
-  .nav-wrapper {
-    margin-right: 20px;
-  }
-}
-@media (min-width: 790px) {
-  .nav-wrapper {
-    margin-right: 50px;
-  }
-}
-@media (max-width: 690px) {
-  .header-wrapper {
-    .logo-wrapper {
-      margin-left: 20px;
-      font-size: 28px;
-    }
-    .menu {
-      display: flex;
-    }
     #check:checked ~ .nav-wrapper {
       left: 0;
       opacity: 1;
@@ -277,29 +225,16 @@ export default {
       display: block;
     }
     .nav-wrapper {
-      position: fixed;
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      box-sizing: border-box;
-      padding-left: 100px;
-      height: 100vh;
-      background: #082634;
-      text-align: center;
-      transform: translateX(-100px);
-      opacity: 0;
-      transition: all $animationTime $animationType;
-      top: 0;
-      left: -100%;
-      z-index: 5;
+      @apply fixed flex flex-col transform w-full z-20 -left-full top-0;
+      @apply opacity-0 text-center h-screen pl-24 bg-theme-menu;
+      @apply transition-all duration-primary ease-primary -translate-x-24;
       .nav-item {
-        border-bottom: 1px solid #30849a;
-        color: #fff;
+        @apply border-b border-solid text-white-default border-theme-primary;
         a:hover::before {
-          transform: scale(0);
+          @apply transform scale-0;
         }
         &.active {
-          color: $color-blue;
+          @apply text-blue-5;
         }
       }
     }
