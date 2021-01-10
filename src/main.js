@@ -6,7 +6,7 @@ import dayjs from 'dayjs'
 import ElementUI from 'element-ui'
 import './assets/style/icon.css'
 import './assets/style/markdown.css'
-import 'tailwindcss/tailwind.css'
+import './assets/style/tailwind.css'
 import './assets/style/global.scss' // 后于tailwind引入，因为需要重置font-family
 // import './mock/index'
 import mavonEditor from 'mavon-editor'
