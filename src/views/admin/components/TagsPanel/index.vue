@@ -70,8 +70,9 @@ export default {
       this.$emit('add-tag', this.addTagText)
     },
     onSelectTag(index) {
-      this.selectedTags[index] = !this.selectedTags[index]
-      this.$emit('select-change', this.selectedTags)
+      const temp = this.selectedTags.slice()
+      temp[index] = !this.selectedTags[index]
+      this.$emit('update:selectedTags', temp)
     }
   }
 }
@@ -102,8 +103,7 @@ export default {
       margin-bottom: 10px;
       font-size: 14px;
       &.is-selected {
-        background-color: $color-blue !important;
-        color: #fff !important;
+        @apply text-white-default bg-blue-5;
       }
     }
   }
