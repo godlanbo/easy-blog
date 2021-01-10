@@ -57,13 +57,15 @@ export default new Vuex.Store({
       state.toolListVisible = newStatus
     },
     setBlogsList(state, list) {
+      let tempIdList = []
       list.forEach(blog => {
         blog.comments = []
         blog.commentsLoaded = false
         // 为了使getter更新
         Vue.set(state.blogs, blog.id, blog)
-        state.blogsListArr.push(blog.id)
+        tempIdList.push(blog.id)
       })
+      state.blogsListArr = tempIdList
     },
     setLifeList(state, list) {
       state.lifeList = list

@@ -124,38 +124,38 @@ export default {
     onSaveBlogEdit() {
       if (this.mode === 'create') {
         this.releaseBlog()
+          .then(() => {
+            this.$message({
+              type: 'success',
+              message: '发布成功'
+            })
+            this.isShowLeaveWarning = true
+            this.$router.back()
+            this.getBlogsList()
+          })
+          .catch(console.error)
       } else {
         this.updateBlog()
+          .then(() => {
+            this.$message({
+              type: 'success',
+              message: '更新博客成功'
+            })
+          })
+          .catch(console.error)
       }
     },
     updateBlog() {
-      if (this.coverFile) {
-        this.uploadImage(this.coverFile)
-          .then(res => {
+      return Promise.resolve().then(() => {
+        if (this.coverFile) {
+          return this.uploadImage(this.coverFile).then(res => {
             this.blog.cover = res.data.imgUrl
             return updateBlog(this.blog)
           })
-          .then(() => {
-            this.$message({
-              type: 'success',
-              message: '更新博客成功'
-            })
-          })
-          .catch(err => {
-            console.error(err)
-          })
-      } else {
-        updateBlog(this.blog)
-          .then(() => {
-            this.$message({
-              type: 'success',
-              message: '更新博客成功'
-            })
-          })
-          .catch(err => {
-            console.error(err)
-          })
-      }
+        } else {
+          return updateBlog(this.blog)
+        }
+      })
     },
     getEmptyBlog() {
       return {
@@ -166,33 +166,16 @@ export default {
       }
     },
     releaseBlog() {
-      if (this.coverFile) {
-        this.uploadImage(this.coverFile)
-          .then(res => {
+      return Promise.resolve().then(() => {
+        if (this.coverFile) {
+          return this.uploadImage(this.coverFile).then(res => {
             this.blog.cover = res.data.imgUrl
             return newBlog(this.blog)
           })
-          .then(() => {
-            this.$message({
-              type: 'success',
-              message: '发布成功'
-            })
-          })
-          .catch(err => {
-            console.error(err)
-          })
-      } else {
-        newBlog(this.blog)
-          .then(() => {
-            this.$message({
-              type: 'success',
-              message: '发布成功'
-            })
-          })
-          .catch(err => {
-            console.error(err)
-          })
-      }
+        } else {
+          return newBlog(this.blog)
+        }
+      })
     },
     uploadImage(img) {
       let fd = new FormData()

@@ -1,4 +1,4 @@
-import { mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export const listInfoMixin = {
   computed: {
@@ -72,6 +72,9 @@ export const editMixin = {
         this.isShowLeaveWarning = true
       }
     }
+  },
+  methods: {
+    ...mapActions(['getBlogsList'])
   },
   beforeRouteLeave(to, from, next) {
     if (this.isShowLeaveWarning) {
