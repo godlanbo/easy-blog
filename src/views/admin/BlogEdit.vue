@@ -66,7 +66,7 @@
         :tags-item-list="tagCategoryList"
         :selected-tags="selectedTags"
         :can-edit="true"
-        @select-change="onSelectTag"
+        @update:selectedTags="onSelectTag"
         @add-tag="onAddTag"
       ></tags-panel>
       <el-button class="submit-btn" type="success" @click="onSaveBlogEdit">{{
