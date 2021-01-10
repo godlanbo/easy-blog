@@ -13,7 +13,8 @@ module.exports = {
           'scss',
           'nginx',
           'sql',
-          'markup'
+          'markup',
+          'json'
         ],
         theme: 'okaidia',
         css: true
