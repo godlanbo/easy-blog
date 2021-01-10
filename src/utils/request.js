@@ -2,17 +2,21 @@ import axios from 'axios'
 import { getToken } from './auth'
 import { Message } from 'element-ui'
 import router from './../router/index'
+import loadGenerator from './loading'
 
 const request = axios.create({
   baseURL: `${process.env.VUE_APP_BASE_URL}/api`,
   timeout: 5000
 })
 
+const load = loadGenerator()
+
 request.interceptors.request.use(
   config => {
     if (getToken()) {
       config.headers['Authorization'] = `Bearer ${getToken()}`
     }
+    load.open()
     return config
   },
   error => {
@@ -25,6 +29,7 @@ request.interceptors.request.use(
 // response interceptor
 request.interceptors.response.use(
   response => {
+    load.close()
     const res = response.data
     if (res.code !== 0) {
       Message({
@@ -37,6 +42,7 @@ request.interceptors.response.use(
     return res
   },
   error => {
+    load.close()
     const { response } = error
     if (response?.status === 401) {
       Message({
