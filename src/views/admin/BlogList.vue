@@ -137,7 +137,7 @@ export default {
       searchText: '', // 输入
       filterText: '', // 确定后
       filterTime: '不限',
-      sortType: 'up',
+      sortType: 'down',
       selectedTags: [],
       pageLength: 7,
       currentPage: 1
