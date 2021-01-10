@@ -108,8 +108,8 @@
       </div>
       <tags-panel
         :tags-item-list="tagCategoryList"
+        :selectedTags.sync="selectedTags"
         :sticky-top="82"
-        @select-change="onSelectChange"
       ></tags-panel>
     </div>
   </div>
@@ -255,9 +255,6 @@ export default {
             message: '已取消删除'
           })
         })
-    },
-    onSelectChange(arr) {
-      this.selectedTags = arr
     },
     onSelectCommand(filterTime) {
       this.filterTime = filterTime
