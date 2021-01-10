@@ -62,8 +62,10 @@ export const editMixin = {
   watch: {
     blog: {
       deep: true,
-      handler() {
-        this.isShowLeaveWarning = true
+      handler(v) {
+        if (+v.content.length) {
+          this.isShowLeaveWarning = true
+        }
       }
     },
     lifeItem: {
