@@ -1,13 +1,9 @@
 @mixin center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @apply flex justify-center items-center;
 }
 
 @mixin ellipsis {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  @apply overflow-ellipsis whitespace-nowrap overflow-hidden;
 }
 
 @mixin colorText($color) {
@@ -17,10 +13,7 @@
 }
 
 @mixin columnCenter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  @apply flex flex-col items-center justify-center;
 }
 
 @mixin overflowText($line) {
