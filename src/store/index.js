@@ -36,7 +36,7 @@ export default new Vuex.Store({
       return state.blogs[id]
     },
     async getCommentsList({ commit, state }, { id, force }) {
-      if (state.blogs[id].commentsLoaded && !force) {
+      if (!force && state.blogs[id].commentsLoaded) {
         return Promise.resolve({ commentsList: state.blogs[id].comments })
       } else {
         let resComment = await getCommentsList(id)
