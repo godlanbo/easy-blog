@@ -16,14 +16,14 @@
     "element-ui": "^2.13.2",
     "lrz": "^4.9.40",
     "mavon-editor": "^2.9.0",
-    "prismjs": "^1.22.0",
+    "prismjs": "^1.23.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "vanilla-tilt": "^1.7.0",
     "vue": "^2.6.11",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.4.3",
     "vuex": "^3.4.0",
-    "web-storage-cache": "^1.1.1",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2"
+    "web-storage-cache": "^1.1.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
