@@ -14,8 +14,10 @@ module.exports = {
           'nginx',
           'sql',
           'markup',
-          'json'
+          'json',
+          'diff'
         ],
+        plugins: ['line-numbers', 'diff-highlight', 'autoloader'],
         theme: 'okaidia',
         css: true
       }
