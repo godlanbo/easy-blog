@@ -25,7 +25,7 @@ Vue.prototype.$markDown = mavonEditor.markdownIt.set({
   highlight: (str, lang) => {
     let res =
       `<pre class="language-${lang} extra-class">` +
-      `<pre class="language-${lang}">` +
+      `<pre class="language-diff-${lang} diff-highlight line-numbers">` +
       `<code>${str.replace(/</g, '&lt;')}</code>` +
       `</pre>` +
       `</pre>`
