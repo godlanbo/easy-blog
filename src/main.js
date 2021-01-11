@@ -23,9 +23,12 @@ Vue.config.productionTip = process.env.NODE_ENV !== 'development'
 Vue.prototype.$markDown = mavonEditor.markdownIt.set({
   langPrefix: 'language-',
   highlight: (str, lang) => {
+    const isDiffBlock = /\n(\+|-)\s/.test(str)
     let res =
       `<pre class="language-${lang} extra-class">` +
-      `<pre class="language-diff-${lang} diff-highlight line-numbers">` +
+      `<pre class="language-${
+        isDiffBlock ? 'diff-' : ''
+      }${lang} diff-highlight line-numbers">` +
       `<code>${str.replace(/</g, '&lt;')}</code>` +
       `</pre>` +
       `</pre>`
