@@ -1,6 +1,7 @@
 @import './reset.scss';
 @import './transition.scss';
 @import './markdownTag.scss';
+@import './globalScript.scss';
 
 @layer base {
   html {
@@ -26,4 +27,19 @@
 }
 .el-tooltip__popper {
   transform: translateY(5px);
+}
+.tool-list-item {
+  width: $tool-item-size;
+  height: $tool-item-size;
+  transition: all $animationTime $animationType;
+  right: $toolListRight;
+  font-size: 25px;
+  @apply fixed font-bold rounded-full flex justify-center items-center bg-white-default text-grey-2 shadow-xl cursor-pointer;
+  &:hover {
+    transform: scale(1.08);
+    @apply shadow-2xl;
+  }
+  @media (max-width: 640px) {
+    right: $small-toolListRight;
+  }
 }

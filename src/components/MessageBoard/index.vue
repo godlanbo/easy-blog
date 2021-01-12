@@ -1,10 +1,18 @@
 <template>
-  <div class="message-board-placeholder">
+  <div class="message-board-placeholder w-0 h-0">
     <transition name="slide-left">
-      <div class="message-board" v-show="messageBoardVisible">
-        <div class="message-board-header">
-          <span class="close-btn icon-down" @click="toggleMessageBoard"></span>
-          <div class="header-banner-wrapper">
+      <div
+        class="message-board flex flex-col text-white-default fixed shadow-2xl overflow-hidden rounded-2xl bg-white-default"
+        v-show="messageBoardVisible"
+      >
+        <div
+          class="message-board-header relative flex flex-col bg-blue-6 mb-3.5"
+        >
+          <span
+            class="close-btn icon-down absolute text-white-default cursor-pointer"
+            @click="toggleMessageBoard"
+          ></span>
+          <div class="header-banner-wrapper flex relative">
             <div class="header-banner">
               <h2 class="banner-title">嗨，你好👋</h2>
               <p class="banner-content">
@@ -13,18 +21,21 @@
               </p>
             </div>
             <transition name="slide-up">
-              <div v-show="messageBoardVisible" class="header-avatar">
-                <img src="/image/avatar.jpeg" />
+              <div v-show="messageBoardVisible" class="header-avatar relative">
+                <img
+                  class="absolute left-0 bottom-5 rounded-full object-cover"
+                  src="/image/avatar.jpeg"
+                />
               </div>
             </transition>
           </div>
-          <div class="header-title">
+          <div class="header-title relative">
             <span class="header-title-text"
               >😀 确保输入的邮箱有效，方便我回复您</span
             >
           </div>
         </div>
-        <div class="message-board-body">
+        <div class="message-board-body flex flex-col">
           <el-input
             class="input-box"
             type="text"
@@ -32,7 +43,7 @@
             v-model="messageData.email"
           >
           </el-input>
-          <div style="margin: 5px 0;"></div>
+          <div class="my-1 mx-0"></div>
           <el-input
             class="input-box"
             type="textarea"
@@ -48,7 +59,7 @@
     </transition>
     <transition name="slide-right-1">
       <div
-        class="message-board-toggle-btn"
+        class="message-board-toggle-btn tool-list-item"
         v-show="toolListVisible"
         @click="handleClickToggleBtn"
         :class="{ 'message-board-visible': messageBoardVisible }"
@@ -148,21 +159,9 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/globalScript';
 .message-board-toggle-btn {
-  position: fixed;
-  font-weight: bold;
   bottom: ($tool-item-size + $tool-item-gap) * 2 + $base-distance;
-  right: $toolListRight;
   z-index: 3001;
-  width: $tool-item-size;
-  height: $tool-item-size;
-  border-radius: 50%;
-  @include center;
   font-size: 30px;
-  color: #aaa;
-  background: #fff;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: all $animationTime $animationType;
   .icon {
     position: absolute;
     opacity: 0;
@@ -191,14 +190,10 @@ export default {
       transform: rotate(0deg);
     }
   }
-  &:hover {
-    transform: scale(1.08);
-    box-shadow: 0 8px 24px 0 rgba(187, 191, 196, 0.2);
-  }
   &.message-board-visible {
     transform: scale(1.08);
     bottom: $base-distance;
-    box-shadow: rgba(2, 6, 16, 0.2) 0px 4px 24px;
+    box-shadow: 0 25px 50px 0px rgba(0, 0, 0, 0.25);
     &:hover {
       transform: scale(1.3);
     }
@@ -224,42 +219,17 @@ export default {
     }
   }
 }
-@media (max-width: 640px) {
-  .message-board-toggle-btn {
-    right: $small-toolListRight;
-  }
-}
-.message-board-placeholder {
-  width: 0;
-  height: 0;
-}
 .message-board {
-  display: flex;
-  flex-direction: column;
-  color: #fff;
-  position: fixed;
   right: $toolListRight + $tool-item-size / 2 - 5px;
   bottom: 26px;
   z-index: 3000;
-  box-shadow: rgba(0, 18, 46, 0.16) 0px 8px 36px 0px;
   width: 372px;
-  overflow: hidden;
-  border-radius: 16px;
-  background-color: #fff;
   .message-board-header {
-    position: relative;
-    display: flex;
-    flex-direction: column;
     padding: 35px 35px 0;
-    background-color: rgb(74, 144, 226);
-    margin-bottom: 15px;
     .close-btn {
-      position: absolute;
       right: 25px;
       top: 10px;
-      color: #fff;
       font-size: 27px;
-      cursor: pointer;
       padding: 10px;
       z-index: 1;
       &::after {
@@ -280,8 +250,6 @@ export default {
       }
     }
     .header-banner-wrapper {
-      position: relative;
-      display: flex;
       .header-banner {
         flex: 0 0 230px;
         .banner-title {
@@ -296,27 +264,20 @@ export default {
       }
       .header-avatar {
         flex: 1;
-        position: relative;
         transition-delay: 0.3s;
         img {
-          position: absolute;
-          left: 0;
-          bottom: 20px;
           width: 70px;
           height: 70px;
-          border-radius: 50%;
-          object-fit: cover;
         }
       }
     }
     .header-title {
-      position: relative;
       width: calc(100% + 70px);
       margin: 0 -35px;
       padding: 14px 28px 20px;
       z-index: 6;
       line-height: 1.3;
-      background-color: rgba(67, 130, 203, 0.72);
+      @apply bg-blue-7;
       &::after {
         content: '';
         position: absolute;
@@ -333,8 +294,6 @@ export default {
     }
   }
   .message-board-body {
-    display: flex;
-    flex-direction: column;
     padding: 0 20px 20px;
     .input-box {
       /deep/ input,

@@ -1,16 +1,14 @@
 <template>
   <el-popover ref="reference" placement="left" width="100" trigger="click">
-    <el-button
-      style="width: 100%; margin-bottom: 10px"
-      @click="handleSub('eamil')"
+    <el-button class="w-full mb-2.5" @click="handleSub('eamil')"
       >邮件订阅</el-button
     >
     <div></div>
-    <el-button style="width: 100%" @click="handleSub('rss')">Rss订阅</el-button>
+    <el-button class="w-full" @click="handleSub('rss')">Rss订阅</el-button>
     <template v-slot:reference>
       <transition name="slide-right-2">
         <div
-          class="rss"
+          class="rss tool-list-item"
           v-show="toolListVisible"
           :class="{ 'message-board-visible': messageBoardVisible }"
         >
@@ -56,36 +54,14 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/globalScript';
 .rss {
-  position: fixed;
-  font-weight: bold;
   bottom: $tool-item-size + $tool-item-gap + $base-distance;
-  right: $toolListRight;
   z-index: 3000;
-  width: $tool-item-size;
-  height: $tool-item-size;
-  border-radius: 50%;
-  @include center;
-  font-size: 25px;
-  color: #aaa;
-  background: #fff;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: all $animationTime $animationType;
   .icon-sub {
     @include center;
-  }
-  &:hover {
-    transform: scale(1.08);
-    box-shadow: 0 8px 24px 0 rgba(187, 191, 196, 0.2);
   }
   &.message-board-visible {
     bottom: $base-distance;
     box-shadow: unset;
-  }
-}
-@media (max-width: 640px) {
-  .rss {
-    right: $small-toolListRight;
   }
 }
 </style>
