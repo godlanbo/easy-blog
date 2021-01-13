@@ -75,11 +75,6 @@ export default {
       return totalNum
     }
   },
-  watch: {
-    $route() {
-      this.initHeader()
-    }
-  },
   methods: {
     switchQuery(queryString) {
       if (queryString === this.title) {
@@ -110,7 +105,7 @@ export default {
       })
     }
   },
-  mounted() {
+  activated() {
     this.initHeader()
   }
 }
