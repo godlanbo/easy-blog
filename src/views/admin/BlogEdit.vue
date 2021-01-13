@@ -129,7 +129,7 @@ export default {
               type: 'success',
               message: '发布成功'
             })
-            this.isShowLeaveWarning = true
+            this.isShowLeaveWarning = false
             this.$router.back()
             this.getBlogsList()
           })
