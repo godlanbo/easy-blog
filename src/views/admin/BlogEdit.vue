@@ -141,6 +141,7 @@ export default {
               type: 'success',
               message: '更新博客成功'
             })
+            this.getBlogsList()
           })
           .catch(console.error)
       }
