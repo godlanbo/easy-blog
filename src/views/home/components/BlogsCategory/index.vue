@@ -80,6 +80,7 @@ export default {
       if (queryString === this.title) {
         return
       }
+      this.title = queryString
       if (this.type === 'tag') {
         this.$router.replace({
           path: '/blogs/tags',
@@ -87,7 +88,6 @@ export default {
             tag: queryString
           }
         })
-        this.title = queryString
       } else {
         this.$router.replace({
           path: '/archive',
