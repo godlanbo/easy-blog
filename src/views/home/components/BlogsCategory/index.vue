@@ -87,6 +87,7 @@ export default {
             tag: queryString
           }
         })
+        this.title = queryString
       } else {
         this.$router.replace({
           path: '/archive',
