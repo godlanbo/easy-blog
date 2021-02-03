@@ -124,7 +124,6 @@ export default {
     if (this.isLoadInfo) {
       this.getBlogsDetailAsync()
     }
-    this.notifyReadProgressInit()
   },
   methods: {
     normalizeBlogTitle(title) {
@@ -163,6 +162,7 @@ export default {
               ).join(' ')}">${preCItem.innerHTML}</div>`
             })
             prism.highlightAllUnder(document)
+            this.notifyReadProgressInit()
           })
           document.title = this.blogsDetail.title
         } else {
