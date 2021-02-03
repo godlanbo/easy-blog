@@ -7,7 +7,7 @@ const whiteList = ['/login', '/home', '/life', '/archive', '/blogs', '/404'] // 
 router.beforeEach((to, from, next) => {
   // start progress bar
   // set page title
-  document.title = to.meta.title
+  document.title = to.meta.title || document.title
   // determine whether the user has logged in
   if (to.path.indexOf('/blogs') !== -1) {
     next()
