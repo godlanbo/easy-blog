@@ -48,6 +48,7 @@ import Comment from './components/comment/index.vue'
 import prism from 'prismjs'
 import { mapGetters } from 'vuex'
 import { ensurePageLoaded, normalizeMDContent } from '../../utils'
+import initHashLocation from '../../utils/initHashLocation'
 export default {
   name: 'BlogsDetail',
   components: {
@@ -123,7 +124,7 @@ export default {
     if (this.isLoadInfo) {
       this.getBlogsDetailAsync()
     }
-    window.addEventListener('load', this.notifyReadProgressInit)
+    this.notifyReadProgressInit()
   },
   methods: {
     normalizeBlogTitle(title) {
@@ -174,6 +175,7 @@ export default {
       ensurePageLoaded(() => {
         let e = new Event('page-ready')
         window.dispatchEvent(e)
+        initHashLocation()
       })
     },
     handleLoadComment() {
@@ -189,9 +191,6 @@ export default {
         this.commentsList = this.getCommentsList(id)
       })
     }
-  },
-  destroyed() {
-    window.removeEventListener('load', this.notifyReadProgressInit)
   }
 }
 </script>
@@ -239,15 +238,7 @@ export default {
       border-radius: 5px;
       overflow: hidden;
       background-color: #fff;
-      @media (min-width: 1080px) {
-        padding: 40px 30px;
-      }
-      @media (max-width: 1080px) {
-        padding: 40px 20px;
-      }
-      @media (max-width: 640px) {
-        padding: 40px 10px;
-      }
+      padding: 40px 32px;
     }
   }
   .blogs-skip-wrapper {
