@@ -130,8 +130,7 @@ const router = new VueRouter({
   routes,
   scrollBehavior(to, from, savedPosition) {
     // 解决在hash模式下跳转到BlogsDetail路由savedPosition不为空导致无法回到顶部
-    if (to.name === 'BlogsDetail') {
-      handleScroll(document.documentElement.scrollTop, 0)
+    if (to.hash !== '') {
       return false
     } else if (savedPosition) {
       handleScroll(document.documentElement.scrollTop, savedPosition.y)
