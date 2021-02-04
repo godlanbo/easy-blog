@@ -31,6 +31,12 @@
         <div class="no-img" v-else>
           <span class="no-img-text">暂无封面图片</span>
         </div>
+        <el-input
+          v-model="blog.cover"
+          class="mb-3.5"
+          clearable
+          placeholder="填入图片链接"
+        ></el-input>
         <div class="handle-panel">
           <el-upload
             action
@@ -119,7 +125,7 @@ export default {
       })
     },
     getRandomCover() {
-      this.blog.cover = `https://picsum.photos/seed/${Date.now()}/1920/1080`
+      this.blog.cover = `https://picsum.photos/seed/${Date.now()}/672/360`
     },
     onSaveBlogEdit() {
       if (this.mode === 'create') {
