@@ -36,7 +36,8 @@ export default new Vuex.Store({
       return state.blogs[id]
     },
     async getCommentsList({ commit, state }, { id, force }) {
-      if (!force && state.blogs[id].commentsLoaded) {
+      // 读取判断的时候评论未加载，会导致 state.blogs[id] 为空 ?.
+      if (!force && state.blogs[id]?.commentsLoaded) {
         return Promise.resolve({ commentsList: state.blogs[id].comments })
       } else {
         let resComment = await getCommentsList(id)
@@ -128,7 +129,8 @@ export default new Vuex.Store({
       return lifeList
     },
     getCommentsList: state => id => {
-      return state.blogs[id].comments.map(cid => state.commentsList[cid])
+      // 读取的时候，评论可能未加载 ?.
+      return state.blogs[id]?.comments.map(cid => state.commentsList[cid])
     },
     toolListVisible: state => state.toolListVisible,
     messageBoardVisible: state => state.messageBoardVisible
