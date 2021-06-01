@@ -12,15 +12,12 @@
   text-transform: uppercase;
 }
 ::-webkit-scrollbar {
-  width: 10px;
-  background-color: #f0f3f6;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: #bbb;
-  &:hover {
-    background-color: #ccc;
-  }
+  border-radius: 6px;
+  background-color: #aaa;
 }
 * {
   box-sizing: border-box;
