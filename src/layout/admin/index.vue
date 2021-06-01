@@ -30,6 +30,7 @@ export default {
     margin-left: 210px;
     .main-content-container {
       min-height: calc(100vh - 50px);
+      height: calc(100vh - 50px);
       position: relative;
       padding: 20px;
       width: 100%;
