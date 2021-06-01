@@ -1,7 +1,7 @@
 <template>
   <div class="headerbar-container">
     <div class="login-out-btn" @click="loginOut">
-      <span class="login-out-text">Login Out</span>
+      <span class="login-out-text">Logout</span>
     </div>
   </div>
 </template>
