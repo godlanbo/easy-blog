@@ -87,6 +87,12 @@ const routes = [
         name: 'Create',
         component: () => import('@/views/admin/BlogEdit'),
         meta: { title: '创建博客' }
+      },
+      {
+        path: 'comment',
+        name: 'Comment',
+        component: () => import('@/views/admin/CommentManage'),
+        meta: { title: '评论管理' }
       }
     ]
   },
