@@ -130,7 +130,7 @@ export default new Vuex.Store({
     },
     getCommentsList: state => id => {
       // 读取的时候，评论可能未加载 ?.
-      return state.blogs[id]?.comments.map(cid => state.commentsList[cid])
+      return state.blogs[id]?.comments.map(cid => state.commentsList[cid]) || []
     },
     toolListVisible: state => state.toolListVisible,
     messageBoardVisible: state => state.messageBoardVisible
