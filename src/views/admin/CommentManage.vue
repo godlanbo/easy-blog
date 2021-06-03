@@ -97,7 +97,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getCommentsList']),
+    ...mapGetters(['getCommentsList', 'isLoadInfo']),
     commentIndexList() {
       if (this.filterTags.length) {
         return this.blogsList.filter(item => {
@@ -117,10 +117,15 @@ export default {
       this.allOptionalTags = res.data.categoryList
     })
     // 页面数据初始化后读取列表数据
-    window.addEventListener('page-ready', () => {
+    if (this.isLoadInfo) {
       this.blogsList = this.$store.getters.blogsList
       this.handleSelectBlog(0)
-    })
+    } else {
+      window.addEventListener('page-ready', () => {
+        this.blogsList = this.$store.getters.blogsList
+        this.handleSelectBlog(0)
+      })
+    }
   }
 }
 </script>
