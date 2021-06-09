@@ -44,6 +44,10 @@ export function getYear(date) {
   return dayjs(date).get('year')
 }
 
+export function getMonth(date) {
+  return dayjs(date).get('month') + 1
+}
+
 export function compress(img, opt) {
   return lrz(img, opt)
 }
