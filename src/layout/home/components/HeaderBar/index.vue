@@ -45,7 +45,7 @@
         </a>
       </router-link>
       <router-link
-        to="/archive?time=2020"
+        :to="archiveTarget"
         class="nav-item"
         :class="{ active: activeRoute === '/archive' }"
       >
@@ -86,6 +86,10 @@ export default {
     isSwtichHeaderBg() {
       let switchLimit = document.documentElement.clientHeight + 50
       return this.scrollTop >= switchLimit || this.activeRoute !== '/home'
+    },
+    archiveTarget() {
+      const now = new Date()
+      return `/archive?time=${now.getFullYear()}-${now.getMonth() + 1}`
     }
   },
   watch: {
