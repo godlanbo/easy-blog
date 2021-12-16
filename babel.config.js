@@ -15,7 +15,9 @@ module.exports = {
           'sql',
           'markup',
           'json',
-          'diff'
+          'diff',
+          'jsx',
+          'bash'
         ],
         plugins: ['line-numbers', 'diff-highlight', 'autoloader'],
         theme: 'okaidia',
