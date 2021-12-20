@@ -99,12 +99,12 @@ class LazyLoadManager {
   }
   collectImage(el, src, type) {
     let imgLoader
-    if (this.collectMap.has(src)) {
-      imgLoader = this.collectMap.get(src)
+    if (!this.collectMap.has(src)) {
+      imgLoader = new ImageLoader(src, this.loadingSrc, this.errorSrc)
+      this.collectMap.set(src, imgLoader)
     }
-    imgLoader = new ImageLoader(src, this.loadingSrc, this.errorSrc)
+    imgLoader = this.collectMap.get(src)
     imgLoader.addImage(el, type)
-    this.collectMap.set(src, imgLoader)
     this.observer.observe(el)
   }
   initObserver() {
@@ -114,6 +114,11 @@ class LazyLoadManager {
           const target = entry.target
           const lazyKey = target.dataset.lazyKey
           const lazyImageLoader = this.collectMap.get(lazyKey)
+          // 如果加载器已经加载完成并销毁，直接取消监听并返回
+          if (!lazyImageLoader) {
+            this.observer.unobserve(target)
+            return
+          }
           if (lazyImageLoader.state === imgState.wait) {
             lazyImageLoader.renderImage()
           } else if (lazyImageLoader.state === imgState.loading) {
