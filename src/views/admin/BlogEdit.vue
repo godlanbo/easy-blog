@@ -26,7 +26,7 @@
     <div class="edit-cover-and-tags-panel">
       <div class="edit-cover">
         <div class="img-wrapper" v-if="blog.cover">
-          <img :src="blog.cover" />
+          <img alt="upload blog cover" :src="blog.cover" />
         </div>
         <div class="no-img" v-else>
           <span class="no-img-text">暂无封面图片</span>

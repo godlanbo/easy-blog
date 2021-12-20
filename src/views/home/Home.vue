@@ -45,8 +45,7 @@
           class="home-life-section-list-item"
           v-for="item in lifeItemList"
           :key="item.id"
-          :data-src="lifeItemImg(item)"
-          :style="{ 'background-image': '/image/default.png' }"
+          v-lazy:bg="lifeItemImg(item)"
           @click="linkToLife(item.id)"
         >
           <div class="content">
@@ -80,7 +79,7 @@ import AvatarDetail from './components/Avatar/index'
 import CardItem from './components/CardItem/index'
 import SectionItem from './components/SectionItem/index'
 import VanillaTilt from 'vanilla-tilt'
-import { listInfoMixin, lazyImgMixin } from '../../utils/mixin'
+import { listInfoMixin } from '../../utils/mixin'
 import links from '../../links'
 export default {
   components: {
@@ -88,7 +87,7 @@ export default {
     CardItem,
     SectionItem
   },
-  mixins: [lazyImgMixin, listInfoMixin],
+  mixins: [listInfoMixin],
   data() {
     return {
       links: links
@@ -105,7 +104,7 @@ export default {
     },
     lifeItemImg(item) {
       if (item.imgUrl) {
-        return `url(${item.imgUrl})`
+        return item.imgUrl
       } else {
         return `linear-gradient(to right, #30849a, #031013)`
       }

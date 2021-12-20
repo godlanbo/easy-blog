@@ -14,12 +14,12 @@
 </template>
 <script>
 import CardItem from './components/CardItem/index.vue'
-import { listInfoMixin, lazyImgMixin } from '../../utils/mixin'
+import { listInfoMixin } from '../../utils/mixin'
 export default {
   components: {
     CardItem
   },
-  mixins: [listInfoMixin, lazyImgMixin]
+  mixins: [listInfoMixin]
 }
 </script>
 <style lang="scss" scoped>

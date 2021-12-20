@@ -14,6 +14,8 @@ import markdownItAnchor from 'markdown-it-anchor'
 import 'mavon-editor/dist/css/index.css'
 import './permission'
 import VueMeta from 'vue-meta'
+import LazyLoadImg from './directives/lazyLoadImg'
+
 if (process.env.NODE_ENV === 'development') {
   import('./assets/style/fontDev.scss')
 } else {
@@ -53,6 +55,7 @@ Vue.prototype.$markDown = mavonEditor.markdownIt.set({
 })
 Vue.use(mavonEditor)
 Vue.use(ElementUI)
+Vue.use(LazyLoadImg)
 
 Vue.use(VueMeta, {
   tagIDKeyName: 'hid'

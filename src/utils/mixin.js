@@ -6,53 +6,6 @@ export const listInfoMixin = {
   }
 }
 
-export const lazyImgMixin = {
-  data() {
-    return {
-      lazyObserver: null
-    }
-  },
-  computed: {
-    ...mapGetters(['isLoadInfo'])
-  },
-  methods: {
-    initObserverImg() {
-      this.$nextTick(() => {
-        let imgs = document.querySelectorAll('figure img')
-        let bgs = document.querySelectorAll('.home-life-section-list-item')
-        imgs.forEach(img => {
-          this.lazyObserver.observe(img)
-        })
-        bgs.forEach(bg => {
-          this.lazyObserver.observe(bg)
-        })
-      })
-    }
-  },
-  mounted() {
-    if (!this.lazyObserver) {
-      this.lazyObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(item => {
-          if (item.isIntersecting) {
-            let el = item.target
-            if (el.tagName === 'IMG') {
-              el.setAttribute('src', el.dataset.src)
-            } else {
-              el.style.backgroundImage = el.dataset.src
-            }
-            observer.unobserve(item.target)
-          }
-        })
-      })
-    }
-    if (!this.isLoadInfo) {
-      window.addEventListener('img-ready', this.initObserverImg)
-    } else {
-      this.initObserverImg()
-    }
-  }
-}
-
 export const editMixin = {
   data() {
     return {

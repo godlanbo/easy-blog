@@ -25,7 +25,7 @@
           </template>
           <div class="collapse-item-content-wrapper">
             <div class="img" v-if="item.imgUrl.length !== 0">
-              <img :src="item.imgUrl" />
+              <img alt="life img" :src="item.imgUrl" />
             </div>
             <div class="content">
               <p>{{ item.content }}</p>

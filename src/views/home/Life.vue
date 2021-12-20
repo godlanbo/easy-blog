@@ -16,12 +16,12 @@
 
 <script>
 import LifeItem from './components/LifeItem/index'
-import { listInfoMixin, lazyImgMixin } from '../../utils/mixin'
+import { listInfoMixin } from '../../utils/mixin'
 export default {
   components: {
     LifeItem
   },
-  mixins: [listInfoMixin, lazyImgMixin],
+  mixins: [listInfoMixin],
   computed: {
     activeItem() {
       return Number(this.$route.query.id) || -1

@@ -3,7 +3,7 @@
     <div class="card-item-content">
       <router-link :to="linkAddress">
         <figure v-if="isShowImg">
-          <img src="/image/default.png" :data-src="data.cover" />
+          <img :alt="`${data.title}的封面`" v-lazy="data.cover" />
         </figure>
         <main>
           <div class="tags-wrapper">

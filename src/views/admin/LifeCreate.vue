@@ -8,7 +8,7 @@
     <div class="content-wrapper">
       <div class="upload-img-wrapper">
         <div class="img-preview" v-if="lifeItem.imgUrl">
-          <img :src="lifeItem.imgUrl" />
+          <img alt="upload life cover" :src="lifeItem.imgUrl" />
         </div>
         <div class="no-img" v-else>
           <span class="no-img-text">暂无图片</span>
