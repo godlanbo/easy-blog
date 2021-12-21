@@ -18,6 +18,7 @@ import LazyLoadImg from './directives/lazyLoadImg'
 
 if (process.env.NODE_ENV === 'development') {
   import('./assets/style/fontDev.scss')
+  import('element-ui/lib/theme-chalk/index.css')
 } else {
   import('./assets/style/font.scss')
 }
