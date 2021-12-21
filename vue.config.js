@@ -28,6 +28,7 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   productionSourceMap: process.env.NODE_ENV === 'production' ? false : true,
   configureWebpack,
+  publicPath: 'https://output-1303179205.file.myqcloud.com/',
   chainWebpack(config) {
     let css = [],
       js = []
