@@ -42,12 +42,12 @@ module.exports = {
     if (process.env.NODE_ENV === 'production') {
       css = [
         // element-ui css
-        'https://cdn.jsdelivr.net/npm/element-ui@2.14.1/lib/theme-chalk/index.css'
+        'https://lib.baomitu.com/element-ui/2.14.1/theme-chalk/index.css'
       ]
       js = [
-        `https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/${vueCdn}`,
+        `https://lib.baomitu.com/vue/2.6.12/${vueCdn}`,
         // element-ui js
-        'https://cdn.jsdelivr.net/npm/element-ui@2.14.1/lib/index.js'
+        'https://lib.baomitu.com/element-ui/2.14.1/index.js'
       ]
     }
     const cdn = {
