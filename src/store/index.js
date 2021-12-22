@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { getBlogsList, getCommentsList, getLifeList } from '../api'
 import { getYear, normalizeMDContent } from '../utils'
-import mavonEditor from 'mavon-editor'
+import md from '../utils/markdown'
 
 Vue.use(Vuex)
 
@@ -76,9 +76,7 @@ export default new Vuex.Store({
     },
     setCommentsList(state, { list, blogId }) {
       list.forEach(comment => {
-        comment.content = mavonEditor.markdownIt.render(
-          normalizeMDContent(comment.content)
-        )
+        comment.content = md.render(normalizeMDContent(comment.content))
         Vue.set(state.commentsList, comment.cid, comment)
         state.blogs[blogId].comments.push(comment.cid)
       })

@@ -1,10 +1,7 @@
 <template>
   <div class="home">
     <section class="home-title-section">
-      <div
-        class="title-section-background-img"
-        :style="{ 'background-image': headImgURL }"
-      />
+      <div class="title-section-background-img" />
       <avatar-detail
         class="title-section-avatar"
         title="GodLanBo"
@@ -128,9 +125,6 @@ export default {
     },
     lifeItemList() {
       return this.lifeList.slice(0, 4)
-    },
-    headImgURL() {
-      return `url(${process.env.VUE_APP_HEAD_IMG})`
     }
   },
   watch: {
@@ -169,6 +163,7 @@ export default {
       background-repeat: no-repeat;
       background-position: center center;
       background-size: cover;
+      background-image: url('../../assets/image/head.png');
     }
     .title-section-avatar {
       z-index: 1;

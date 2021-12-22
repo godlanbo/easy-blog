@@ -94,10 +94,13 @@ import {
 } from '../../api/admin'
 import { getLocalStorage, removeLocalStorage } from '../../utils/localStorage'
 import { editMixin } from '../../utils/mixin'
+import { mavonEditor } from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 export default {
   name: 'blogEdit',
   components: {
-    TagsPanel
+    TagsPanel,
+    mavonEditor
   },
   mixins: [editMixin],
   data() {

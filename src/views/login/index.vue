@@ -93,7 +93,7 @@ export default {
   width: 100vw;
   height: 100vh;
   @include center;
-  background-image: url('/image/loginBack.jpg');
+  background-image: url('../../assets/image/loginBack.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

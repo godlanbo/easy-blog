@@ -2,7 +2,7 @@
   <div class="avatar-detail-container">
     <div class="avatar-detail-wrapper">
       <a href="#" class="avatar-detail-img">
-        <img src="/image/avatar.jpeg" />
+        <img src="@assets/image/avatar.jpeg" />
       </a>
       <div class="avatar-detail-text">
         <div class="title">{{ title }}</div>

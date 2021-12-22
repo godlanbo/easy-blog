@@ -16,6 +16,7 @@
     "crypto-js": "^4.0.0",
     "element-ui": "^2.13.2",
     "lrz": "^4.9.40",
+    "markdown-it": "^12.3.0",
     "markdown-it-anchor": "^7.0.1",
     "mavon-editor": "^2.9.0",
     "prismjs": "^1.23.0",

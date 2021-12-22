@@ -9,9 +9,6 @@ import './assets/style/markdown.css'
 import './assets/style/tailwind.css'
 import './assets/style/global.scss' // 后于tailwind引入，因为需要重置font-family
 // import './mock/index'
-import mavonEditor from 'mavon-editor'
-import markdownItAnchor from 'markdown-it-anchor'
-import 'mavon-editor/dist/css/index.css'
 import './permission'
 import VueMeta from 'vue-meta'
 import LazyLoadImg from './directives/lazyLoadImg'
@@ -24,37 +21,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 Vue.config.productionTip = process.env.NODE_ENV !== 'development'
-// 配置markdown-it插件
-mavonEditor.markdownIt.use(markdownItAnchor, {
-  permalink: true,
-  permalinkBefore: true,
-  permalinkClass: 'anchor',
-  permalinkSymbol: '<div class="octicon-link octicon"></div>',
-  permalinkAttrs: slug => {
-    return { id: slug }
-  },
-  slugify: s => {
-    return String(s)
-      .trim()
-      .toLowerCase()
-  }
-})
-Vue.prototype.$markDown = mavonEditor.markdownIt.set({
-  langPrefix: 'language-',
-  highlight: (str, lang) => {
-    const isDiffBlock = /\n(\+|-)\s/.test(str)
-    let res =
-      `<pre class="language-${lang} extra-class">` +
-      `<pre class="language-${
-        isDiffBlock ? 'diff-' : ''
-      }${lang} diff-highlight line-numbers">` +
-      `<code>${str.replace(/</g, '&lt;')}</code>` +
-      `</pre>` +
-      `</pre>`
-    return res
-  }
-})
-Vue.use(mavonEditor)
+
 Vue.use(ElementUI)
 Vue.use(LazyLoadImg)
 

@@ -17,6 +17,7 @@ let configureWebpack = {
   resolve: {
     alias: {
       '@': resolve('src'),
+      '@assets': resolve('src/assets'),
       'bn.js': path.resolve(process.cwd(), 'node_modules', 'bn.js')
     }
   }

@@ -1,4 +1,4 @@
-import defaultImg from '../../public/image/default.png'
+import defaultImg from '@assets/image/default.png'
 
 const imgState = {
   wait: 0,
@@ -124,6 +124,9 @@ class LazyLoadManager {
           } else if (lazyImageLoader.state === imgState.loading) {
             this.observer.unobserve(target)
           } else {
+            // 如果元素的资源已经加载成功了，直接渲染图片
+            lazyImageLoader.state === imgState.loaded &&
+              lazyImageLoader.walkImage(lazyKey)
             this.collectMap.delete(lazyKey)
             this.observer.unobserve(target)
           }

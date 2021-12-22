@@ -49,6 +49,7 @@ import prism from 'prismjs'
 import { mapGetters } from 'vuex'
 import { ensurePageLoaded, normalizeMDContent } from '../../utils'
 import initHashLocation from '../../utils/initHashLocation'
+import md from '../../utils/markdown'
 export default {
   name: 'BlogsDetail',
   components: {
@@ -153,7 +154,7 @@ export default {
           this.blogsDetail.content = normalizeMDContent(
             this.blogsDetail.content
           )
-          this.markDownContent = this.$markDown.render(this.blogsDetail.content)
+          this.markDownContent = md.render(this.blogsDetail.content)
           this.$nextTick(() => {
             let preCents = document.querySelectorAll('.extra-class')
             preCents.forEach(preCItem => {
