@@ -12,12 +12,10 @@ import './assets/style/global.scss' // 后于tailwind引入，因为需要重置
 import './permission'
 import VueMeta from 'vue-meta'
 import LazyLoadImg from './directives/lazyLoadImg'
+import('./assets/style/fontDev.scss')
 
 if (process.env.NODE_ENV === 'development') {
-  import('./assets/style/fontDev.scss')
   import('element-ui/lib/theme-chalk/index.css')
-} else {
-  import('./assets/style/font.scss')
 }
 
 Vue.config.productionTip = process.env.NODE_ENV !== 'development'

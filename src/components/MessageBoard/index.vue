@@ -25,7 +25,7 @@
                 <img
                   alt="my avatar"
                   class="absolute left-0 bottom-5 rounded-full object-cover"
-                  src="/image/avatar.jpeg"
+                  src="@assets/image/avatar.jpeg"
                 />
               </div>
             </transition>
