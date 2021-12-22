@@ -2,6 +2,7 @@ const path = require('path')
 // 分析包内容
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
 // const PrerenderSPAPlugin = require('prerender-spa-plugin')
 // const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 
@@ -60,6 +61,9 @@ module.exports = {
       return args
     })
     config.module.rule('eslint').use('eslint-loader')
+    config.plugin('sw').use(ServiceWorkerWebpackPlugin, [{
+      entry: path.join(__dirname, 'src/sw.js')
+    }])
     process.env.ENV_ANALYZE === '1' &&
       config.plugin('analyzer').use(BundleAnalyzerPlugin)
   }

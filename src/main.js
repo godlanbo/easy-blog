@@ -12,10 +12,15 @@ import './assets/style/global.scss' // 后于tailwind引入，因为需要重置
 import './permission'
 import VueMeta from 'vue-meta'
 import LazyLoadImg from './directives/lazyLoadImg'
+import runtime from 'serviceworker-webpack-plugin/lib/runtime'
+
 import('./assets/style/fontDev.scss')
 
 if (process.env.NODE_ENV === 'development') {
   import('element-ui/lib/theme-chalk/index.css')
+}
+if ('serviceWorker' in navigator) {
+  runtime.register()
 }
 
 Vue.config.productionTip = process.env.NODE_ENV !== 'development'

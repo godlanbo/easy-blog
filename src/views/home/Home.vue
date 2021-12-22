@@ -61,7 +61,7 @@
           <el-tooltip :content="item.name" placement="bottom" :key="index">
             <div class="link-item">
               <a :href="item.link" target="_blank">
-                <img :src="item.coverUrl" :alt="item.name" />
+                <img v-lazy="item.coverUrl" :alt="item.name" />
               </a>
             </div>
           </el-tooltip>
