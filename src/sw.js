@@ -1,28 +1,45 @@
-console.log('hello sw')
+console.log('godlanbo\'s service worker is running')
 
-import { registerRoute, setCatchHandler } from 'workbox-routing'
+import { registerRoute } from 'workbox-routing'
 import { StaleWhileRevalidate, CacheFirst } from 'workbox-strategies'
 import { ExpirationPlugin } from 'workbox-expiration'
 import { CacheableResponsePlugin } from 'workbox-cacheable-response'
-import { precacheAndRoute, matchPrecache } from 'workbox-precaching'
+// import { precacheAndRoute, matchPrecache } from 'workbox-precaching'
 
-// 根html缓存
-precacheAndRoute(['/index.html'])
-// Catch routing errors, like if the user is offline
-setCatchHandler(async ({ event }) => {
-  // Return the precached offline page if a document is being requested
-  console.log(event)
-  if (event.request.destination === 'document') {
-    return matchPrecache('/index.html')
-  }
-
-  return Response.error()
-})
-// 图片缓存
+// 文档请求缓存
 registerRoute(
-  /.+\.(?:png|gif|jpg|jpeg|svg|ico)$/,
+  ({ request }) => {
+    return request.destination === 'document'
+  },
+  // Use a Stale While Revalidate caching strategy
+  new StaleWhileRevalidate({
+    // Put all cached files in a cache named 'document'
+    cacheName: 'document',
+    plugins: [
+      // Ensure that only requests that result in a 200 status are cached
+      new CacheableResponsePlugin({
+        statuses: [200]
+      })
+    ]
+  })
+)
+// // 根html缓存
+// precacheAndRoute(['/index.html'])
+// // Catch routing errors, like if the user is offline
+// setCatchHandler(async ({ event }) => {
+//   // Return the precached offline page if a document is being requested
+//   console.log(event)
+//   if (event.request.destination === 'document') {
+//     return matchPrecache('/index.html')
+//   }
+
+//   return Response.error()
+// })
+// 图片字体等静态资源缓存
+registerRoute(
+  /.+\.(?:png|gif|jpg|jpeg|svg|ico|ttf|woff|woff2)$/,
   new CacheFirst({
-    cacheName: 'images',
+    cacheName: 'assets',
     plugins: [
       new ExpirationPlugin({
         maxEntries: 60,
@@ -46,12 +63,11 @@ registerRoute(
 // xhr 请求缓存
 registerRoute(
   ({ request, url }) => {
-    // console.log(request, url)
     return request.destination.length === 0 && url.href.match(/.+\/api\//)
   },
   // Use a Stale While Revalidate caching strategy
   new StaleWhileRevalidate({
-    // Put all cached files in a cache named 'assets'
+    // Put all cached files in a cache named 'request'
     cacheName: 'request',
     plugins: [
       // Ensure that only requests that result in a 200 status are cached
