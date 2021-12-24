@@ -3,7 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import dayjs from 'dayjs'
-import ElementUI from 'element-ui'
+// import ElementUI from 'element-ui'
+import ElementConfig from './element.config'
 import './assets/style/icon.css'
 import './assets/style/markdown.css'
 import './assets/style/tailwind.css'
@@ -16,16 +17,13 @@ import runtime from 'serviceworker-webpack-plugin/lib/runtime'
 
 import('./assets/style/fontDev.scss')
 
-if (process.env.NODE_ENV === 'development') {
-  import('element-ui/lib/theme-chalk/index.css')
-}
 if ('serviceWorker' in navigator) {
   runtime.register()
 }
 
 Vue.config.productionTip = process.env.NODE_ENV !== 'development'
 
-Vue.use(ElementUI)
+Vue.use(ElementConfig)
 Vue.use(LazyLoadImg)
 
 Vue.use(VueMeta, {

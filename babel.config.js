@@ -23,6 +23,13 @@ module.exports = {
         theme: 'okaidia',
         css: true
       }
+    ],
+    [
+      'component',
+      {
+        libraryName: 'element-ui',
+        styleLibraryName: 'theme-chalk'
+      }
     ]
   ]
 }

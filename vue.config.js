@@ -26,8 +26,7 @@ let configureWebpack = {
 
 if (process.env.NODE_ENV === 'production') {
   configureWebpack['externals'] = {
-    vue: 'Vue',
-    'element-ui': 'ELEMENT'
+    vue: 'Vue'
   }
 }
 
@@ -44,12 +43,12 @@ module.exports = {
     if (process.env.NODE_ENV === 'production') {
       css = [
         // element-ui css
-        'https://lib.baomitu.com/element-ui/2.14.1/theme-chalk/index.css'
+        // 'https://lib.baomitu.com/element-ui/2.14.1/theme-chalk/index.css'
       ]
       js = [
-        `https://lib.baomitu.com/vue/2.6.12/${vueCdn}`,
+        `https://lib.baomitu.com/vue/2.6.12/${vueCdn}`
         // element-ui js
-        'https://lib.baomitu.com/element-ui/2.14.1/index.js'
+        // 'https://lib.baomitu.com/element-ui/2.14.1/index.js'
       ]
     }
     const cdn = {
@@ -61,9 +60,11 @@ module.exports = {
       return args
     })
     config.module.rule('eslint').use('eslint-loader')
-    config.plugin('sw').use(ServiceWorkerWebpackPlugin, [{
-      entry: path.join(__dirname, 'src/sw.js')
-    }])
+    config.plugin('sw').use(ServiceWorkerWebpackPlugin, [
+      {
+        entry: path.join(__dirname, 'src/sw.js')
+      }
+    ])
     process.env.ENV_ANALYZE === '1' &&
       config.plugin('analyzer').use(BundleAnalyzerPlugin)
   }
