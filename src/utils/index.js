@@ -102,3 +102,17 @@ export function normalizeMDContent(content) {
   content = content.replace(/&lt;(?!(script|\/script))/g, '<')
   return content
 }
+
+// 嗅探浏览器是否支持webp
+export function isSupportWebp() {
+  try {
+    return (
+      document
+        .createElement('canvas')
+        .toDataURL('image/webp', 0.5)
+        .indexOf('data:image/webp') === 0
+    )
+  } catch (err) {
+    return false
+  }
+}

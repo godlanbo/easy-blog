@@ -1,7 +1,10 @@
 <template>
   <div class="home">
     <section class="home-title-section">
-      <div class="title-section-background-img" />
+      <div
+        class="title-section-background-img"
+        :class="{ webp: canUseWebp }"
+      />
       <avatar-detail
         class="title-section-avatar"
         title="GodLanBo"
@@ -78,6 +81,7 @@ import SectionItem from './components/SectionItem/index'
 import VanillaTilt from 'vanilla-tilt'
 import { listInfoMixin } from '../../utils/mixin'
 import links from '../../links'
+import { isSupportWebp } from '../../utils'
 export default {
   components: {
     AvatarDetail,
@@ -125,6 +129,9 @@ export default {
     },
     lifeItemList() {
       return this.lifeList.slice(0, 4)
+    },
+    canUseWebp() {
+      return isSupportWebp()
     }
   },
   watch: {
@@ -164,6 +171,9 @@ export default {
       background-position: center center;
       background-size: cover;
       background-image: url('../../assets/image/head.png');
+      &.webp {
+        background-image: url('../../assets/image/head.webp');
+      }
     }
     .title-section-avatar {
       z-index: 1;
