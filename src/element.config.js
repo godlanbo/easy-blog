@@ -18,7 +18,7 @@ import {
   Collapse,
   CollapseItem,
   Message,
-  Alert
+  MessageBox
 } from 'element-ui'
 
 const ElementConfig = {
@@ -41,8 +41,8 @@ const ElementConfig = {
     app.use(Upload)
     app.use(Collapse)
     app.use(CollapseItem)
-    app.use(Alert)
     app.prototype.$message = Message
+    app.prototype.$alert = MessageBox.alert;
   }
 }
 
