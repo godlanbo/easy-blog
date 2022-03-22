@@ -251,6 +251,8 @@
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+  width: 80%;
+  box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
 }
 
 .markdown-body blockquote {
