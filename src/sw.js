@@ -1,7 +1,7 @@
 console.log('godlanbo\'s service worker is running')
 
 import { registerRoute } from 'workbox-routing'
-import { StaleWhileRevalidate, CacheFirst } from 'workbox-strategies'
+import { StaleWhileRevalidate, CacheFirst, NetworkFirst } from 'workbox-strategies'
 import { ExpirationPlugin } from 'workbox-expiration'
 import { CacheableResponsePlugin } from 'workbox-cacheable-response'
 // import { precacheAndRoute, matchPrecache } from 'workbox-precaching'
@@ -66,7 +66,7 @@ registerRoute(
     return request.destination.length === 0 && url.href.match(/.+\/api\//)
   },
   // Use a Stale While Revalidate caching strategy
-  new StaleWhileRevalidate({
+  new NetworkFirst({
     // Put all cached files in a cache named 'request'
     cacheName: 'request',
     plugins: [
