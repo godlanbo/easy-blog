@@ -116,3 +116,65 @@ export function isSupportWebp() {
     return false
   }
 }
+
+/**
+ * 读取文件内容以字符串形式返回
+ * @param {File} file
+ * @returns {Promise<String>}
+ */
+export function getFileContent(file) {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader()
+    fileReader.onload = res => {
+      resolve(res.target.result)
+    }
+
+    fileReader.onerror = err => {
+      reject(err.target.error)
+    }
+
+    fileReader.readAsText(file, 'utf-8')
+  })
+}
+
+/**
+ * 解析Markdown中的图片信息，返回一个数组
+ * <{
+ *  desc: string,
+ *  url: string,
+ *  start: number,
+ *  length: number,
+ *  file: File
+ * }>[]
+ * @param {String} markdownString
+ * @param {Map} fileMap
+ * @returns {Array}
+ */
+export function parseImageInfo(markdownString, fileMap) {
+  const imgTagRegExp = /<img\s+src="(.*?)"\s+alt="(.*?)".*?\/>/g
+  const markdownImgRegExp = /!\[(.*?)\]\((.*?)\)/g
+
+  const imgTagMatchs = [...markdownString.matchAll(imgTagRegExp)]
+  const markdownImgMatchs = [...markdownString.matchAll(markdownImgRegExp)]
+
+  const imgParsedResult = []
+  for (const imgTagMatch of imgTagMatchs) {
+    imgParsedResult.push({
+      needReplaceStr: imgTagMatch[0],
+      desc: imgTagMatch[2],
+      url: imgTagMatch[1],
+      file: fileMap.get(imgTagMatch[1])
+    })
+  }
+
+  for (const markdownImgMatch of markdownImgMatchs) {
+    imgParsedResult.push({
+      needReplaceStr: markdownImgMatch[0],
+      desc: markdownImgMatch[1],
+      url: markdownImgMatch[2],
+      file: fileMap.get(markdownImgMatch[2])
+    })
+  }
+
+  return imgParsedResult
+}

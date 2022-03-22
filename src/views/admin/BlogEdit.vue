@@ -75,6 +75,10 @@
         @update:selectedTags="onSelectTag"
         @add-tag="onAddTag"
       ></tags-panel>
+      <el-button class="import" type="primary" @click="onImportMarkdownFile"
+        >导入</el-button
+      >
+      <br />
       <el-button class="submit-btn" type="success" @click="onSaveBlogEdit">{{
         mode === 'create' ? '发布' : '保存'
       }}</el-button>
@@ -96,6 +100,7 @@ import { getLocalStorage, removeLocalStorage } from '../../utils/localStorage'
 import { editMixin } from '../../utils/mixin'
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import { getFileContent, parseImageInfo } from '../../utils'
 export default {
   name: 'blogEdit',
   components: {
@@ -117,6 +122,50 @@ export default {
     }
   },
   methods: {
+    // 导入markdown文件夹进行创建
+    onImportMarkdownFile() {
+      const input = document.createElement('input')
+      input.setAttribute('webkitdirectory', true)
+      input.setAttribute('type', 'file')
+      input.click()
+
+      input.addEventListener('input', async event => {
+        let files = event.target.files
+        let fileMap = new Map(),
+          fileContent = ''
+
+        for (let file of files) {
+          if (file.name.endsWith('md')) {
+            fileContent = await getFileContent(file)
+          } else {
+            fileMap.set(file.name, file)
+          }
+        }
+
+        const imgParsedInfo = parseImageInfo(fileContent, fileMap)
+
+        let uploadTask = []
+        for (let imgMatch of imgParsedInfo) {
+          uploadTask.push(this.uploadImage(imgMatch.file))
+        }
+        Promise.all(uploadTask).then(resArr => {
+          resArr = resArr.map(res => {
+            return {
+              url: res.data.imgUrl,
+              fileName: res.data.fileName.split('.')[0]
+            }
+          })
+          resArr.forEach((val, idx) => {
+            const imgInfo = imgParsedInfo[idx]
+            fileContent = fileContent.replace(
+              imgInfo.needReplaceStr,
+              `![${imgInfo.desc}](${val.url})`
+            )
+          })
+          this.blog.content = fileContent
+        })
+      })
+    },
     onSelectTag(arr) {
       this.blog.tags = this.tagCategoryList
         .filter((tag, idx) => arr[idx])
