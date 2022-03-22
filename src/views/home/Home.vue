@@ -1,10 +1,7 @@
 <template>
   <div class="home">
     <section class="home-title-section">
-      <div
-        class="title-section-background-img"
-        :class="{ webp: canUseWebp }"
-      />
+      <div class="title-section-background-img" :class="{ webp: canUseWebp }" />
       <avatar-detail
         class="title-section-avatar"
         title="GodLanBo"
